@@ -2,8 +2,6 @@
 
 El Sistema de Control de Inventario para ferreterías es una herramienta eficiente que registra productos, realiza seguimiento en tiempo real del inventario, gestiona compras y ventas, y emite alertas sobre niveles bajos de stock. Facilita la toma de decisiones y optimiza el flujo de trabajo diario.
 
-TESTING EL GIT en visual
-
 ## Descripción del Sistema de Información para el Control de Inventario en una Ferretería:
 
 El Sistema de Información para el Control de Inventario en una ferretería es una plataforma eficiente y robusta que permite gestionar de manera integral todo el proceso de inventario en el establecimiento. Diseñado específicamente para satisfacer las necesidades de una ferretería, este sistema tiene como objetivo principal optimizar la gestión de los productos y garantizar un flujo de trabajo fluido y organizado.
