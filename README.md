@@ -1,5 +1,8 @@
 # FerreSys
 
+![logo_ferreSysGit](https://github.com/davidadarme/FerreSys/assets/114038362/1743fa7d-b1b1-465e-ad23-2eabb7dc4c2a)
+
+
 FerreSys es un software de control e inventario enfocado para ferreterías. Permite registrar productos, realizar seguimiento en tiempo real del inventario, gestionar compras y ventas, y recibir alertas por niveles bajos de stock. Esta herramienta optimiza el flujo de trabajo diario y facilita la toma de decisiones informadas al brindar datos y reportes detallados sobre el rendimiento del negocio. Su interfaz intuitiva y amigable asegura una rápida adopción por parte del personal, mejorando la competitividad y productividad de las ferreterías en el mercado actual.
 
 ## Descripción del Sistema de Información para el Control de Inventario en una Ferretería:
