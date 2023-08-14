@@ -1,3 +1,4 @@
+--modificar basado en el nuevo der y diagrama de clases
 CREATE TABLE tab_usuario(
   consec_usu BIGINT DEFAULT NEXTVAL('consec_usu'),
   id_usu iNTEGER NOT NULL,
