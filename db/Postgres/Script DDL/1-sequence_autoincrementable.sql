@@ -1,65 +1,55 @@
 /*para crear una secuencia para un consecutivo o codigo autoincrementable*/
-create sequence consec_usu
+
+create sequence consecCli
 start with 1
 increment by 1
 maxvalue 9223372036854775807
 minvalue 1;
 
-create sequence consec_cli
+
+create sequence consecCateg
 start with 1
 increment by 1
 maxvalue 9223372036854775807
 minvalue 1;
 
-create sequence consec_prov
+create sequence consecMarca
 start with 1
 increment by 1
 maxvalue 9223372036854775807
 minvalue 1;
 
-create sequence consec_categ
+create sequence consecProvMarca
 start with 1
 increment by 1
 maxvalue 9223372036854775807
 minvalue 1;
 
-create sequence consec_marca
+create sequence consecProvArt
 start with 1
 increment by 1
 maxvalue 9223372036854775807
 minvalue 1;
 
-create sequence consec_art
+create sequence consecKardex
 start with 1
 increment by 1
 maxvalue 9223372036854775807
 minvalue 1;
 
-create sequence consec_artxprov
+create sequence consecVenta
 start with 1
 increment by 1
 maxvalue 9223372036854775807
 minvalue 1;
 
-create sequence consec_kardex
-start with 1
-increment by 1
-maxvalue 9223372036854775807
-minvalue 1;
-
-create sequence consec_venta
-start with 1
-increment by 1
-maxvalue 9223372036854775807
-minvalue 1;
-
-create sequence consec_det_venta
+create sequence consecDetVenta
 start with 1
 increment by 1
 maxvalue 9223372036854775807 
 minvalue 1;
 
-create sequence consec_reg
+create sequence consecReg
 start with 1
 increment by 1
 maxvalue 9223372036854775807 
