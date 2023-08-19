@@ -1,6 +1,6 @@
 -- Función para insertar datos en la tabla "tab_marca"
-CREATE OR REPLACE FUNCTION insert_marca(
-    znom_marca tab_marca.nom_marca%type) 
+CREATE OR REPLACE FUNCTION insertMarca(
+    zNomMarca tabMarca.nomMarca%type) 
 RETURNS void AS 
 
 $$
@@ -8,8 +8,8 @@ DECLARE
     
 BEGIN
 
-    INSERT INTO tab_marca(nom_marca)
-    VALUES (znom_marca);
+    INSERT INTO tabMarca(nomMarca)
+    VALUES (zNomMarca);
     
     RAISE NOTICE 'Registro exitoso ';
 END;
@@ -17,12 +17,12 @@ $$
 LANGUAGE plpgsql;
 
 /*
-select insert_marca('dewalt');
-select * from tab_marca;
+select insertMarca('dewalt');
+select * from tabMarca;
 
 
-UPDATE tab_marca
+UPDATE tabMarca
 SET estado = 'ACTIVO'
-WHERE consec_marca = 1;
+WHERE consecMarca = 1;
 
 */

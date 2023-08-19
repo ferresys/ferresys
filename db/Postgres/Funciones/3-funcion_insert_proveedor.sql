@@ -1,23 +1,23 @@
 -- Función para insertar datos en la tabla "tab_proveedor"
-CREATE OR REPLACE FUNCTION insert_proveedor(
+CREATE OR REPLACE FUNCTION insertProveedor(
     
-    znit_prov tab_proveedor.nit_prov%type,
-    znom_prov tab_proveedor.nom_prov%type,
-    ztel_prov tab_proveedor.tel_prov%type,  
-    zemail_prov tab_proveedor.email_prov%type, 
-    zdir_prov tab_proveedor.dir_prov%type
+    zNitProv tabProveedor.nitProv%type,
+    zNomProv tabProveedor.nomProv%type,
+    zTelProv tabProveedor.telProv%type,  
+    zEmailProv tabProveedor.emailProv%type, 
+    zDirProv tabProveedor.dirProv%type
 
 ) RETURNS void AS 
 
 $$
 DECLARE
     
-    zfec_reg timestamp := current_timestamp;--now(); puede ser current_timestamp o now();
+    zFecReg timestamp := current_timestamp;--now(); puede ser current_timestamp o now();
 	
 BEGIN
 
-    INSERT INTO tab_proveedor(fec_reg, nit_prov, nom_prov, tel_prov, email_prov, dir_prov)
-    VALUES (zfec_reg, znit_prov, znom_prov, ztel_prov, zemail_prov, zdir_prov);
+    INSERT INTO tabProveedor(fecReg, nitProv, nomProv, telProv, emailProv, dirProv)
+    VALUES (zFecReg, zNitProv, zNomProv, zTelProv, zEmailProv, zDirProv);
     
     RAISE NOTICE 'Registro exitoso ';
 END;
@@ -25,12 +25,12 @@ $$
 LANGUAGE plpgsql;
 
 /*
-select insert_proveedor('0-1098235641','DEWALT','3156478952','dewalt@gmail.com','calle 22 #1-14');
-select * from tab_proveedor;
+select insertProveedor('0-1098235641','DEWALT','3156478952','dewalt@gmail.com','calle 22 #1-14');
+select * from tabProveedor;
 
 
-UPDATE tab_proveedor
+UPDATE tabProveedor
 SET estado = 'INACTIVO'
-WHERE consec_prov = 1;
+WHERE nitProv = 1;
 
 */

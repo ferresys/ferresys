@@ -1,30 +1,31 @@
 -- Función para insertar datos en la tabla "tab_categoria"
-CREATE OR REPLACE FUNCTION insert_categoria( 
-    znom_categ tab_categoria.nom_categ%type) 
+CREATE OR REPLACE FUNCTION insertCategoria( 
+    zNomCateg tabCategoria.nomCateg%type,
+    ZIdAdmin tabAdministrador.idAdmin%type)
 RETURNS void AS 
 
 $$
 DECLARE
-      
+    --zAdmin INTEGER;
 BEGIN
-
-    INSERT INTO tab_categoria(nom_categ)
-    VALUES (znom_categ);
-    
+    --SELECT idAdmin INTO ZAdmin FROM tabAdministrador;
+    INSERT INTO tabCategoria(nomCateg, idAdmin)
+    VALUES (zNomCateg, ZIdAdmin);
+    --RETURNING idAdmin INTO zAdmin;
     RAISE NOTICE 'Registro exitoso ';
 END;
 $$ 
 LANGUAGE plpgsql;
 
 /*
-select insert_categoria('Herramientas');
-select * from tab_categoria;
-select * from reg_borrados;
+select insertCategoria('Herramientas','1095821827');
+select * from tabCategoria;
+select * from tabregBorrados;
 
-delete from tab_categoria where consec_categ=1;
+delete from tabCategoria where consecCateg=1;
 
-UPDATE tab_categoria
+UPDATE tabCategoria
 SET estado = 'INACTIVO'
-WHERE consec_categ = 1;
+WHERE consecCateg = 1;
 
 */

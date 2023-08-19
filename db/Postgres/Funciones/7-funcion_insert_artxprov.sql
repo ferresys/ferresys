@@ -1,32 +1,33 @@
-/* funcion para insertar los datos y actualizarlos si ya existen en la tab_artxprov*/
-CREATE OR REPLACE FUNCTION insert_tab_artxprov()
+/* funcion para insertar los datos y actualizarlos si ya existen en la tabProveedorArticulo*/
+CREATE OR REPLACE FUNCTION inserttabProveedorArticulo()
 RETURNS TRIGGER AS 
 
 $$
 BEGIN
-  -- Verificar si ya existe una fila con los mismos valores de consec_prov y ean_art en tab_artxprov
-  IF EXISTS (SELECT 1 FROM tab_artxprov WHERE consec_prov = NEW.consec_prov AND ean_art = NEW.ean_art) THEN
+  -- Verificar si ya existe una fila con los mismos valores de nitProv y eanArt en tabProveedorArticulo
+  IF EXISTS (SELECT 1 FROM tabProveedorArticulo WHERE nitProv = NEW.nitProv AND eanArt = NEW.eanArt) THEN
     -- Si existe, realizar una actualización en lugar de una inserción
-    UPDATE tab_artxprov 
-    SET nom_prov = (SELECT nom_prov FROM tab_proveedor WHERE consec_prov = NEW.consec_prov), 
-        nom_art = (SELECT nom_art FROM tab_articulo WHERE ean_art = NEW.ean_art), 
+    UPDATE tabProveedorArticulo
+    SET nomProv = (SELECT nomProv FROM tab_proveedor WHERE nitProv = NEW.nitProv), 
+        nomArt = (SELECT nomArt FROM tabArticulo WHERE eanArt = NEW.eanArt), 
         val_compra = NEW.val_compra
-    WHERE consec_prov = NEW.consec_prov AND ean_art = NEW.ean_art;
+    WHERE nitProv = NEW.nitProv AND eanArt = NEW.eanArt;
   ELSE
     -- Si no existe, insertar una nueva fila
-    INSERT INTO tab_artxprov (consec_prov, nom_prov, ean_art, nom_art, val_compra)
-    VALUES (NEW.consec_prov, (SELECT nom_prov FROM tab_proveedor WHERE consec_prov = NEW.consec_prov), 
-            NEW.ean_art, (SELECT nom_art FROM tab_articulo WHERE ean_art = NEW.ean_art), 
-            NEW.val_compra);
+    INSERT INTO taProveedorArticulo (nitProv, nomProv, eanArt, nomArt, valCompra)
+    VALUES (NEW.nitProv, (SELECT nomProv FROM tabProveedor WHERE nitProv = NEW.nitProv), 
+            NEW.eanArt, (SELECT nomArt FROM tabArticulo WHERE eanArt = NEW.eanArt), 
+            NEW.valCompra);
   END IF;
 
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_insert_tab_artxprov
-AFTER INSERT ON tab_kardex
+CREATE TRIGGER triggerInserttabProveedorArticulo
+AFTER INSERT ON tabKardex
 FOR EACH ROW
-EXECUTE FUNCTION insert_tab_artxprov();
+EXECUTE FUNCTION inserttabProveedorArticulo();
 
-SELECT * FROM tab_artxprov;
+--SELECT * FROM tabProveedorArticulo;
+

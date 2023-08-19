@@ -1,31 +1,30 @@
-CREATE OR REPLACE FUNCTION insert_detalle_venta(
-    zean_art tab_articulo.ean_art%type,
-    zcant_art INTEGER,
-    zdescuento NUMERIC(10)
+CREATE OR REPLACE FUNCTION insertDetalleVenta(
+    zEanArt tab_articulo.ean_art%type,
+    zCantArt INTEGER,
 ) RETURNS VOID AS 
 
 $$
 DECLARE
-    zval_unit NUMERIC(10);
-    zsubtotal NUMERIC(10);
-    ziva NUMERIC(10);
-    ztotal_pagar NUMERIC(10);
-    zconsec_venta BIGINT;
+    zVal_Unit NUMERIC(10);
+    zSubtotal NUMERIC(10);
+    --ziva NUMERIC(10);
+    zTotalPagar NUMERIC(10);
+    zConsecVenta BIGINT;
 BEGIN
-    -- Obtener el valor unitario (val_unit) del artículo desde la tabla "tab_articulo"
-    SELECT val_unit INTO zval_unit FROM tab_articulo WHERE ean_art = zean_art;
+    -- Obtener el valor unitario (val_unit) del artículo desde la tabla "tabArticulo"
+    SELECT valUnit INTO zValUnit FROM tabArticulo WHERE eanArt = zEanArt;
 
     -- Calcular el subtotal, el valor del IVA y el total a pagar
-    zsubtotal := zcant_art * zval_unit;
-    SELECT iva INTO ziva FROM tab_articulo WHERE ean_art = zean_art;
-    ztotal_pagar :=  (zsubtotal * ziva)/100+(zsubtotal)-zdescuento;
-
+    zSubtotal := zCantArt * zValUnit;
+    /*SELECT iva INTO ziva FROM tab_articulo WHERE ean_art = zEanArt;
+    zTotalPagar :=  (zSubtotal * ziva)/100+(zsubtotal)-zdescuento;*/
+    zTotalPagar := zSubtotal
     -- Obtener el consecutivo de venta (consec_venta) desde la tabla "tab_encabezado_venta"
-    SELECT consec_venta INTO zconsec_venta FROM tab_encabezado_venta ORDER BY consec_venta DESC LIMIT 1;
+    SELECT consecVenta INTO zConsecVenta FROM tabEncabezadoVenta ORDER BY consecVenta DESC LIMIT 1;
 
     -- Insertar los datos en la tabla "tab_detalle_venta"
-    INSERT INTO tab_detalle_venta (nom_art, cant_art, val_unit, Subtotal, Descuento, val_iva, Total_Pagar, consec_venta, ean_art)
-    VALUES ((SELECT nom_art FROM tab_articulo WHERE ean_art = zean_art), zcant_art, zval_unit, zsubtotal, zdescuento, ziva, ztotal_pagar, zconsec_venta, zean_art);
+    INSERT INTO tabDetalleVenta (nomArt, cantArt, valUnit, subtotal, Total_Pagar, consecVenta, eanArt)
+    VALUES ((SELECT nomArt FROM tabArticulo WHERE eanArt = zEanArt), zCantArt, zVal_Unit, zsubtotal,  zTotalPagar, zConsecVenta, zEanArt);
 
     RETURN;
 END;
@@ -33,9 +32,9 @@ $$
 LANGUAGE plpgsql;
 
 /*
-select insert_detalle_venta('00000001',10,0);
-select * from tab_detalle_venta;
-select * from tab_encabezado_venta;
-select * from tab_articulo
+select insertDetalleVenta('00000001',10,0);
+select * from tabDetalleVenta;
+select * from tabEncabezadoVenta;
+select * from tabArticulo
 
 */

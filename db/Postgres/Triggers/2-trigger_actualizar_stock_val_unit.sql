@@ -3,34 +3,35 @@ cuando el usuario ingrese datos en el kardex ya sea de entrada o de salida
 debo llamar esta funcion para que me actualice los datos 
 val_stock y val_unit en la tab_articulo*/
 
-CREATE OR REPLACE FUNCTION actualizar_stock_val_unit()
+CREATE OR REPLACE FUNCTION actualizarStockValUnit()
 RETURNS TRIGGER AS 
 
 $$
 DECLARE
-  zval_stock tab_articulo.val_stock%type;
-  zval_unit tab_articulo.val_unit%type;
-  
+  zValStock tabArticulo.valStock%type;
+  zValUnit tabArticulo.valUnit%type;
+  zPorcentaje NUMERIC(10,2);
+
 BEGIN
 
-  IF NEW.tipo_mov = 'ENTRADA' THEN
-    	zval_stock := (SELECT COALESCE(val_stock, 0) + NEW.cant_art FROM tab_articulo WHERE ean_art = NEW.ean_art);
-    	zval_unit := NEW.val_prom * 1.20;
+  IF NEW.tipoMov = 'ENTRADA' THEN
+    	zValStock := (SELECT COALESCE(valStock, 0) + NEW.cantArt FROM tabArticulo WHERE eanArt = NEW.eanArt);
+    	zValUnit := NEW.ValProm * zPorcentaje; --(el porcentaje debe ser ingresado como 1.20, 1.30, 1.10..etc)
 	
-  	 ELSIF NEW.tipo_mov = 'SALIDA' THEN
-    	zval_stock := (SELECT COALESCE(val_stock, 0) - NEW.cant_art FROM tab_articulo WHERE ean_art = NEW.ean_art);
-    	zval_unit := (SELECT val_unit FROM tab_articulo WHERE ean_art = NEW.ean_art);
+  	 ELSIF NEW.tipoMov = 'SALIDA' THEN
+    	zValStock := (SELECT COALESCE(valStock, 0) - NEW.cantArt FROM tabArticulo WHERE eanArt = NEW.eanArt);
+    	zValUnit := (SELECT valUnit FROM tabArticulo WHERE eanArt = NEW.eanArt);
   END IF;
 
-  UPDATE tab_articulo SET val_stock = zval_stock, val_unit = zval_unit WHERE ean_art = NEW.ean_art;
+  UPDATE tabArticulo SET valStock = zValStock, valUnit = zValUnit WHERE eanArt = NEW.eanArt;
 
 RETURN NEW;
 END;
 $$ 
 LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_actualizar_stock_val_unit
-AFTER INSERT ON tab_kardex
+CREATE TRIGGER triggerActualizarStockValUnit
+AFTER INSERT ON tabKardex
 FOR EACH ROW
-EXECUTE FUNCTION actualizar_stock_val_unit();
+EXECUTE FUNCTION actualizarStockValUnit();
 
