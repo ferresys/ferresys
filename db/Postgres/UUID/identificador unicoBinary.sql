@@ -1,5 +1,6 @@
-CREATE TABLE tabAdministrador(
-  idAdmin UUID  NOT NULL,
+CREATE TABLE tabAdministrador (
+  idAdmin BINARY(16) DEFAULT UUID_BIN(), --Sin embargo, no estoy seguro a que entidades colocarles este tipo de datos 
+  --idAdmin UUID  NOT NULL,
   fecReg TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   nomAdmin VARCHAR NOT NULL,
   apeAdmin VARCHAR NOT NULL,
