@@ -1,5 +1,5 @@
 CREATE TABLE tabAdministrador(
-  idAdmin INTEGER NOT NULL,
+  idAdmin UUID  NOT NULL,
   fecReg TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   nomAdmin VARCHAR NOT NULL,
   apeAdmin VARCHAR NOT NULL,
