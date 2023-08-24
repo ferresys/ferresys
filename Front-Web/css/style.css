@@ -4,6 +4,7 @@
     --secondary: #191C24;
     --light: #6C7293;
     --dark: #000000;
+    --marca: #ffcc29;
 }
 
 .back-to-top {
@@ -132,7 +133,7 @@
 .sidebar .navbar .navbar-nav .nav-link.active {
     color: var(--primary);
     background: var(--dark);
-    border-color: var(--primary);
+    border-color: var(--marca);
 }
 
 .sidebar .navbar .navbar-nav .nav-link i {
@@ -179,13 +180,13 @@
 .content .navbar .navbar-nav .nav-link {
     margin-left: 25px;
     padding: 12px 0;
-    color: var(--light);
+    color: var(--marca);
     outline: none;
 }
 
 .content .navbar .navbar-nav .nav-link:hover,
 .content .navbar .navbar-nav .nav-link.active {
-    color: var(--dark);
+    color: var(--primary);
 }
 
 .content .navbar .sidebar-toggler,
@@ -195,7 +196,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--primary);
+    background: var(--dark);
     border-radius: 40px;
 }
 
