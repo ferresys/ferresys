@@ -1,0 +1,111 @@
+CONFIGURAR UN NUEVO PROYECTO NODEJS
+
+1.CREAMOS LA CARPETA DONDE ESTARA EL PROYECTO
+
+mkdir SICIV
+(crear carpeta para el proyecto en este caso se llama SICIV).
+------------------------------------------------------------------------------------------------
+
+2.INICIAMOS UN NUEVO PROYECTO
+
+npm init -y 
+(la -y significa que se configure por default los datos que vaya a pedir. si no queremos eso y queremos añadir datos adicionales entonces solo usamos "npm init" )
+
+(iniciar un nuevo proyecto de nodejs-Esto creará un archivo package.json con la configuración predeterminada)
+
+------------------------------------------------------------------------------------------------
+
+3.INSTALAMOS LOS PAQUETES NECESARIOS PARA EL PROYECTO.
+
+npm install express pg dotenv @babel/core @babel/node @babel/preset-env
+
+(express: es un framework y nos permite crear aplicaciones web en nodejs y con este creamos el servidor.)
+
+(pg: para conectar con la base de datos).
+
+(dotenv: variables de entorno-para mantener los datos de conexion como contraseña, host,usuario en una carpeta oculta y que no se muestren en el codigo- esto se hace en un archivo ".env").
+
+(@babel/core @babel/node @babel/preset-env:Herramientas para usar el estándar ES6 en el servidor )
+
+ES6 ECMAScript (ES) es una especificación de lenguaje de programación que define los estándares para JavaScript. Es decir, ES es la especificación oficial que establece cómo debe comportarse el lenguaje JavaScript en diferentes versiones.
+(instalamos todas las dependencias que necesitemos para poder trabajar en el proyecto)
+
+------------------------------------------------------------------------------------------------
+
+4. CREAMOS EL ARCHIVO ".env"
+
+(crear un archivo ".env" e ingresar los datos o credenciales de la base de datos postgres)
+
+DB_HOST=nombre_del_host
+DB_USER=nombre_del_usuario
+DB_PASS=contraseña_del_usuario
+DB_NAME=nombre_de_la_base_de_datos
+
+------------------------------------------------------------------------------------------------
+
+5.CONFIGURAR BABEL
+
+crear archivo ".babelrc" y crear codigo:
+
+/*
+
+{
+  "presets": ["@babel/preset-env"]
+}
+
+*/
+
+------------------------------------------------------------------------------------------------
+
+6.CREAR EL SERVIDOR NODEJS
+
+crear el archivo index.js
+(Crea un archivo llamado index.js en la raíz de tu proyecto y agrega el código para configurar el servidor Express )
+
+------------------------------------------------------------------------------------------------
+7.CREAR LA CONEXION A LA BASE DE DATOS
+
+crear un archivo conexion_db.js
+(en este archivo vamos a programar el codigo para la conexion con la base de datos).
+
+------------------------------------------------------------------------------------------------
+
+8.CREAR LAS FUNCIONES PARA REALIZAR LAS CONSULTAS A LA BASE DE DATOS
+
+crear archivo consultas.js
+(en este archivo creamos el codigo que contendra las funciones para las consultas a la base de datos).
+
+------------------------------------------------------------------------------------------------
+
+9.CREAMOS LA CARPETA "PUBLIC"
+
+esta carpeta estara dentro de la carpeta SICIV y contendra los archivos index.html, estilos.css, funciones.js
+
+(Seran los archivos que se podran visualizar en la consola del navegador y seran de acceso publico para quien desee inspeccionar el script).
+
+
+10.INICIAR EL SERVIDOR
+
+en la consola ubuntu usamos el siguiente comando:
+
+npx babel-node index.js
+
+(esto iniciara el servidor y quedara escuchando en la ruta y el puerto especificado)
+
+por lo general: http//localhost/3000/articulos
+
+
+
+
+
+
+
+glosario java script
+
+palabra clave= import- const- 
+variables= contenedor de tipos de datos varchar ,numeric,
+instancias= declaracion de una const para una clase ejemplo app(instancia)= express(clase)
+metodo= get, 
+ECMAScript 6 (ES6) = estandar actualizado
+pg = paquete o modulo para postgresql
+
