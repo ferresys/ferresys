@@ -1,4 +1,5 @@
-/* funcion para insertar los datos y verificar si ya existen en la tabProveedorArticulo*/
+
+-- función para insertar los datos y verificar si ya existen en la tabProveedorArticulo
 
 
 CREATE OR REPLACE FUNCTION inserttabProveedorArticulo()
@@ -9,7 +10,7 @@ BEGIN
   -- Verificar si ya existe una fila con los mismos valores de nitProv y eanArt en tabProveedorArticulo
   IF EXISTS (SELECT 1 FROM tabProveedorArticulo WHERE nitProv = NEW.nitProv AND eanArt = NEW.eanArt) THEN
    
-     UPDATE tabProveedorArticulo
+    UPDATE tabProveedorArticulo
     SET nitProv = NEW.nitProv, eanArt= NEW.eanArt
     WHERE  nitProv=NEW.nitProv and eanArt= NEW.eanArt;
 	
@@ -24,6 +25,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
+--creamos un trigger para que se ejecute despues de insertar un registro en la tabKardex y llene la tabProveedorArticulo
 CREATE TRIGGER triggerInserttabProveedorArticulo
 AFTER INSERT ON tabKardex
 FOR EACH ROW

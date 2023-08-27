@@ -1,5 +1,6 @@
 CREATE TABLE tabAdministrador(
-  idAdmin INTEGER NOT NULL,
+  idAdmin UUID NOT NULL,
+  cedulaAdmin INTEGER NOT NULL UNIQUE,
   fecReg TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   nomAdmin VARCHAR NOT NULL,
   apeAdmin VARCHAR NOT NULL,
@@ -17,18 +18,24 @@ CREATE TABLE tabAdministrador(
 
 
 CREATE TABLE tabCliente(
-  consecCli BIGINT NOT NULL DEFAULT NEXTVAL('consecCli'),
+  idCli UUID NOT NULL,
+  consecCli BIGINT NOT NULL UNIQUE,
   fecReg TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   tipoCli VARCHAR NOT NULL,
   telCli VARCHAR NOT NULL,
   emailCli VARCHAR NOT NULL,
   dirCli VARCHAR NOT NULL,
-  PRIMARY KEY (consecCli)
+  fecInsert TIMESTAMP WITHOUT TIME ZONE,
+  userInsert VARCHAR,
+  fecUpdate TIMESTAMP WITHOUT TIME ZONe,
+  userUpdate VARCHAR,
+  PRIMARY KEY (idCli)
 );
 
 
 CREATE TABLE tabClienteNatural(
-  idCli INTEGER NOT NULL,
+  idCliNat UUID NOT NULL,
+  cedulaCliNat INTEGER NOT NULL UNIQUE,
   consecCli BIGINT NOT NULL,
   fecReg TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   nomCli VARCHAR NOT NULL,
@@ -37,13 +44,14 @@ CREATE TABLE tabClienteNatural(
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (idCli),
+  PRIMARY KEY (idCliNat),
   CONSTRAINT fkCliNatural
   FOREIGN KEY (consecCli) REFERENCES tabCliente(consecCli)
 );
 
 CREATE TABLE tabClienteJuridico(
-  nitCli VARCHAR NOT NULL,
+  idCliJur UUID NOT NULL,
+  nitCliJur VARCHAR NOT NULL UNIQUE,
   consecCli BIGINT NOT NULL,
   fecReg TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   nomEmpr VARCHAR NOT NULL,
@@ -51,13 +59,14 @@ CREATE TABLE tabClienteJuridico(
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (nitCli),
+  PRIMARY KEY (idCliJur),
   CONSTRAINT fkCliJuridico
   FOREIGN KEY (consecCli) REFERENCES tabCliente(consecCli)
 );
 
 CREATE TABLE tabProveedor(
-  nitProv VARCHAR NOT NULL,
+  idProv UUID NOT NULL,
+  nitProv VARCHAR NOT NULL UNIQUE,
   fecReg TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   nomProv VARCHAR NOT NULL,
   telProv VARCHAR NOT NULL,
@@ -68,46 +77,49 @@ CREATE TABLE tabProveedor(
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (nitProv)
+  PRIMARY KEY (idProv)
 );
 
 
 CREATE TABLE tabCategoria(
-  consecCateg BIGINT NOT NULL DEFAULT NEXTVAL('consecCateg'),
+  idCateg UUID NOT NULL,
+  consecCateg BIGINT NOT NULL UNIQUE,
   nomCateg VARCHAR NOT NULL,
   estado TEXT NOT NULL DEFAULT 'ACTIVO',
-  idAdmin INTEGER NOT NULL,
+  cedulaAdmin INTEGER NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (consecCateg),
+  PRIMARY KEY (idCateg),
   CONSTRAINT fkAdministrador
-  FOREIGN KEY (idAdmin ) REFERENCES tabAdministrador(idAdmin)
+  FOREIGN KEY (cedulaAdmin ) REFERENCES tabAdministrador(cedulaAdmin)
 );
 
 
 CREATE TABLE tabMarca(
-  consecMarca BIGINT NOT NULL DEFAULT NEXTVAL('consecMarca'),
+  idMarca UUID NOT NULL,
+  consecMarca BIGINT NOT NULL UNIQUE,
   nomMarca VARCHAR NOT NULL,
   estado TEXT NOT NULL DEFAULT 'ACTIVO',
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (consecMarca)
+  PRIMARY KEY (idMarca)
 );
 
 
 CREATE TABLE tabProveedorMarca(
-  consecProvMarca BIGINT NOT NULL DEFAULT NEXTVAL('consecProvMarca'),
+  idProvMarca UUID NOT NULL,
+  consecProvMarca BIGINT NOT NULL UNIQUE,
   nitProv VARCHAR NOT NULL,
   consecMarca BIGINT NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (consecProvMarca),
+  PRIMARY KEY (idProvMarca),
   CONSTRAINT fkProveedor
   FOREIGN KEY (nitProv) REFERENCES tabProveedor(nitProv),
   CONSTRAINT fkMarca
@@ -116,7 +128,8 @@ CREATE TABLE tabProveedorMarca(
 
 
 CREATE TABLE tabArticulo(
-  eanArt VARCHAR NOT NULL,
+  idArt UUID NOT NULL,
+  eanArt VARCHAR  UNIQUE,
   fecReg TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   nomArt VARCHAR NOT NULL,
   consecMarca BIGINT NOT NULL,
@@ -134,7 +147,7 @@ CREATE TABLE tabArticulo(
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (eanArt),
+  PRIMARY KEY (idArt),
   CONSTRAINT fkMarca
   FOREIGN KEY (consecMarca) REFERENCES tabMarca(consecMarca),
   CONSTRAINT fkCategoria
@@ -143,7 +156,8 @@ CREATE TABLE tabArticulo(
 
 
 CREATE TABLE tabKardex(
-  consecKardex BIGINT NOT NULL DEFAULT NEXTVAL('consecKardex'),
+  idKardex UUID NOT NULL,
+  consecKardex BIGINT NOT NULL UNIQUE,
   fecMov TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   tipoMov VARCHAR NOT NULL,
   eanArt VARCHAR NOT NULL,
@@ -154,31 +168,34 @@ CREATE TABLE tabKardex(
   valProm NUMERIC(10) NOT NULL,
   observacion TEXT,
   nitProv VARCHAR NOT NULL,
-  idAdmin INTEGER NOT NULL,
   consecMarca BIGINT NOT NULL,
+  cedulaAdmin INTEGER NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
   userUpdate VARCHAR,
-  PRIMARY KEY (consecKardex),
+  PRIMARY KEY (idKardex),
   CONSTRAINT fkArticulo
   FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt),
   CONSTRAINT fkProveedor
   FOREIGN KEY (nitProv) REFERENCES tabProveedor(nitProv),
   CONSTRAINT fkAdministrador
-  FOREIGN KEY (idAdmin) REFERENCES tabAdministrador(idAdmin)
+  FOREIGN KEY (cedulaAdmin) REFERENCES tabAdministrador(cedulaAdmin),
+  CONSTRAINT fkMarca
+  FOREIGN KEY (consecMarca) REFERENCES tabMarca(consecMarca)
 );
 
 
 CREATE TABLE tabProveedorArticulo(
-  consecProvArt BIGINT NOT NULL DEFAULT NEXTVAL('consecProvArt'),
+  idProvArt UUID NOT NULL,
+  consecProvArt BIGINT NOT NULL UNIQUE,
   nitProv VARCHAR NOT NULL,
   eanArt VARCHAR NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (consecProvArt),
+  PRIMARY KEY (idProvArt),
   CONSTRAINT fkProveedor
   FOREIGN KEY (nitProv) REFERENCES tabProveedor(nitProv),
   CONSTRAINT fkArticulo
@@ -188,35 +205,34 @@ CREATE TABLE tabProveedorArticulo(
 
 
 CREATE TABLE tabEncabezadoVenta(
-  consecVenta BIGINT NOT NULL DEFAULT NEXTVAL('consecVenta'),
+  idventa UUID NOT NULL,
+  consecVenta BIGINT NOT NULL UNIQUE,
   fecVenta TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   tipoFactura VARCHAR NOT NULL, --factura legal- factura preliminar
-  idCli INTEGER,
-  NitCli VARCHAR,
-  --consecCli BIGINT,
+  cedulaCliNat INTEGER,
+  NitCliJur VARCHAR,
   totalPagar NUMERIC (10),
-  idAdmin INTEGER NOT NULL,
+  cedulaAdmin INTEGER NOT NULL,
   estado TEXT NOT NULL DEFAULT 'ACTIVO',
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (consecVenta),
-  --CONSTRAINT fkCliente
-  --FOREIGN KEY (consecCli) REFERENCES tabCliente(consecCli),
+  PRIMARY KEY (idVenta),
   CONSTRAINT fkClienteNatural
-  FOREIGN KEY (idCli) REFERENCES tabClienteNatural(idCli),
+  FOREIGN KEY (cedulaCliNat) REFERENCES tabClienteNatural(cedulaCliNat),
   CONSTRAINT fkClienteJuridico
-  FOREIGN KEY (nitCli) REFERENCES tabClienteJuridico(nitCli),
+  FOREIGN KEY (nitCliJur) REFERENCES tabClienteJuridico(nitCliJur),
   CONSTRAINT fkAdministrador
-  FOREIGN KEY (idAdmin) REFERENCES tabAdministrador(idAdmin)
+  FOREIGN KEY (cedulaAdmin) REFERENCES tabAdministrador(cedulaAdmin)
   
   
 );
 
 
 CREATE TABLE tabDetalleVenta(
-  consecDetVenta BIGINT NOT NULL DEFAULT NEXTVAL('consecDetVenta'),
+  idDetVenta UUID NOT NULL,
+  consecDetVenta BIGINT NOT NULL UNIQUE,
   consecVenta BIGINT NOT NULL,
   eanArt VARCHAR NOT NULL,
   nomArt VARCHAR NOT NULL,
@@ -229,7 +245,7 @@ CREATE TABLE tabDetalleVenta(
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (consecDetVenta),
+  PRIMARY KEY (idDetVenta),
   CONSTRAINT fkVenta
   FOREIGN KEY (consecVenta) REFERENCES tabEncabezadoVenta(consecVenta),
   CONSTRAINT fkArticulo
@@ -238,7 +254,8 @@ CREATE TABLE tabDetalleVenta(
 );
 
 CREATE TABLE tabRegBorrados(
-  consecReg BIGINT NOT NULL DEFAULT NEXTVAL('consecReg'),
+  idReg UUID NOT NULL,
+  consecReg BIGINT NOT NULL UNIQUE,
   fecDelete TIMESTAMP WITHOUT TIME ZONE,
   userDelete VARCHAR NOT NULL,
   nomTabla VARCHAR NOT NULL,

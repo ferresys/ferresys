@@ -1,3 +1,5 @@
+
+
 CREATE OR REPLACE FUNCTION insertDetalleVenta(
     zEanArt tabArticulo.eanArt%type,
     zCantArt tabDetalleVenta.cantArt%type
@@ -11,7 +13,7 @@ DECLARE
     zTotalPagar NUMERIC(10);
     zConsecVenta BIGINT;
 BEGIN
-    -- Obtener el valor unitario (val_unit) del artículo desde la tabla "tabArticulo"
+    -- Obtener el valor unitario (valUnit) del artículo desde la tabla "tabArticulo"
     SELECT valUnit INTO zValUnit FROM tabArticulo WHERE eanArt = zEanArt;
 
     -- Calcular el subtotal, el valor del IVA y el total a pagar
@@ -32,8 +34,8 @@ $$
 LANGUAGE plpgsql;
 
 /*
-select insertDetalleVenta('00000001',5);
-select insertDetalleVenta('00000002',10);
+select insertDetalleVenta('0-0000001',5);
+select insertDetalleVenta('0-0000002',10);
 select * from tabDetalleVenta;
 select * from tabEncabezadoVenta;
 select * from tabArticulo

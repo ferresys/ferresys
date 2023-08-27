@@ -1,4 +1,4 @@
--- Función para insertar datos en la tabla "tab_proveedor"
+-- Función para insertar datos en la tabla "tabProveedor"
 CREATE OR REPLACE FUNCTION insertProveedor(
     
     zNitProv tabProveedor.nitProv%type,
@@ -27,6 +27,7 @@ LANGUAGE plpgsql;
 /*
 select insertProveedor('0-12','DEWALT','3156478952','dewalt@gmail.com','calle 22 #1-14');
 select insertProveedor('0-13','DEWALT','3156478952','dewalt@gmail.com','calle 22 #1-14');
+select insertProveedor('0-14','MAKITA','3105642356','makita@gmail.com','calle 45 #25-15');
 select * from tabProveedor;
 
 

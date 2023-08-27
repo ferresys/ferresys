@@ -36,8 +36,8 @@ LANGUAGE plpgsql;
 
 
 /*
-select insertArticulo('00000001','pulidora',1,1,'taladro amarillo',1.20, '2023-11-21');
-select insertArticulo('00000002','pulidora',2,1,'taladro amarillo',1.20, '2023-11-21');
+select insertArticulo('0-0000001','pulidora',1,1,'taladro amarillo',1.20, '2023-11-21');
+select insertArticulo('0-0000002','pulidora',2,1,'verde', 1.20, '2023-11-21');
 select * from tabArticulo;
 select * from tabMarca;
 select * from tabCategoria;
