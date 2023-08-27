@@ -41,13 +41,13 @@ CREATE TRIGGER triggertabRegBorrados
 after delete on tabAdministrador for each row execute procedure movimientosAdmin();
 
 -- Crear el trigger en la tabla tabCliente
-/*CREATE TRIGGER triggertabCliente
+CREATE TRIGGER triggertabCliente
 BEFORE INSERT OR UPDATE ON tabCliente
 FOR EACH ROW
 EXECUTE FUNCTION movimientosAdmin();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabCliente for each row execute procedure movimientosAdmin();*/
+after delete on tabCliente for each row execute procedure movimientosAdmin();
 
 -- Crear el trigger en la tabla tabClienteNatural
 CREATE TRIGGER triggertabClienteNatural

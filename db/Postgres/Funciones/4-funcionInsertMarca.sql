@@ -1,4 +1,6 @@
--- Función para insertar datos en la tabla "tab_marca"
+
+-- Función para insertar datos en la tabla "tabMarca"
+
 CREATE OR REPLACE FUNCTION insertMarca(
     zNomMarca tabMarca.nomMarca%type) 
 RETURNS void AS 
@@ -18,7 +20,7 @@ LANGUAGE plpgsql;
 
 /*
 select insertMarca('MAKITA');
-select insertMarca('dewalt');
+select insertMarca('DEWALT');
 select * from tabMarca;
 select * from tabProveedorMarca;
 select * from tabProveedor;

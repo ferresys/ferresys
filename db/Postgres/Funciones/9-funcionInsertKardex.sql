@@ -1,14 +1,16 @@
--- Función para insertar datos en la tabla "tab_kardex"
+
+-- Función para insertar datos en la tabla "tabKardex"
+
 CREATE OR REPLACE FUNCTION insertKardex(
     zTipoMov tabKardex.tipoMov%type,
     zEanArt tabArticulo.eanArt%type,
-    znomArt tabArticulo.nomArt%type,
-    zcantArt tabKardex.cantArt%type,
-    zvalCompra tabKardex.valCompra%type,
+    zNomArt tabArticulo.nomArt%type,
+    zCantArt tabKardex.cantArt%type,
+    zValCompra tabKardex.valCompra%type,
     zObservacion tabKardex.observacion%type,
-    znitProv tabProveedor.nitProv%type,
-	zconsecMarca tabMarca.consecMarca%type,
-	zIdAdmin tabAdministrador.idAdmin%type
+    zNitProv tabProveedor.nitProv%type,
+	zConsecMarca tabMarca.consecMarca%type,
+	zCedulaAdmin tabAdministrador.cedulaAdmin%type
 ) RETURNS void AS 
 
 $$
@@ -27,8 +29,8 @@ BEGIN
         zValProm := 0;  -- No se realiza el cálculo para 'SALIDA', asignamos un valor por defecto.
     END IF;
 
-    INSERT INTO tabKardex( fecMov, tipoMov, eanArt, nomArt, cantArt, valCompra, valTotal, valProm, observacion, nitProv, consecMarca, idAdmin)
-    VALUES (zFecMov, zTipoMov, zEanArt, zNomArt, zCantArt, zValCompra, zValTotal, zValProm, zObservacion, zNitProv, zConsecMarca, zIdAdmin);
+    INSERT INTO tabKardex( fecMov, tipoMov, eanArt, nomArt, cantArt, valCompra, valTotal, valProm, observacion, nitProv, consecMarca, cedulaAdmin)
+    VALUES (zFecMov, zTipoMov, zEanArt, zNomArt, zCantArt, zValCompra, zValTotal, zValProm, zObservacion, zNitProv, zConsecMarca, zCedulaAdmin);
     
     RAISE NOTICE 'Registro exitoso ';
 END;
@@ -36,10 +38,11 @@ $$
 LANGUAGE plpgsql;
 
 /*
-select insertKardex('ENTRADA','00000001','Pulidora',15,5000,'OK','0-12', 1, 1095821827);
-select insertKardex('ENTRADA','00000001','Pulidora',15,5000,'OK','0-13', 1, 1095821827);
-select insertKardex('ENTRADA','00000002','Pulidora',15,5000,'OK','0-13', 2, 1095821827);
-select insertKardex('SALIDA','00000001','taladro',10,5000,'OK',1);
+select insertKardex('ENTRADA','0-0000001','Pulidora',15,5000,'OK','0-12', 1, 1098821827 );
+select insertKardex('ENTRADA','0-0000001','Pulidora',20,5000,'OK','0-13', 1, 1098821827);
+select insertKardex('ENTRADA','0-0000001','Pulidora',20,5000,'OK','0-13', 1, 1098821827);
+select insertKardex('ENTRADA','0-0000002','Pulidora',10,5000,'OK','0-13', 2, 1098821827);
+
 select * from tabKardex;
 select * from tabMarca;
 select * from tabCategoria;
@@ -48,6 +51,7 @@ select * from tabProveedor;
 select * from tabArticulo;
 select * from tabProveedorArticulo;
 select * from tabCliente;
+select * from tabAdministrador;
 ALTER TABLE tabArticulo
 ALTER COLUMN marcaArt TYPE VARCHAR;
 ALTER COLUMN categArt TYPE VARCHAR;
