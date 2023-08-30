@@ -9,12 +9,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.22.10",
+    "@babel/core": "^7.22.11",
     "@babel/node": "^7.22.10",
-    "@babel/preset-env": "^7.22.10",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.22.10",
+    "@babel/preset-env": "^7.22.10"
   },
   "description": ""
 }

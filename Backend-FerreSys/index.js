@@ -10,6 +10,8 @@ import { insertar_articulo } from './insert_articulos';
 import { consultar_articulos } from './consulta_articulos'; //(funcion)
 import { consultar_clientes } from './consulta_clientes';
 import { consultar_proveedores } from './consulta_proveedores';
+import cors from 'cors';  // <-- Asegúrate de importar cors
+
 
 //cargar variables de entorno .env
 
@@ -18,10 +20,22 @@ dotenv.config();
 
 //crear instancia app y variable PORT
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Cambiado de 3000 a 3001
+
 
 
 app.use(express.json());
+
+
+
+// Habilitar CORS para todos los orígenes
+app.use(cors());
+
+
+// Iniciar el servidor
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+});
 
 app.post('/yocser', async (req, res) => {
   try {
@@ -41,6 +55,7 @@ app.post('/yocser', async (req, res) => {
     res.status(500).json({ error: 'Error al insertar el artículo1' });
   }
 });
+
 
 
 
@@ -84,10 +99,6 @@ try {
 
 
 
-//iniciar el servidor en el puerto definido.
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
-});
 
 
 
