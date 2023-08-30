@@ -150,7 +150,7 @@
 
 .sidebar .navbar .navbar-nav .nav-link:hover i,
 .sidebar .navbar .navbar-nav .nav-link.active i {
-    background: var(--secondary);
+    background: var(--primary);
     box-shadow: -4px 10px 25px 9px rgba(0,0,0,0.1);
 }
 
@@ -199,7 +199,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--dark);
+    background: var(--primary);
     border-radius: 40px;
 }
 
@@ -210,6 +210,7 @@
 .content .navbar .dropdown-item:hover,
 .content .navbar .dropdown-item.active {
     background: var(--dark);
+    
 }
 
 .content .navbar .dropdown-toggle::after {
