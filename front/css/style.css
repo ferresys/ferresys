@@ -177,7 +177,7 @@
 
 .sidebar .navbar .dropdown-item:hover,
 .sidebar .navbar .dropdown-item.active {
-    background: var(--dark);
+    background: var(--marca);
 }
 
 .content .navbar .navbar-nav .nav-link {
@@ -189,7 +189,7 @@
 
 .content .navbar .navbar-nav .nav-link:hover,
 .content .navbar .navbar-nav .nav-link.active {
-    color: var(--primary);
+    color: var(--dark);
 }
 
 .content .navbar .sidebar-toggler,
@@ -201,6 +201,7 @@
     justify-content: center;
     background: var(--primary);
     border-radius: 40px;
+    box-shadow: 8px 10px 15px 4px rgba(0,0,0,0.1);
 }
 
 .content .navbar .dropdown-item {
