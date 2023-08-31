@@ -8,12 +8,10 @@ CREATE OR REPLACE FUNCTION insertSalidaKardexDetalleVenta()
 RETURNS TRIGGER AS $$
 BEGIN
   INSERT INTO tabKardex (
-    fecMov, tipoMov, eanArt, nomArt, cantArt,valCompra, valTotal, valProm, nitProv, consecMarca, cedulaAdmin ) 
+    fecMov, tipoMov, eanArt, nomArt, cantArt,valCompra, valTotal, valProm ) 
 	VALUES (now(), 'SALIDA', NEW.eanArt, NEW.nomArt, NEW.cantArt, 0, 0, 0,  
-    (SELECT nitProv FROM tabProveedor  LIMIT 1), 
-	(SELECT consecMarca FROM tabMarca LIMIT 1),		
-    (SELECT cedulaAdmin FROM tabAdministrador LIMIT 1) 
-   
+    
+    
   );
 
   RETURN NEW;
