@@ -183,13 +183,13 @@
 .content .navbar .navbar-nav .nav-link {
     margin-left: 25px;
     padding: 12px 0;
-    color: var(--marca);
+    color: var(--dark);
     outline: none;
 }
 
 .content .navbar .navbar-nav .nav-link:hover,
 .content .navbar .navbar-nav .nav-link.active {
-    color: var(--dark);
+    color: var(--marca);
 }
 
 .content .navbar .sidebar-toggler,

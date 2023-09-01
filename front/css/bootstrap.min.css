@@ -198,12 +198,12 @@ sup {
     top: -0.5em;
 }
 a {
-    color: #ffcc29;
+    color: var(--bs-dark);
     text-decoration: none;
     
 }
 a:hover {
-    color: var(--bs-dark);
+    color: var(--marca);
     
 }
 a:not([href]):not([class]),
