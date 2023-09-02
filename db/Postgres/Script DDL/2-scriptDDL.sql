@@ -1,3 +1,39 @@
+
+CREATE TABLE tabUsuario(
+  codUsuario UUID NOT NULL,
+  idUsuario INTEGER NOT NULL UNIQUE,
+  nomUsuario VARCHAR NOT NULL,
+  ApeUsuario VARCHAR NOT NULL,
+  emailUsuario VARCHAR NOT NULL,
+  usuario VARCHAR NOT NULL,
+  password VARCHAR NOT NULL,
+  telUsuario VARCHAR NOT NULL,
+  idRol INTEGER NOT NULL,
+  PRIMARY KEY (codUsuario),
+  CONSTRAINT fkRol
+  FOREIGN KEY (idRol) REFERENCES tabRol(idRol)
+);
+
+
+CREATE TABLE tabRol(
+  idRol INTEGER NOT NULL,
+  nomRol VARCHAR NOT NULL,
+  descripRol TEXT NOT NULL,
+  PRIMARY KEY (idRol)
+);
+
+CREATE TABLE RolxUsuario(
+  idRolxUsuario INTEGER NOT NULL,
+  idUsuario INTEGER NOT NULL,
+  idRol INTEGER NOT NULL,
+  PRIMARY KEY (idRol),
+  CONSTRAINT fkUsuario
+  FOREIGN KEY (idUsuario) REFERENCES tabUsuario(idUsuario),
+  CONSTRAINT fkRol
+  FOREIGN KEY (idRol) REFERENCES tabRol(idRol),
+);
+
+
 CREATE TABLE tabAdministrador(
   codAdmin UUID NOT NULL,
   idAdmin INTEGER NOT NULL UNIQUE,
@@ -53,7 +89,7 @@ CREATE TABLE tabProveedor(
 
 
 CREATE TABLE tabCategoria(
-  idCateg BIGINT NOT NULL UNIQUE,
+  idCateg BIGINT NOT NULL,
   nomCateg VARCHAR NOT NULL,
   estado TEXT NOT NULL DEFAULT 'ACTIVO',
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
