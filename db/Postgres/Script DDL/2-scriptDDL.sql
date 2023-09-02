@@ -26,14 +26,31 @@ CREATE TABLE RolxUsuario(
   idRolxUsuario INTEGER NOT NULL,
   idUsuario INTEGER NOT NULL,
   idRol INTEGER NOT NULL,
-  PRIMARY KEY (idRol),
+  PRIMARY KEY (idRolxUsuario),
   CONSTRAINT fkUsuario
   FOREIGN KEY (idUsuario) REFERENCES tabUsuario(idUsuario),
   CONSTRAINT fkRol
   FOREIGN KEY (idRol) REFERENCES tabRol(idRol),
 );
 
+CREATE TABLE Tabpermiso(
+  consecPermiso BIGINT NOT NULL,
+  nomPermiso VARCHAR NOT NULL,
+  PRIMARY KEY (consecPermiso),
+);
 
+CREATE TABLE tabAsignacionPermiso(
+  consecAsigPermiso BIGINT NOT NULL,
+  idRol INTEGER NOT NULL,
+  consecPermiso VARCHAR NOT NULL,
+  PRIMARY KEY (consecAsigPermiso),
+  CONSTRAINT fkRol
+  FOREIGN KEY (idRol) REFERENCES tabRol(idRol),
+  CONSTRAINT fkpermiso
+  FOREIGN KEY (consecPermiso) REFERENCES Tabpermiso(consecPermiso),
+);
+
+/*
 CREATE TABLE tabAdministrador(
   codAdmin UUID NOT NULL,
   idAdmin INTEGER NOT NULL UNIQUE,
@@ -50,7 +67,7 @@ CREATE TABLE tabAdministrador(
   userUpdate VARCHAR,
   PRIMARY KEY (codAdmin)
 );
-
+*/
 
 CREATE TABLE tabCliente(
   codCli UUID NOT NULL,
@@ -120,13 +137,13 @@ CREATE TABLE tabArticulo(
   idCateg BIGINT NOT NULL,
   descripArt TEXT,
   valUnit NUMERIC(10),
-  porcentaje NUMERIC(10,2),
+  porcentaje NUMERIC(10,2), --valor porcentual para las ganancias por venta del articulo
+  iva NUMERIC (10.2) NOT NULL DEFAULT 0, --por lo general se maneja el 0.19 (%)
   valStock INTEGER,
   stockMin INTEGER NOT NULL DEFAULT 10,
   stockMax INTEGER NOT NULL DEFAULT 500,
   valReorden INTEGER NOT NULL DEFAULT 50,
   fecVence DATE,
-  idProv INTEGER NOT NULL, 
   estado TEXT NOT NULL DEFAULT 'ACTIVO',
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
@@ -137,8 +154,7 @@ CREATE TABLE tabArticulo(
   FOREIGN KEY (idMarca) REFERENCES tabMarca(idMarca),
   CONSTRAINT fkCategoria
   FOREIGN KEY (idCateg) REFERENCES tabCategoria(idCateg)
-   CONSTRAINT fkProveedor
-  FOREIGN KEY (idProv) REFERENCES tabProveedor(idProv)
+  
 );
 
 
@@ -147,9 +163,9 @@ CREATE TABLE tabKardex(
   tipoMov VARCHAR NOT NULL,
   eanArt VARCHAR NOT NULL,
   cantArt INTEGER NOT NULL,
-  valCompra NUMERIC(10) NOT NULL,
-  valTotal NUMERIC(10) NOT NULL,
-  valProm NUMERIC(10) NOT NULL,
+  --valCompra NUMERIC(10) NOT NULL,
+  --valTotal NUMERIC(10) NOT NULL,
+  --valProm NUMERIC(10) NOT NULL,
   observacion TEXT,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
@@ -158,15 +174,36 @@ CREATE TABLE tabKardex(
   PRIMARY KEY (consecKardex),
   CONSTRAINT fkArticulo
   FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt),
+  FOREIGN KEY (cantArt) REFERENCES tabReciboMcia(cantArt),
 );
 
+CREATE TABLE tabReciboMercancia(
+  consecReciboMcia BIGINT NOT NULL,
+  --fecReg TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+  eanArt VARCHAR NOT NULL,
+  cantArt INTEGER NOT NULL,
+  valCompra NUMERIC(10),
+  valTotal NUMERIC(10),
+  valprom NUMERIC(10) NOT NULL,
+  idProv VARCHAR NOT NULL,
+  idMarca BIGINT NOT NULL,
+  fecInsert TIMESTAMP WITHOUT TIME ZONE,
+  userInsert VARCHAR,
+  fecUpdate TIMESTAMP WITHOUT TIME ZONE,
+  userUpdate VARCHAR,
+  PRIMARY KEY (consecReciboMcia),
+  CONSTRAINT fkProveedor
+  FOREIGN KEY (idProv) REFERENCES tabProveedor(idProv),
+  CONSTRAINT fkMarca
+  FOREIGN KEY (idMarca) REFERENCES tabMarca(idMarca),
+);
 
 CREATE TABLE tabEncabezadoVenta(
   consecEncVenta  BIGINT NOT NULL,
   fecVenta TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   tipoFactura VARCHAR NOT NULL, --factura legal- factura preliminar
   idCli INTEGER NOT NULL,
-  totalPagar NUMERIC (10),
+  --totalPagar NUMERIC (10),
   estado TEXT NOT NULL DEFAULT 'ACTIVO',
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
@@ -186,6 +223,8 @@ CREATE TABLE tabDetalleVenta(
   cantArt INTEGER NOT NULL,
   valUnit NUMERIC(10) NOT NULL,
   subTotal NUMERIC(10) NOT NULL,
+  iva NUMERIC (10,2) NOT NULL DEFAULT 0,
+  descuento NUMERIC (10) NOT NULL DEFAULT 0,
   totalPagar NUMERIC(10) NOT NULL,
   estado TEXT NOT NULL DEFAULT 'ACTIVO',
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
