@@ -7,7 +7,6 @@ CREATE TABLE tabUsuario(
   emailUsuario VARCHAR NOT NULL,
   usuario VARCHAR NOT NULL,
   password VARCHAR NOT NULL,
-  telUsuario VARCHAR NOT NULL,
   idRol INTEGER NOT NULL,
   PRIMARY KEY (codUsuario),
   CONSTRAINT fkRol
