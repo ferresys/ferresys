@@ -49,7 +49,6 @@ CREATE TABLE tabAsignacionPermiso(
   FOREIGN KEY (consecPermiso) REFERENCES Tabpermiso(consecPermiso),
 );
 
-/*
 CREATE TABLE tabAdministrador(
   codAdmin UUID NOT NULL,
   idAdmin INTEGER NOT NULL UNIQUE,
