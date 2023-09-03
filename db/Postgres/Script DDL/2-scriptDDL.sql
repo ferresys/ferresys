@@ -133,7 +133,7 @@ CREATE TABLE tabArticulo(
   eanArt VARCHAR  NOT NULL,
   nomArt VARCHAR NOT NULL,
   idMarca SMALLINT NOT NULL,
-  idCateg BIGINT NOT NULL,
+  idCateg SMALLINT NOT NULL,
   descripArt TEXT,
   valUnit NUMERIC(10),
   porcentaje NUMERIC(10,2), --valor porcentual para las ganancias por venta del articulo
