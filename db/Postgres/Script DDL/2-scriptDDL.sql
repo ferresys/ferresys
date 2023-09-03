@@ -70,7 +70,7 @@ CREATE TABLE tabAdministrador(
 
 CREATE TABLE tabCliente(
   codCli UUID NOT NULL,
-  idCli INTEGER NOT NULL UNIQUE,
+  idCli VARCHAR NOT NULL UNIQUE,
   tipoCli VARCHAR NOT NULL,
   nomCli VARCHAR,
   apeCli VARCHAR,
