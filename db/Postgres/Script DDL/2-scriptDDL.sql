@@ -132,7 +132,7 @@ CREATE TABLE tabMarca(
 CREATE TABLE tabArticulo(
   eanArt VARCHAR  NOT NULL,
   nomArt VARCHAR NOT NULL,
-  idMarca BIGINT NOT NULL,
+  idMarca SMALLINT NOT NULL,
   idCateg BIGINT NOT NULL,
   descripArt TEXT,
   valUnit NUMERIC(10),
