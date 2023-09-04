@@ -21,33 +21,6 @@ CREATE TABLE tabRol(
   PRIMARY KEY (idRol)
 );
 
-CREATE TABLE RolxUsuario(
-  idRolxUsuario INTEGER NOT NULL,
-  idUsuario INTEGER NOT NULL,
-  idRol INTEGER NOT NULL,
-  PRIMARY KEY (idRolxUsuario),
-  CONSTRAINT fkUsuario
-  FOREIGN KEY (idUsuario) REFERENCES tabUsuario(idUsuario),
-  CONSTRAINT fkRol
-  FOREIGN KEY (idRol) REFERENCES tabRol(idRol),
-);
-
-CREATE TABLE Tabpermiso(
-  consecPermiso BIGINT NOT NULL,
-  nomPermiso VARCHAR NOT NULL,
-  PRIMARY KEY (consecPermiso),
-);
-
-CREATE TABLE tabAsignacionPermiso(
-  consecAsigPermiso BIGINT NOT NULL,
-  idRol INTEGER NOT NULL,
-  consecPermiso VARCHAR NOT NULL,
-  PRIMARY KEY (consecAsigPermiso),
-  CONSTRAINT fkRol
-  FOREIGN KEY (idRol) REFERENCES tabRol(idRol),
-  CONSTRAINT fkpermiso
-  FOREIGN KEY (consecPermiso) REFERENCES Tabpermiso(consecPermiso),
-);
 
 CREATE TABLE tabAdministrador(
   codAdmin UUID NOT NULL,
