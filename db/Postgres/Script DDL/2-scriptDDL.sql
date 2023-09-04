@@ -14,12 +14,6 @@ CREATE TABLE tabUsuario(
 );
 
 
-CREATE TABLE tabRol(
-  idRol INTEGER NOT NULL,
-  nomRol VARCHAR NOT NULL,
-  descripRol TEXT NOT NULL,
-  PRIMARY KEY (idRol)
-);
 
 
 CREATE TABLE tabAdministrador(
