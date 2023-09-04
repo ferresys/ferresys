@@ -9,19 +9,19 @@ $$
 BEGIN
 	IF TG_OP='INSERT' THEN
     	NEW.fecInsert := now();
-    	NEW.userInsert := current_user;
+    	NEW.userInsert := current_user;//cambiar por usuario de la pagina
 		RETURN NEW;
 	END IF;
 	
 	IF TG_OP='UPDATE' THEN
 		NEW.fecUpdate := now();
-		NEW.userUpdate := current_user;
+		NEW.userUpdate := current_user;//cambiar por usuario de la pagina
 		RETURN NEW;
 	END IF;
 	
 	IF TG_OP= 'DELETE' THEN
 	  INSERT INTO tabRegBorrados (fecDelete,userDelete,nomTabla)
-	  VALUES(current_timestamp,current_user,TG_RELNAME);
+	  VALUES(current_timestamp,current_user,TG_RELNAME);//cambiar por usuario de la pagina
 	
 	  RETURN OLD;
 	END IF ;
@@ -48,25 +48,6 @@ EXECUTE FUNCTION movimientosAdmin();
 
 CREATE TRIGGER triggertabRegBorrados
 after delete on tabCliente for each row execute procedure movimientosAdmin();
-
--- Crear el trigger en la tabla tabClienteNatural
-CREATE TRIGGER triggertabClienteNatural
-BEFORE INSERT OR UPDATE ON tabClienteNatural
-FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
-
-CREATE TRIGGER triggertabRegBorrados
-after delete on tabClienteNatural for each row execute procedure movimientosAdmin();
-
-
--- Crear el trigger en la tabla tabClienteJuridico
-CREATE TRIGGER triggertabClienteJuridico
-BEFORE INSERT OR UPDATE ON tabClienteJuridico
-FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
-
-CREATE TRIGGER triggertabRegBorrados
-after delete on tabClienteJuridico for each row execute procedure movimientosAdmin();
 
 
 -- Crear el trigger en la tabla tabProveedor
@@ -113,24 +94,6 @@ EXECUTE FUNCTION movimientosAdmin();
 
 CREATE TRIGGER triggertabRegBorrados
 after delete on tabKardex for each row execute procedure movimientosAdmin();
-
--- Crear el trigger en la tabla tabproveedorArticulo
-CREATE TRIGGER triggertabproveedorArticulo
-BEFORE INSERT OR UPDATE ON tabproveedorArticulo
-FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
-
-CREATE TRIGGER triggertabRegBorrados
-after delete on tabproveedorArticulo for each row execute procedure movimientosAdmin();
-
--- Crear el trigger en la tabla tabproveedorMarca
-CREATE TRIGGER triggertabproveedorMarca
-BEFORE INSERT OR UPDATE ON tabproveedorMarca
-FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
-
-CREATE TRIGGER triggertabRegBorrados
-after delete on tabproveedorMarca for each row execute procedure movimientosAdmin();
 
 
 -- Crear el trigger en la tabla tabEncabezadoVenta
