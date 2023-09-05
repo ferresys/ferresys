@@ -22,7 +22,8 @@ CREATE TABLE tabPermiso(
   PRIMARY KEY (idPermiso)
 );
 
-CREATE TABLE usuariosxpermisos(
+CREATE TABLE tabUsuarioPermiso(
+idUsuarioPermiso SMALLINT NOT NULL,
   idUsuario UUID NOT NULL,
   idPermiso SMALLINT NOT NULL,
   fecPermiso TIMESTAMP WITHOUT TIME ZONE, 
