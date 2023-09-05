@@ -10,7 +10,7 @@ CREATE TABLE tabUsuario(
   PRIMARY KEY (codUsuario)
 );
 
-CREATE TABLE tabpermisos(
+CREATE TABLE tabPermiso(
   idPermiso SMALLINT PRIMARY KEY,
   nombrePermiso VARCHAR NOT NULL,
   descPermiso TEXT NOT NULL,
