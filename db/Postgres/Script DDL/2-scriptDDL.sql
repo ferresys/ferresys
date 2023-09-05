@@ -24,7 +24,7 @@ CREATE TABLE tabPermiso(
 
 CREATE TABLE tabUsuarioPermiso(
 idUsuarioPermiso SMALLINT NOT NULL,
-  idUsuario UUID NOT NULL,
+  idUsuario VARCHAR NOT NULL,
   idPermiso SMALLINT NOT NULL,
   fecPermiso TIMESTAMP WITHOUT TIME ZONE, 
   FOREIGN KEY (idUsuario) REFERENCES tabUsuario(idUsuario),
