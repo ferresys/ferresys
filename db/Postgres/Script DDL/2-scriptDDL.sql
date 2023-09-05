@@ -12,7 +12,7 @@ CREATE TABLE tabUsuario(
 
 CREATE TABLE tabPermiso(
   idPermiso SMALLINT PRIMARY KEY,
-  nombrePermiso VARCHAR NOT NULL,
+  nomPermiso VARCHAR NOT NULL,
   descPermiso TEXT NOT NULL,
   estado BOOLEAN NOT NULL DEFAULT TRUE
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
