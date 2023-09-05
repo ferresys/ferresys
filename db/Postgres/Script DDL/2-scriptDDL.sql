@@ -17,7 +17,7 @@ CREATE TABLE tabPermiso(
   
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
-  fecUpdate TIMESTAMP WITHOUT TIME ZONe,
+  fecUpdate TIMESTAMP WITHOUT TIME ZONE,
   userUpdate VARCHAR,
   PRIMARY KEY (idPermiso)
 );
