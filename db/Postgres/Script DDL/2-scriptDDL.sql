@@ -11,10 +11,9 @@ CREATE TABLE tabUsuario(
 );
 
 CREATE TABLE tabPermiso(
-  idPermiso SMALLINT PRIMARY KEY,
+  consecPermiso SMALLINT PRIMARY KEY,
   nomPermiso VARCHAR NOT NULL,
-  descPermiso TEXT NOT NULL,
-  
+  descPermiso TEXT NOT NULL, --descripción permiso
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
@@ -23,36 +22,20 @@ CREATE TABLE tabPermiso(
 );
 
 CREATE TABLE tabUsuarioPermiso(
-idUsuarioPermiso SMALLINT NOT NULL,
+  consecUsuarioPermiso SMALLINT NOT NULL,
   idUsuario VARCHAR NOT NULL,
-  idPermiso SMALLINT NOT NULL,
+  consecPermiso SMALLINT NOT NULL,
   fecPermiso TIMESTAMP WITHOUT TIME ZONE, 
+  PRIMARY KEY (consecUsuarioPermiso)
   FOREIGN KEY (idUsuario) REFERENCES tabUsuario(idUsuario),
   CONSTRAINT fkUsuario
   FOREIGN KEY (idPermiso) REFERENCES tabpermisos(idPermiso)
 );
 
-CREATE TABLE tabAdministrador(
-  codAdmin UUID NOT NULL,
-  idAdmin VARCHAR(15) NOT NULL UNIQUE,
-  nomAdmin VARCHAR NOT NULL,
-  apeAdmin VARCHAR NOT NULL,
-  telAdmin VARCHAR NOT NULL,
-  emailAdmin VARCHAR NOT NULL,
-  usuario VARCHAR NOT NULL,
-  password VARCHAR NOT NULL,
-  estado BOOLEAN NOT NULL TRUE,
-  fecInsert TIMESTAMP WITHOUT TIME ZONE,
-  userInsert VARCHAR,
-  fecUpdate TIMESTAMP WITHOUT TIME ZONE,
-  userUpdate VARCHAR,
-  PRIMARY KEY (codAdmin)
-);
-
 CREATE TABLE tabCliente(
   codCli UUID NOT NULL,
   idCli VARCHAR NOT NULL UNIQUE,
-  tipoCli BOOLEAN NOT NULL TRUE,
+  tipoCli BOOLEAN NOT NULL  DEFAULT TRUE, --TRUE="CLIENTE NATURAL"
   nomCli VARCHAR,
   apeCli VARCHAR,
   nomRepLegal VARCHAR,
@@ -77,27 +60,24 @@ CREATE TABLE tabProveedor(
   estado BOOLEAN NOT NULL TRUE,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
-  fecInsert TIMESTAMP WITHOUT TIME ZONE,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
   PRIMARY KEY (codProv)
 );
 
 CREATE TABLE tabCategoria(
-  idCateg SMALLINT NOT NULL,
+  consecCateg SMALLINT NOT NULL,
   nomCateg VARCHAR NOT NULL,
-  estado BOOLEAN NOT NULL TRUE,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (idCateg)
+  PRIMARY KEY (consecCateg)
 );
 
 CREATE TABLE tabMarca(
-  idMarca SMALLINT NOT NULL,
+  consecMarca SMALLINT NOT NULL,
   nomMarca VARCHAR NOT NULL,
-  estado BOOLEAN NOT NULL TRUE,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
@@ -108,16 +88,16 @@ CREATE TABLE tabMarca(
 CREATE TABLE tabArticulo(
   eanArt VARCHAR  NOT NULL,
   nomArt VARCHAR NOT NULL,
-  idMarca SMALLINT NOT NULL,
-  idCateg SMALLINT NOT NULL,
-  descripArt TEXT,
+  consecMarca SMALLINT NOT NULL,
+  consecCateg SMALLINT NOT NULL,
+  descArt TEXT, --descripción del articulo
   valUnit NUMERIC(10),
   porcentaje NUMERIC(10,2), --valor porcentual para las ganancias por venta del articulo
   iva NUMERIC (10,2) NOT NULL DEFAULT 0,
   valStock INTEGER,
-  stockMin INTEGER NOT NULL DEFAULT 10,
-  stockMax INTEGER NOT NULL DEFAULT 500,
-  valReorden INTEGER NOT NULL DEFAULT 50,
+  stockMin INTEGER NOT NULL,
+  stockMax INTEGER NOT NULL,
+  valReorden INTEGER NOT NULL,
   fecVence DATE,
   estado BOOLEAN NOT NULL TRUE,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
@@ -126,18 +106,18 @@ CREATE TABLE tabArticulo(
   userUpdate VARCHAR,
   PRIMARY KEY (eanArt),
   CONSTRAINT fkMarca
-  FOREIGN KEY (idMarca) REFERENCES tabMarca(idMarca),
+  FOREIGN KEY (consecMarca) REFERENCES tabMarca(consecMarca),
   CONSTRAINT fkCategoria
-  FOREIGN KEY (idCateg) REFERENCES tabCategoria(idCateg)
+  FOREIGN KEY (consecCateg) REFERENCES tabCategoria(consecCateg)
   
 );
 
 CREATE TABLE tabKardex(
   consecKardex BIGINT NOT NULL UNIQUE,
-  tipoMov VARCHAR NOT NULL,
+  tipoMov BOOLEAN NOT NULL DEFAULT TRUE, --TRUE="ENTRADA" FALSE="SALIDA"
   eanArt VARCHAR NOT NULL,
   cantArt INTEGER NOT NULL,
-  valProm NUMERIC(10) NOT NULL,
+  valProm NUMERIC(10) NOT NULL,--Valor de compra promedio
   observacion TEXT,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
@@ -146,7 +126,6 @@ CREATE TABLE tabKardex(
   PRIMARY KEY (consecKardex),
   CONSTRAINT fkArticulo
   FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt),
-  FOREIGN KEY (cantArt) REFERENCES tabReciboMcia(cantArt),
 );
 
 CREATE TABLE tabReciboMercancia(
@@ -155,9 +134,8 @@ CREATE TABLE tabReciboMercancia(
   cantArt INTEGER NOT NULL,
   valCompra NUMERIC(10),
   valTotal NUMERIC(10),
-  valprom NUMERIC(10) NOT NULL,
   idProv VARCHAR NOT NULL,
-  idMarca SMALLINT NOT NULL,
+  consecMarca SMALLINT NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
@@ -166,15 +144,16 @@ CREATE TABLE tabReciboMercancia(
   CONSTRAINT fkProveedor
   FOREIGN KEY (idProv) REFERENCES tabProveedor(idProv),
   CONSTRAINT fkMarca
-  FOREIGN KEY (idMarca) REFERENCES tabMarca(idMarca),
+  FOREIGN KEY (consecMarca) REFERENCES tabMarca(consecMarca),
 );
 
 CREATE TABLE tabEncabezadoVenta(
-  consecEncVenta BIGINT NOT NULL,
+  consecEncVenta SMALLINT NOT NULL,
   fecVenta TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-  tipoFactura VARCHAR NOT NULL, --factura legal- factura preliminar
+  --tipoFactura BOOLEAN NOT NULL, --factura legal- cotización
+  estado BOOLEAN NOT NULL TRUE, --TRUE= 'Anulada"
   idCli INTEGER NOT NULL,
-  estado BOOLEAN NOT NULL TRUE,
+  ciudad Varchar NOT NULL DEFAULT 'Bucaramanga',
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
@@ -186,7 +165,7 @@ CREATE TABLE tabEncabezadoVenta(
 
 CREATE TABLE tabDetalleVenta(
   consecDetVenta BIGINT NOT NULL UNIQUE,
-  consecVenta BIGINT NOT NULL,
+  consecEncVenta SMALLINT NOT NULL,
   eanArt VARCHAR NOT NULL,
   cantArt INTEGER NOT NULL,
   valUnit NUMERIC(10) NOT NULL,
@@ -194,7 +173,6 @@ CREATE TABLE tabDetalleVenta(
   iva NUMERIC (10,2) NOT NULL DEFAULT 0,
   descuento NUMERIC (10) NOT NULL DEFAULT 0,
   totalPagar NUMERIC(10) NOT NULL,
-  estado BOOLEAN NOT NULL TRUE,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
@@ -206,15 +184,20 @@ CREATE TABLE tabDetalleVenta(
   FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt)
 );
 
-CREATE TABLE cotizacionCliente(
-  idCotizacion INTEGER PRIMARY KEY,
-  idCli VARCHAR NOT NULL,
-  fecReg TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+CREATE TABLE tabcotizacionCliente(
+  consecCotizacion SMALLINT NOT NULL,
+  fecVenta TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+  --tipoFactura BOOLEAN NOT NULL, --factura legal- factura preliminar
+  idCli INTEGER NOT NULL,
+  ciudad Varchar NOT NULL DEFAULT 'Bucaramanga',
+  estado BOOLEAN NOT NULL TRUE,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (idCotizacion)
+  PRIMARY KEY (consecEncVenta),
+  CONSTRAINT fkCliente
+  FOREIGN KEY (idCli) REFERENCES tabCliente(idCli)
 );
 
 CREATE TABLE tabRegBorrados(
