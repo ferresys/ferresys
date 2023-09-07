@@ -1,7 +1,8 @@
 -- Función para insertar datos en la tabla "tabCliente"
+-- pendiente de revision por logica
 
 CREATE OR REPLACE FUNCTION insertCliente(
-    zTipoCli VARCHAR,
+    zTipoCli BOOLEAN,
     zTelCli VARCHAR,
     zEmailCli VARCHAR,
     zDirCli VARCHAR,
@@ -10,34 +11,22 @@ CREATE OR REPLACE FUNCTION insertCliente(
     zApeCli VARCHAR DEFAULT NULL,
     zNitCliJur VARCHAR DEFAULT NULL,
     zNomEmpr VARCHAR DEFAULT NULL
-) RETURNS VOID AS 
+) RETURNS VOID AS
+
 $$
 DECLARE
-    zFecReg TIMESTAMP := current_timestamp;
-    zConsecCli BIGINT;
+    zFecReg TIMESTAMP = current_timestamp;
+    zConsecCli UUID;
+
 BEGIN
-    -- Insertar en la tabla tabCliente
-    INSERT INTO tabCliente(fecReg, tipoCli, telCli, emailCli, dirCli)
-    VALUES (zFecReg, zTipoCli, zTelCli, zEmailCli, zDirCli)
-    RETURNING consecCli INTO zConsecCli;
-
-    --validaciones para insertar dependiendo del tipo de cliente Natural o Juridico
-    IF zTipoCli = 'Natural' THEN
-        -- Insertar en la tabla tabClienteNatural
-        INSERT INTO tabClienteNatural(cedulaCliNat, consecCli, fecReg, nomCli, apeCli)
-        VALUES (zCedulaCliNat, zConsecCli, zFecReg, zNomCli, zApeCli);
-
-    ELSIF zTipoCli = 'Juridico' THEN
-        -- Insertar en la tabla tabClienteJuridico
-        INSERT INTO tabClienteJuridico(nitCliJur, consecCli, fecReg, nomEmpr)
-        VALUES (zNitCliJur, zConsecCli, zFecReg, zNomEmpr);
-    END IF;
+    INSERT INTO tabCliente (codCli, idCli, tipoCli, telCli, emailCli, dirCli, fecInsert, userInsert)
+        VALUES (uuid_generate_v4(), '', TRUE, '3228695242', 'lagarto@gmail.com', 'Carrera 22', current_timestamp, current_user);
+    RETURNING codCli INTO zConsecCli;
 
     RAISE NOTICE 'Registro exitoso';
 END;
 $$ 
 LANGUAGE plpgsql;
-
 
 -- Llamar a la función insertCliente
 /*
