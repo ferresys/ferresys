@@ -38,7 +38,7 @@ $$
 LANGUAGE plpgsql;
 
 /*
-select insertKardex('ENTRADA','0-0000001','Pulidora',15,5000,'OK','0-12', 1, 1098821827 );
+select insertKardex(TRUE,'0-0000001','Pulidora',15,5000,'OK','0-12', 1, 1098821827 );
 select insertKardex('ENTRADA','0-0000001','Pulidora',20,5000,'OK','0-13', 1, 1098821827);
 select insertKardex('ENTRADA','0-0000001','Pulidora',20,5000,'OK','0-13', 1, 1098821827);
 select insertKardex('ENTRADA','0-0000002','Pulidora',10,5000,'OK','0-13', 2, 1098821827);

@@ -4,12 +4,13 @@
 CREATE OR REPLACE FUNCTION insertCliente(
     zIdCli tabCliente.idCli%type,
     zTipoCli tabCliente.tipoCli%type,
-    zTelCli tabCliente.telCli%type,
-    zEmailCli tabCliente.emailCli%type,
-    zDirCli tabCliente.dirCli%type,
     zNomCli tabCliente.nomCli%type,
     zApeCli tabCliente.apeCli%type,
-    zNomEmpr tabCliente.nomEmpr%type
+    zNomEmpr tabCliente.nomRepLegal%type,
+    zNomRepLegal tabCliente.nomEmpresa%type,
+    zTelCli tabCliente.telCli%type,
+    zEmailCli tabCliente.emailCli%type,
+    zDirCli tabCliente.dirCli%type
 
 ) RETURNS VOID AS
 
@@ -19,8 +20,8 @@ DECLARE
     zConsecCli UUID;
 
 BEGIN
-    INSERT INTO tabCliente (idCli, tipoCli, telCli, emailCli, dirCli, userInsert)
-        VALUES ('', TRUE, '3228695242', 'lagarto@gmail.com', 'Carrera 22', current_timestamp, current_user);
+    INSERT INTO tabCliente (idCli, tipoCli, nomCli, apeCli, nomEmpresa, nomRepLegal, telCli, emailCli, dirCli)
+        VALUES (zIdCli, zTipoCli, zNomCli, zNomEmpr, zNomRepLegal, zTelCli, zEmailCli, zDirCli);
     RETURNING codCli INTO zConsecCli;
 
     RAISE NOTICE 'Registro exitoso';
