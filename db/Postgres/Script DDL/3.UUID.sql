@@ -4,10 +4,10 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 --creamos la función para generar un UUID por registro
 
-CREATE OR REPLACE FUNCTION generarUuidtabAdministrador()
+CREATE OR REPLACE FUNCTION uuidtabUsuario()
 RETURNS TRIGGER AS $$
 BEGIN
-    NEW.idAdmin := uuid_generate_v4();
+    NEW.codUsuario := uuid_generate_v4();
     RETURN NEW;
 END;
 $$ 
@@ -15,10 +15,10 @@ LANGUAGE PLpgSQL;
 
 -----------------------------------------------------------------------
 
-CREATE OR REPLACE FUNCTION generarUuidtabCliente()
+CREATE OR REPLACE FUNCTION uuidtabCliente()
 RETURNS TRIGGER AS $$
 BEGIN
-    NEW.idCli := uuid_generate_v4();
+    NEW.codCli := uuid_generate_v4();
     RETURN NEW;
 END;
 $$ 
@@ -26,31 +26,32 @@ LANGUAGE PLpgSQL;
 
 -----------------------------------------------------------------------
 
-CREATE OR REPLACE FUNCTION generarUuidtabProveedor()
+CREATE OR REPLACE FUNCTION uuidtabProveedor()
 RETURNS TRIGGER AS $$
 BEGIN
-    NEW.idProv := uuid_generate_v4();
+    NEW.codProv := uuid_generate_v4();
     RETURN NEW;
 END;
 $$ 
 LANGUAGE PLpgSQL;
+-----------------------------------------------------------------------
 
 
 -- Crea el trigger para las tablas 
 
-CREATE TRIGGER UuidAdministrador
-BEFORE INSERT ON tabAdministrador
+CREATE TRIGGER uuidUsuario
+BEFORE INSERT ON tabUsuario
 FOR EACH ROW
-EXECUTE FUNCTION generarUuidtabAdministrador();
+EXECUTE FUNCTION uuidtabUsuario();
 
-CREATE TRIGGER UuidCliente
+CREATE TRIGGER uuidCliente
 BEFORE INSERT ON tabCliente
 FOR EACH ROW
-EXECUTE FUNCTION generarUuidtabCliente();
+EXECUTE FUNCTION uuidtabCliente();
 
-CREATE TRIGGER UuidProveedor
+CREATE TRIGGER uuidProveedor
 BEFORE INSERT ON tabProveedor
 FOR EACH ROW
-EXECUTE FUNCTION generarUuidtabProveedor();
+EXECUTE FUNCTION uuidtabProveedor();
 
 

@@ -9,13 +9,13 @@ $$
 BEGIN
 	IF TG_OP='INSERT' THEN
     	NEW.fecInsert := now();
-    	NEW.userInsert := current_user;--cambiar por usuario de la pagina
+    	NEW.userInsert := current_user;
 		RETURN NEW;
 	END IF;
 	
 	IF TG_OP='UPDATE' THEN
 		NEW.fecUpdate := now();
-		NEW.userUpdate := current_user;--cambiar por usuario de la pagina
+		NEW.userUpdate := current_user;
 		RETURN NEW;
 	END IF;
 	
@@ -37,6 +37,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
 AFTER DELETE ON tabUsuario AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabPermiso -- Crear el trigger en la tabla tabPermiso
 BEFORE INSERT OR UPDATE ON tabPermiso
@@ -45,6 +46,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
 AFTER DELETE ON tabPermiso AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabUsuarioPermiso -- Crear el trigger en la tabla tabUsuarioPermiso
 BEFORE INSERT OR UPDATE ON tabUsuarioPermiso
@@ -53,6 +55,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
 AFTER DELETE ON tabUsuarioPermiso AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabCliente -- Crear el trigger en la tabla tabCliente
 BEFORE INSERT OR UPDATE ON tabCliente
@@ -61,6 +64,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
 AFTER DELETE ON tabCliente AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabProveedor -- Crear el trigger en la tabla tabProveedor
 BEFORE INSERT OR UPDATE ON tabProveedor
@@ -69,6 +73,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
 AFTER DELETE ON tabProveedor AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabCategoria -- Crear el trigger en la tabla tabCategoria
 BEFORE INSERT OR UPDATE ON tabCategoria
@@ -77,6 +82,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
 AFTER DELETE ON tabCategoria AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabMarca -- Crear el trigger en la tabla tabMarca
 BEFORE INSERT OR UPDATE ON tabMarca
@@ -85,6 +91,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
 AFTER DELETE ON tabMarca AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabArticulo -- Crear el trigger en la tabla tabArticulo
 BEFORE INSERT OR UPDATE ON tabArticulo
@@ -93,6 +100,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
 AFTER DELETE ON tabArticulo AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabKardex -- Crear el trigger en la tabla tabKardex
 BEFORE INSERT OR UPDATE ON tabKardex
@@ -101,6 +109,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
 AFTER DELETE ON tabKardex AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabReciboMercancia -- Crear el trigger en la tabla tabReciboMercancia
 BEFORE INSERT OR UPDATE ON tabReciboMercancia
@@ -109,6 +118,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabReciboMercancia
 AFTER DELETE ON tabReciboMercancia AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabEncabezadoVenta -- Crear el trigger en la tabla tabEncabezadoVenta
 BEFORE INSERT OR UPDATE ON tabEncabezadoVenta
@@ -117,6 +127,7 @@ EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
 AFTER DELETE ON tabEncabezadoVenta AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabDetalleVenta -- Crear el trigger en la tabla tabDetalleVenta
 BEFORE INSERT OR UPDATE ON tabDetalleVenta
