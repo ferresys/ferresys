@@ -1,3 +1,4 @@
+
 CREATE TABLE tabUsuario(
   codUsuario UUID NOT NULL,
   idUsuario VARCHAR NOT NULL UNIQUE,
@@ -66,7 +67,7 @@ CREATE TABLE tabProveedor(
   userUpdate VARCHAR,
   PRIMARY KEY (codProv)
 );
- ..
+ 
 CREATE TABLE tabCategoria(
   consecCateg SMALLINT NOT NULL,
   nomCateg VARCHAR NOT NULL,
@@ -95,13 +96,13 @@ CREATE TABLE tabArticulo(
   descArt TEXT,
   valUnit NUMERIC(10),
   porcentaje NUMERIC(10,2),
-  iva NUMERIC (10,2) NOT NULL DEFAULT 0,
+  iva NUMERIC (10,2) NOT NULL,
   valStock INTEGER,
   stockMin INTEGER NOT NULL,
   stockMax INTEGER NOT NULL,
   valReorden INTEGER NOT NULL,
   fecVence DATE,
-  estado BOOLEAN NOT NULL TRUE,
+  estado BOOLEAN NOT NULL DEFAULT TRUE,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
@@ -153,25 +154,21 @@ CREATE TABLE tabReciboMercancia(
 
 CREATE TABLE tabEncabezadoVenta(
   consecEncVenta BIGINT NOT NULL,
-  --fecVenta TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-  --tipoFactura BOOLEAN NOT NULL, --factura legal- cotización
-  estado BOOLEAN NOT NULL TRUE, --TRUE= "Generada" -- FALSE="Anulada" 
+  tipoFactura BOOLEAN NOT NULL DEFAULT TRUE, --TRUE='LEGAL' / FALSE='COTIZACION'
+  estado BOOLEAN NOT NULL DEFAULT TRUE, --TRUE= "Generada" / FALSE="Anulada" 
   idCli INTEGER NOT NULL,
   ciudad VARCHAR NOT NULL DEFAULT 'Bucaramanga',
-  idUsuario VARCHAR NOT NULL, --Revision
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
   PRIMARY KEY (consecEncVenta),
   CONSTRAINT fkCliente
-  FOREIGN KEY (idCli) REFERENCES tabCliente(idCli),
-  CONSTRAINT fkuUsuario
-  FOREIGN KEY (idUsuario) REFERENCES tabUsuario(idUsuario)
+  FOREIGN KEY (idCli) REFERENCES tabCliente(idCli)
 );
 
 CREATE TABLE tabDetalleVenta(
-  consecDetVenta BIGINT NOT NULL UNIQUE,
+  consecDetVenta BIGINT NOT NULL,
   consecEncVenta BIGINT NOT NULL,
   eanArt VARCHAR NOT NULL,
   cantArt INTEGER NOT NULL,
@@ -191,22 +188,7 @@ CREATE TABLE tabDetalleVenta(
   FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt)
 );
 
-/*
-CREATE TABLE tabcotizacionCliente(
-  consecCotizacion SMALLINT NOT NULL,
-  fecVenta TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-  idCli INTEGER NOT NULL,
-  ciudad Varchar NOT NULL DEFAULT 'Bucaramanga',
-  estado BOOLEAN NOT NULL DEFAULT TRUE,
-  fecInsert TIMESTAMP WITHOUT TIME ZONE,
-  userInsert VARCHAR,
-  fecUpdate TIMESTAMP WITHOUT TIME ZONE,
-  userUpdate VARCHAR,
-  PRIMARY KEY (consecEncVenta),
-  CONSTRAINT fkCliente
-  FOREIGN KEY (idCli) REFERENCES tabCliente(idCli)
-);
-*/
+
 
 CREATE TABLE tabRegBorrados(
   consecRegBor BIGINT NOT NULL,
