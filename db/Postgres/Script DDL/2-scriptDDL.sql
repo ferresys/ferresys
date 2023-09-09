@@ -156,8 +156,8 @@ CREATE TABLE tabReciboMercancia(
 );
 
 CREATE TABLE tabEncabezadoVenta(
-  consecEncVenta BIGINT NOT NULL,
-  consecEnCotizacion BIGINT NOT NULL,
+  idEncVenta BIGINT NOT NULL,
+  consecEncVenta BIGINT NOT NULL UNIQUE,
   tipoFactura BOOLEAN NOT NULL DEFAULT TRUE, --TRUE='LEGAL' / FALSE='COTIZACION'
   estado BOOLEAN NOT NULL DEFAULT TRUE, --TRUE= "Generada" / FALSE="Anulada" 
   idCli INTEGER NOT NULL,
@@ -166,7 +166,7 @@ CREATE TABLE tabEncabezadoVenta(
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (consecEncVenta),
+  PRIMARY KEY (idEncVenta),
   CONSTRAINT fkCliente
   FOREIGN KEY (idCli) REFERENCES tabCliente(idCli)
 );
@@ -178,7 +178,7 @@ CREATE TABLE tabDetalleVenta(
   cantArt INTEGER NOT NULL,
   valUnit NUMERIC(10) NOT NULL,
   subTotal NUMERIC(10) NOT NULL,
-  iva NUMERIC (10,2) NOT NULL DEFAULT 0,
+  iva NUMERIC (10,2) NOT NULL DEFAULT 0,19, -- DEFAULT 0
   descuento NUMERIC (10) NOT NULL DEFAULT 0,
   totalPagar NUMERIC(10) NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
@@ -190,6 +190,8 @@ CREATE TABLE tabDetalleVenta(
   FOREIGN KEY (consecEncVenta) REFERENCES tabEncabezadoVenta(consecEncVenta),
   CONSTRAINT fkArticulo
   FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt)
+  CONSTRAINT fkEncVenta
+  FOREIGN KEY (idEncVenta) REFERENCES tabEncabezadoVenta(idEncVenta)
 );
 
 

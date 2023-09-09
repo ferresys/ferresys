@@ -75,7 +75,7 @@ CREATE OR REPLACE FUNCTION ConsecutivotabEncabezadoVenta()
 RETURNS TRIGGER AS 
 $$
 BEGIN
-    NEW.consecEncVenta := (SELECT COALESCE(MAX(consecEncVenta), 0) + 1 FROM tabEncabezadoVenta);
+    NEW.idEncVenta := (SELECT COALESCE(MAX(idEncVenta), 0) + 1 FROM tabEncabezadoVenta);
     RETURN NEW;
 END;
 $$ 
@@ -83,6 +83,17 @@ LANGUAGE PLpgSQL;
 
 ------------------------------------------------------------------------------------------------------------
 
+CREATE OR REPLACE FUNCTION ConsecutivotabEncabezadoVenta()
+RETURNS TRIGGER AS 
+$$
+BEGIN
+    NEW.consecEncVenta := (SELECT COALESCE(MAX(consecEncVenta), 0) + 1 FROM tabEncabezadoVenta);
+    RETURN NEW;
+END;
+$$ 
+LANGUAGE PLpgSQL;
+
+------------------------------------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION ConsecutivotabDetalleVenta()
 RETURNS TRIGGER AS 
 $$
