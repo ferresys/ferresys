@@ -2038,6 +2038,51 @@ textarea.form-control-lg {
     appearance: none;
     color-adjust: exact;
 }
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;  /* Ancho total del interruptor */
+    height: 24px;
+  }
+  
+  .switch-input {
+    display: none; /* Oculta el checkbox */
+  }
+  
+  .switch-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Color cuando está desactivado */
+    transition: 0.4s; /* Efecto de transición al deslizar */
+    border-radius: 34px; /* Hace que los bordes sean redondos */
+  }
+  
+  .switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;  /* Altura del círculo */
+    width: 16px;   /* Ancho del círculo */
+    left: 4px;     /* Posición inicial del círculo */
+    bottom: 4px;
+    background-color: white;  /* Color del círculo */
+    transition: 0.4s;         /* Efecto de transición al deslizar */
+    border-radius: 50%;       /* Hace que sea un círculo */
+  }
+  
+  .switch-input:checked + .switch-slider {
+    background-color: var(--marca);  /* Color cuando está activado */
+  }
+  
+  .switch-input:checked + .switch-slider:before {
+    transform: translateX(16px);  /* Distancia que se desplaza el círculo */
+  }
+  
+
+
 .form-check-input[type="checkbox"] {
     border-radius: 0.25em;
 }
