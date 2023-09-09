@@ -3,25 +3,25 @@
 
 CREATE OR REPLACE FUNCTION insertEncabezadoVentaNatural(
     zTipoFactura tabEncabezadoVenta.tipoFactura%type,
-    zCedulaCliNat tabClienteNatural.cedulaCliNat%type,
-    zCedulaAdmin tabAdministrador.cedulaAdmin%type
+    zIdCli tabCliente.idCli%type,
+    zCiudad tabEncabezadoVenta.ciudad%type
 )
+
 RETURNS VOID AS 
-$$
-DECLARE 
-    zFecVenta TIMESTAMP:= current_timestamp;
-    zIdClis INTEGER;
-	
+$$    
+
 BEGIN
-    IF zTipoFactura = 'PRELIMINAR' OR zTipoFactura = 'LEGAL' THEN
-        -- Obtener el consecutivo del cliente natural
-        SELECT cedulaCliNat INTO zIdClis FROM tabClienteNatural WHERE cedulaCliNat = zCedulaCliNat;
+    -- Insertar en la tabla tabEncabezadoVenta
+    IF zTipoFactura = TRUE THEN -- LEGAL
+        INSERT INTO tabEncabezadoVenta (idCli, ciudad)
+        VALUES (zIdCli, zCiudad);
+        RAISE NOTICE 'Encabezado de venta registrado con éxito.';
+    END IF;
 
-        -- Insertar en la tabla tabEncabezadoVenta
-        INSERT INTO tabEncabezadoVenta (fecVenta, tipoFactura, cedulaAdmin, cedulaCliNat)
-        VALUES (zFecVenta, zTipoFactura,  zcedulaAdmin, zIdClis);
-
-        RAISE NOTICE 'Encabezado de Venta para cliente natural registrado con éxito.';
+    ELSIF zTipoFactura = FALSE THEN -- COTIZACION
+        INSERT INTO tabEncabezadoVenta (idCli, ciudad)
+        VALUES (zIdCli, zCiudad);
+        RAISE NOTICE 'Encabezado de venta registrado con éxito.';
     END IF;
     
     RETURN;

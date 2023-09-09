@@ -17,6 +17,7 @@ CREATE OR REPLACE FUNCTION insertCliente(
 $$
 DECLARE
     clienteExistente BOOLEAN;
+
 BEGIN
     -- Verificamos si ya existe un registro con el mismo idCli
     SELECT EXISTS (SELECT 1 FROM tabCliente WHERE idCli = zIdCli) INTO clienteExistente;

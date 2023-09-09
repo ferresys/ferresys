@@ -117,11 +117,11 @@ CREATE TABLE tabArticulo(
 
 CREATE TABLE tabKardex(
   consecKardex BIGINT NOT NULL,
+  consecReciboMcia BIGINT NOT NULL,
   tipoMov BOOLEAN NOT NULL DEFAULT TRUE, --TRUE="ENTRADA" FALSE="SALIDA"
   eanArt VARCHAR NOT NULL,
   cantArt INTEGER NOT NULL,
-  valProm NUMERIC(10) NOT NULL,--Valor de compra promedio
-  observacion TEXT,
+  valProm NUMERIC(10) NOT NULL, --Valor de compra promedio
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
@@ -129,6 +129,8 @@ CREATE TABLE tabKardex(
   PRIMARY KEY (consecKardex),
   CONSTRAINT fkArticulo
   FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt),
+  CONSTRAINT fkReciboMercancia
+  FOREIGN KEY (consecReciboMcia) REFERENCES tabReciboMercancia(consecReciboMcia),
 );
 
 CREATE TABLE tabReciboMercancia(
@@ -139,6 +141,7 @@ CREATE TABLE tabReciboMercancia(
   valTotal NUMERIC(10),
   idProv VARCHAR NOT NULL,
   consecMarca SMALLINT NOT NULL,
+  observacion TEXT,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
@@ -154,6 +157,7 @@ CREATE TABLE tabReciboMercancia(
 
 CREATE TABLE tabEncabezadoVenta(
   consecEncVenta BIGINT NOT NULL,
+  consecEnCotizacion BIGINT NOT NULL,
   tipoFactura BOOLEAN NOT NULL DEFAULT TRUE, --TRUE='LEGAL' / FALSE='COTIZACION'
   estado BOOLEAN NOT NULL DEFAULT TRUE, --TRUE= "Generada" / FALSE="Anulada" 
   idCli INTEGER NOT NULL,
