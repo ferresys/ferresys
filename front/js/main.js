@@ -128,9 +128,9 @@
         data: {
             labels: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
             datasets: [{
-                label: "Salse",
+                label: "mostrar",
                 fill: false,
-                backgroundColor: "rgba(235, 22, 22, .7)",
+                backgroundColor: "rgba(255, 204, 41, 1)",
                 data: [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15]
             }]
         },
@@ -145,14 +145,14 @@
     var myChart4 = new Chart(ctx4, {
         type: "bar",
         data: {
-            labels: ["Italy", "France", "Spain", "USA", "Argentina"],
+            labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
             datasets: [{
                 backgroundColor: [
-                    "rgba(235, 22, 22, .7)",
-                    "rgba(235, 22, 22, .6)",
-                    "rgba(235, 22, 22, .5)",
-                    "rgba(235, 22, 22, .4)",
-                    "rgba(235, 22, 22, .3)"
+                    "rgba(255, 204, 41, 1)",
+                    "rgba(255, 204, 41, 1)",
+                    "rgba(255, 204, 41, 1)",
+                    "rgba(255, 204, 41, 1)",
+                    "rgba(255, 204, 41, 1))"
                 ],
                 data: [55, 49, 44, 24, 15]
             }]
@@ -168,14 +168,14 @@
     var myChart5 = new Chart(ctx5, {
         type: "pie",
         data: {
-            labels: ["Italy", "France", "Spain", "USA", "Argentina"],
+            labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
             datasets: [{
                 backgroundColor: [
-                    "rgba(235, 22, 22, .7)",
-                    "rgba(235, 22, 22, .6)",
-                    "rgba(235, 22, 22, .5)",
-                    "rgba(235, 22, 22, .4)",
-                    "rgba(235, 22, 22, .3)"
+                    "rgba(255, 204, 41, 1)",
+                    "rgba(255, 204, 41, 1)",
+                    "rgba(255, 204, 41, 1)",
+                    "rgba(255, 204, 41, .8)",
+                    "rgba(255, 204, 41, 1)"
                 ],
                 data: [55, 49, 44, 24, 15]
             }]
@@ -191,14 +191,14 @@
     var myChart6 = new Chart(ctx6, {
         type: "doughnut",
         data: {
-            labels: ["Italy", "France", "Spain", "USA", "Argentina"],
+            labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
             datasets: [{
                 backgroundColor: [
-                    "rgba(235, 22, 22, .7)",
-                    "rgba(235, 22, 22, .6)",
-                    "rgba(235, 22, 22, .5)",
-                    "rgba(235, 22, 22, .4)",
-                    "rgba(235, 22, 22, .3)"
+                    "rgba(255, 204, 41, 1)",
+                    "rgba(255, 204, 41, .3)",
+                    "rgba(255, 204, 41, .4)",
+                    "rgba(255, 204, 41, .6)",
+                    "rgba(255, 204, 41, 1)"
                 ],
                 data: [55, 49, 44, 24, 15]
             }]
