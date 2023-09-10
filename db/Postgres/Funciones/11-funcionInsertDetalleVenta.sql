@@ -10,7 +10,7 @@ DECLARE
     zSubTotal NUMERIC(10);
     zIva NUMERIC(10);
     zTotalPagar NUMERIC(10);
-    zConsecVenta BIGINT;
+    zConsecEncVenta BIGINT;
 
 BEGIN
     -- Obtener el valor unitario (valUnit) del artículo desde la tabla "tabArticulo"
@@ -18,17 +18,19 @@ BEGIN
 
     -- Calcular el subtotal, el valor del IVA y el total a pagar
     zSubtotal := zCantArt * zValUnit;
-    SELECT iva INTO ziva FROM tabArticulo WHERE eanArt = zEanArt;
+    SELECT iva INTO zIva FROM tabArticulo WHERE eanArt = zEanArt;
     -- zTotalPagar :=  (zSubtotal * zIva)/100+(zsubtotal)-zdescuento; --REVISAR @Yocser
     zTotalPagar :=  (zSubtotal * zIva)-zdescuento;
     -- zTotalPagar := zSubtotal;
     -- Obtener el consecutivo de venta (consec_venta) desde la tabla "tab_encabezado_venta"
     SELECT consecVenta INTO zConsecVenta FROM tabEncabezadoVenta ORDER BY consecVenta DESC LIMIT 1;
 
-    -- Insertar los datos en la tabla "tab_detalle_venta"
-    INSERT INTO tabDetalleVenta (nomArt, cantArt, valUnit, subtotal, totalPagar, consecVenta, eanArt)
-    VALUES ((SELECT nomArt FROM tabArticulo WHERE eanArt = zEanArt), zCantArt, zValUnit, zsubtotal,  zTotalPagar, zConsecVenta, zEanArt);
+    -- Insertar los datos en la tabla "tabDetalleVenta"
+    INSERT INTO tabDetalleVenta (eanArt, cantArt, valUnit, subTotal, iva, descuento, totalPagar, consecEncVenta )
+    VALUES (zEanArt, zCantArt, zValUnit, zSubTotal, zIva, zDescuento, zTotalPagar, zConsecEncVenta);
     RETURN;
 END;
 $$ 
 LANGUAGE plpgsql;
+
+
