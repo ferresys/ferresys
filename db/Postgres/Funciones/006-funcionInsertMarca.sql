@@ -2,7 +2,7 @@
 --función InsertMarca para insertar una nueva marca en la tabMarca.
 
 --SELECT insertMarca('MAKITA');
-
+--select * from tabMarca;
 CREATE OR REPLACE FUNCTION insertMarca(
     zNomMarca tabMarca.nomMarca%type
 ) RETURNS void AS 

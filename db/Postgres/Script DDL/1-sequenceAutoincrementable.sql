@@ -106,7 +106,7 @@ LANGUAGE PLpgSQL;
 
 ------------------------------------------------------------------------------------------------------------
 
-CREATE OR REPLACE FUNCTION generarConsecutivotabRegBorrados()
+CREATE OR REPLACE FUNCTION ConsecutivotabRegBorrados()
 RETURNS TRIGGER AS 
 $$
 BEGIN

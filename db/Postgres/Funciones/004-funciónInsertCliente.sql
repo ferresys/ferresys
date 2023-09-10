@@ -1,8 +1,8 @@
 
 -- Función para insertar datos de un nuevo cliente  en la tabla "tabCliente"
 
---SELECT insertCliente('1095847854', TRUE, 'juan', 'Rojas', '3012545874', 'juan@gmail.com', 'avenida 45 # 54-30');
-
+--SELECT insertCliente('1095847854', TRUE, 'juan', 'Rojas', NULL, NULL, '3012545874', 'juan@gmail.com', 'avenida 45 # 54-30');
+--SELECT * FROM tabCliente;
 CREATE OR REPLACE FUNCTION insertCliente(
     zIdCli tabCliente.idCli%type,
     zTipoCli tabCliente.tipoCli%type,

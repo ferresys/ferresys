@@ -6,6 +6,10 @@ CREATE TABLE tabUsuario(
   ApeUsuario VARCHAR NOT NULL,
   emailUsuario VARCHAR NOT NULL,
   usuario VARCHAR NOT NULL,
+  fecInsert TIMESTAMP WITHOUT TIME ZONE,
+  userInsert VARCHAR,
+  fecUpdate TIMESTAMP WITHOUT TIME ZONE,
+  userUpdate VARCHAR,
   password VARCHAR NOT NULL,
   PRIMARY KEY (codUsuario)
 );
@@ -29,10 +33,11 @@ CREATE TABLE tabUsuarioPermiso(
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
   userUpdate VARCHAR,
-  PRIMARY KEY (consecUsuarioPermiso)
-  FOREIGN KEY (idUsuario) REFERENCES tabUsuario(idUsuario),
+  PRIMARY KEY (consecUsuarioPermiso),
   CONSTRAINT fkUsuario
-  FOREIGN KEY (idPermiso) REFERENCES tabPermiso(consecPermiso)
+  FOREIGN KEY (idUsuario) REFERENCES tabUsuario(idUsuario),
+  CONSTRAINT fkPermiso
+  FOREIGN KEY (consecPermiso) REFERENCES tabPermiso(consecPermiso)
 );
 
 CREATE TABLE tabCliente(
@@ -115,24 +120,6 @@ CREATE TABLE tabArticulo(
   
 );
 
-CREATE TABLE tabKardex(
-  consecKardex BIGINT NOT NULL,
-  consecReciboMcia BIGINT NOT NULL,
-  tipoMov BOOLEAN NOT NULL DEFAULT TRUE, --TRUE="ENTRADA" FALSE="SALIDA"
-  eanArt VARCHAR NOT NULL,
-  cantArt INTEGER NOT NULL,
-  valProm NUMERIC(10) NOT NULL, --Valor de compra promedio
-  fecInsert TIMESTAMP WITHOUT TIME ZONE,
-  userInsert VARCHAR,
-  fecUpdate TIMESTAMP WITHOUT TIME ZONE,
-  userUpdate VARCHAR,
-  PRIMARY KEY (consecKardex),
-  CONSTRAINT fkArticulo
-  FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt),
-  CONSTRAINT fkReciboMercancia
-  FOREIGN KEY (consecReciboMcia) REFERENCES tabReciboMercancia(consecReciboMcia),
-);
-
 CREATE TABLE tabReciboMercancia(
   consecReciboMcia BIGINT NOT NULL,
   eanArt VARCHAR NOT NULL,
@@ -155,12 +142,30 @@ CREATE TABLE tabReciboMercancia(
   FOREIGN KEY (consecMarca) REFERENCES tabMarca(consecMarca)
 );
 
+CREATE TABLE tabKardex(
+  consecKardex BIGINT NOT NULL,
+  consecReciboMcia BIGINT NOT NULL,
+  tipoMov BOOLEAN NOT NULL DEFAULT TRUE, --TRUE="ENTRADA" FALSE="SALIDA"
+  eanArt VARCHAR NOT NULL,
+  cantArt INTEGER NOT NULL,
+  valProm NUMERIC(10) NOT NULL, --Valor de compra promedio
+  fecInsert TIMESTAMP WITHOUT TIME ZONE,
+  userInsert VARCHAR,
+  fecUpdate TIMESTAMP WITHOUT TIME ZONE,
+  userUpdate VARCHAR,
+  PRIMARY KEY (consecKardex),
+  CONSTRAINT fkArticulo
+  FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt),
+  CONSTRAINT fkReciboMercancia
+  FOREIGN KEY (consecReciboMcia) REFERENCES tabReciboMercancia(consecReciboMcia)
+);
+
 CREATE TABLE tabEncabezadoVenta(
   idEncVenta BIGINT NOT NULL,
   consecEncVenta BIGINT NOT NULL UNIQUE,
   tipoFactura BOOLEAN NOT NULL DEFAULT TRUE, --TRUE='LEGAL' / FALSE='COTIZACION'
   estado BOOLEAN NOT NULL DEFAULT TRUE, --TRUE= "Generada" / FALSE="Anulada" 
-  idCli INTEGER NOT NULL,
+  idCli VARCHAR NOT NULL,
   ciudad VARCHAR NOT NULL DEFAULT 'Bucaramanga',
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
@@ -178,7 +183,7 @@ CREATE TABLE tabDetalleVenta(
   cantArt INTEGER NOT NULL,
   valUnit NUMERIC(10) NOT NULL,
   subTotal NUMERIC(10) NOT NULL,
-  iva NUMERIC (10,2) NOT NULL DEFAULT 0,19, -- DEFAULT 0
+  iva NUMERIC (10,2) NOT NULL DEFAULT 0.19, -- DEFAULT 0
   descuento NUMERIC (10) NOT NULL DEFAULT 0,
   totalPagar NUMERIC(10) NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
@@ -186,12 +191,12 @@ CREATE TABLE tabDetalleVenta(
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
   userUpdate VARCHAR,
   PRIMARY KEY (consecDetVenta),
-  CONSTRAINT fkEncVenta
+  CONSTRAINT fkConsecVenta
   FOREIGN KEY (consecEncVenta) REFERENCES tabEncabezadoVenta(consecEncVenta),
   CONSTRAINT fkArticulo
-  FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt)
+  FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt),
   CONSTRAINT fkEncVenta
-  FOREIGN KEY (idEncVenta) REFERENCES tabEncabezadoVenta(idEncVenta)
+  FOREIGN KEY (consecEncVenta) REFERENCES tabEncabezadoVenta(consecEncVenta)
 );
 
 
