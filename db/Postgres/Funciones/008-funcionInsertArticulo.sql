@@ -1,7 +1,7 @@
 -- Función para insertar datos en la tabla "tabArticulo"
 
---SELECT insertArticulo(select insertArticulo('0-0000001','pulidora',1,1,'taladro amarillo',1.20, 0.19, 10, 500, 50, '2023-11-21');)
-
+--SELECT insertArticulo('00000001','pulidora','1','1','taladro amarillo',1.20, 0.19, 10, 500, 50, '2023-11-21');
+--select * from tabArticulo;
 
 CREATE OR REPLACE FUNCTION insertArticulo(
     zEanArt tabArticulo.eanArt%type,

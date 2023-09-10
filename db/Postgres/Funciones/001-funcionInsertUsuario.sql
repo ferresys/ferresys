@@ -4,7 +4,7 @@
 
 -- SELECT insertUsuario('1005330671', 'Chato', 'Adarme', 'inges@pailas.com', 'kraken', 'abcd1234');
 -- SELECT insertUsuario ('1095821827', 'Jacob', 'Chavez', 'jacob@gmail.com', 'kraken', 'abcd1234');
-
+--select * from tabUsuario;
 CREATE OR REPLACE FUNCTION insertUsuario(
     zIdUsuario tabUsuario.idUsuario%type,
     zNomUsuario tabUsuario.nomUsuario%type,

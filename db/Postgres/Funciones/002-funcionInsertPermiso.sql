@@ -1,6 +1,8 @@
 
 --Creamos la funcion insertPermiso para insertar los permisos a los que tendran acceso los usuarios.
 
+--SELECT insertPermiso('MODULO CLIENTES', 'Acceso a todos los registros del modulo clientes');
+--select * from tabPermiso;
 CREATE OR REPLACE FUNCTION insertPermiso(
     zNomPermiso tabUsuario.idUsuario%type,
     zDescPermiso tabUsuario.nomUsuario%type

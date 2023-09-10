@@ -36,7 +36,7 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabUsuario AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabUsuario FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabPermiso -- Crear el trigger en la tabla tabPermiso
@@ -45,7 +45,7 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabPermiso AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabPermiso FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabUsuarioPermiso -- Crear el trigger en la tabla tabUsuarioPermiso
@@ -54,7 +54,7 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabUsuarioPermiso AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabUsuarioPermiso FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabCliente -- Crear el trigger en la tabla tabCliente
@@ -63,7 +63,7 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabCliente AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabCliente FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabProveedor -- Crear el trigger en la tabla tabProveedor
@@ -72,7 +72,7 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabProveedor AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabProveedor FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabCategoria -- Crear el trigger en la tabla tabCategoria
@@ -81,7 +81,8 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabCategoria AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabCategoria 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabMarca -- Crear el trigger en la tabla tabMarca
@@ -90,7 +91,8 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabMarca AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabMarca 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabArticulo -- Crear el trigger en la tabla tabArticulo
@@ -99,7 +101,8 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabArticulo AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabArticulo 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabKardex -- Crear el trigger en la tabla tabKardex
@@ -108,7 +111,8 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabKardex AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabKardex 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabReciboMercancia -- Crear el trigger en la tabla tabReciboMercancia
@@ -116,8 +120,9 @@ BEFORE INSERT OR UPDATE ON tabReciboMercancia
 FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
-CREATE TRIGGER triggertabReciboMercancia
-AFTER DELETE ON tabReciboMercancia AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+CREATE TRIGGER triggertabRegBorrados
+AFTER DELETE ON tabReciboMercancia 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabEncabezadoVenta -- Crear el trigger en la tabla tabEncabezadoVenta
@@ -126,7 +131,8 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabEncabezadoVenta AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabEncabezadoVenta 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
 --------------------------------------------------------------------------------------------------
 
 CREATE TRIGGER triggertabDetalleVenta -- Crear el trigger en la tabla tabDetalleVenta
@@ -135,4 +141,5 @@ FOR EACH ROW
 EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabDetalleVenta AFTER EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+AFTER DELETE ON tabDetalleVenta 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
