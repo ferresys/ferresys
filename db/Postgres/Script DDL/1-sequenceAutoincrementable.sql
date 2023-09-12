@@ -83,17 +83,34 @@ LANGUAGE PLpgSQL;
 
 ------------------------------------------------------------------------------------------------------------
 
-CREATE OR REPLACE FUNCTION ConsecutivotabEncabezadoVenta()
+CREATE OR REPLACE FUNCTION ConsecutivotabEncabezadoVenta1()
 RETURNS TRIGGER AS 
 $$
 BEGIN
-    NEW.consecEncVenta := (SELECT COALESCE(MAX(consecEncVenta), 0) + 1 FROM tabEncabezadoVenta);
-    RETURN NEW;
+    IF NEW.tipoFactura = TRUE THEN
+    NEW.consecFactura := (SELECT COALESCE(MAX(consecFactura), 2221) + 1 FROM tabEncabezadoVenta);
+    END IF;
+	RETURN NEW;
 END;
 $$ 
 LANGUAGE PLpgSQL;
 
 ------------------------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION ConsecutivotabEncabezadoVenta2()
+RETURNS TRIGGER AS 
+$$
+BEGIN
+    IF NEW.tipoFactura = FALSE THEN
+    NEW.consecCotizacion := (SELECT COALESCE(MAX(consecCotizacion), 111) + 1 FROM tabEncabezadoVenta);
+    END IF;
+	RETURN NEW;
+END;
+$$ 
+LANGUAGE PLpgSQL;
+
+------------------------------------------------------------------------------------------------------------
+
 CREATE OR REPLACE FUNCTION ConsecutivotabDetalleVenta()
 RETURNS TRIGGER AS 
 $$
@@ -155,6 +172,16 @@ CREATE TRIGGER autoincrementtabEncabezadoventa
 BEFORE INSERT ON tabEncabezadoVenta
 FOR EACH ROW
 EXECUTE FUNCTION ConsecutivotabEncabezadoVenta();
+
+CREATE TRIGGER autoincrementtabEncabezadoventa1
+BEFORE INSERT ON tabEncabezadoVenta
+FOR EACH ROW
+EXECUTE FUNCTION ConsecutivotabEncabezadoVenta1();
+
+CREATE TRIGGER autoincrementtabEncabezadoventa2
+BEFORE INSERT ON tabEncabezadoVenta
+FOR EACH ROW
+EXECUTE FUNCTION ConsecutivotabEncabezadoVenta2();
 
 CREATE TRIGGER autoincrementtabDetalleVenta
 BEFORE INSERT ON tabDetalleVenta

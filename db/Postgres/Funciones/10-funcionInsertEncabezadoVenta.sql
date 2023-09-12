@@ -1,37 +1,42 @@
 
--- Función para insertar encabezado de venta
+
 --SELECT *FROM tabCliente;
---select insertEncabezadoVenta(TRUE, '1095847854');
-CREATE OR REPLACE FUNCTION insertEncabezadoVenta(
-   zTipoFactura tabEncabezadoVenta.tipoFactura%type,
-   zIdCli tabCliente.idCli%type
-  
+--select insertEncVenta(TRUE, '1095847854', 'Bucaramanga');
+--select insertEncVenta(FALSE, '1095847854', 'Bucaramanga');
+--select * from tabEncabezadoVenta;
+
+-- Función para insertar encabezado de venta
+CREATE OR REPLACE FUNCTION insertEncVenta(
+    IN zTipoFactura BOOLEAN,
+       zIdCli VARCHAR,
+       zCiudad VARCHAR,
+    OUT zConsecFactura BIGINT,
+	OUT zConsecCotizacion BIGINT
+	
 )
+AS $$
 
-RETURNS VOID AS 
-$$
-
-DECLARE
-    zVenta BIGINT;
+DECLARE 
+zCliente VARCHAR;
 
 BEGIN
-    -- Insertar en la tabla tabEncabezadoVenta
-    IF zTipoFactura = TRUE THEN -- LEGAL
-        INSERT INTO tabEncabezadoVenta (tipoFactura, idCli)
-        VALUES (zTipoFactura, zIdCli);
-		--RETURNING consecEncVenta INTO zVenta;
-   
-    ELSIF zTipoFactura = FALSE THEN -- COTIZACION
-        INSERT INTO tabEncabezadoVenta (tipoFactura, idCli)
-        VALUES (zTipoFactura, zIdCli);
-        --ALERTA: Tener en cuenta para pasar una cotización a venta.
+    IF zTipoFactura = TRUE THEN -- Factura legal
+	 SELECT idCli INTO zCliente from tabCliente where idCli=zIdCli;
+        INSERT INTO tabEncabezadoVenta (tipoFactura, idCli, ciudad)
+        VALUES (zTipoFactura, zCliente, zCiudad )
+        RETURNING consecFactura INTO zConsecFactura;
+	    zConsecCotizacion:= NULL;
+    ELSE -- Cotización
+	SELECT idCli INTO zCliente from tabCliente where idCli=zIdCli;
+        INSERT INTO tabEncabezadoVenta  (tipoFactura, idCli, ciudad)
+        VALUES (zTipoFactura, zCliente, zCiudad)
+        RETURNING consecCotizacion INTO zConsecCotizacion;
+		zConsecFactura := NULL; -- No asignar consecutivo para cotizaciones
+    END IF;
+END;
+$$ LANGUAGE plpgSQL;
+
+--ALERTA: Tener en cuenta para pasar una cotización a venta.
         -- Yo sugiero que si la cotizacion pasa a ser venta se agrege a consecEncVenta 
         -- pero como un nuevo(ultimo) registro de venta
-        RAISE NOTICE 'Encabezado de venta registrado con éxito.';
-    END IF;
-    RETURN;
-END;
-$$
-LANGUAGE PLPGSQL;
-
-
+       
