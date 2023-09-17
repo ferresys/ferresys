@@ -35,7 +35,7 @@ Asegúrate de tener instalados los siguientes requisitos previos antes de comenz
    La `-y` significa que se configure por default los datos que vaya a pedir. Si no queremos eso y queremos añadir datos adicionales
    entonces solo usamos `npm init`.
 
-   Esto creará un archivo `package.json` con la configuración predeterminada
+   Esto creará un archivo [`package.json`](Backend-FerreSys/package.json) con la configuración predeterminada
 
 5. Instalar los paquetes necesarios
   
@@ -61,7 +61,7 @@ Asegúrate de tener instalados los siguientes requisitos previos antes de comenz
     */
     ```
     
-8. Crear el archivo [index.js](Backend-FerreSys/index.js)
+8. Crear el archivo [`index.js`](Backend-FerreSys/index.js)
 
 9. Crear conexión a la base de datos con [`conexion_db.js`](Backend-FerreSys/conexion_db.js)
 
@@ -96,7 +96,8 @@ ES6 ECMAScript (ES) es una especificación de lenguaje de programación que defi
 2. **Clona el Repositorio:** Clona tu repositorio fork en tu máquina local utilizando el comando `git clone`.
 
    ```bash
-   git clone https://github.com/davidadarme/FerreSys.git
+   # Tu nombre de usuario
+   git clone https://github.com/tu_nombre_de_usuario/FerreSys.git
    ```
 
 3. **Crea una Rama:** Crea una nueva rama para tu contribución.
