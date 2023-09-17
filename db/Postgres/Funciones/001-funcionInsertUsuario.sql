@@ -22,6 +22,7 @@ BEGIN
     -- Verificamos si el usuario ya existe en la db.
 
     SELECT EXISTS (SELECT 1 FROM tabUsuario WHERE usuario = zUsuario) INTO usuarioExistente;
+    -- SELECT EXISTS (SELECT 1 FROM tabUsuario WHERE usuario = zUsuario AND idUsuario = zIdUsuario) INTO usuarioExistente;
 
     IF usuarioExistente THEN
         RAISE EXCEPTION 'Usuario ya existe: %', zUsuario;
