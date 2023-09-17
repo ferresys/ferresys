@@ -63,7 +63,7 @@ Asegúrate de tener instalados los siguientes requisitos previos antes de comenz
     
 8. Crear el archivo vscode-vfs://github%2B7b2276223a312c22726566223a7b2274797065223a352c226964223a22646f6373227d7d/davidadarme/FerreSys/Backend-FerreSys/conexion_db.js
 
-9. Crear conexión a la base de datos con [conexion_db.js](conexion_db.js)
+9. Crear conexión a la base de datos con [conexion_db.js](Backend-FerreSys/conexion_db.js)
 
 10. Inicializar el servidor
     ```bash
