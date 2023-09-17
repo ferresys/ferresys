@@ -61,7 +61,11 @@ Asegúrate de tener instalados los siguientes requisitos previos antes de comenz
     */
     ```
     
-8. Inicializar el servidor
+
+8. Crear el archivo Backend-FerreSys/index.js
+9. Crear conexión a la base de datos con Backend-FerreSys/conexion_db.js
+
+10. Inicializar el servidor
     ```bash
     npx babel-node index.js
     ```
