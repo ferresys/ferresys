@@ -3,19 +3,19 @@ CREATE TABLE tabUsuario(
   codUsuario UUID NOT NULL,
   idUsuario VARCHAR NOT NULL UNIQUE,
   nomUsuario VARCHAR NOT NULL,
-  ApeUsuario VARCHAR NOT NULL,
+  apeUsuario VARCHAR NOT NULL,
   emailUsuario VARCHAR NOT NULL,
   usuario VARCHAR NOT NULL,
+  password VARCHAR NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
   userUpdate VARCHAR,
-  password VARCHAR NOT NULL,
   PRIMARY KEY (codUsuario)
 );
 
 CREATE TABLE tabPermiso(
-  consecPermiso SMALLINT,
+  consecPermiso SMALLINT NOT NULL,
   nomPermiso VARCHAR NOT NULL,
   descPermiso TEXT NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
@@ -65,7 +65,7 @@ CREATE TABLE tabProveedor(
   telProv VARCHAR NOT NULL,
   emailProv VARCHAR NOT NULL,
   dirProv VARCHAR NOT NULL,
-  estado BOOLEAN NOT NULL DEFAULT TRUE,
+  estado BOOLEAN NOT NULL DEFAULT TRUE, --TRUE="ACTIVO" - FALSE="INACTIVO"
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
@@ -107,7 +107,7 @@ CREATE TABLE tabArticulo(
   stockMax INTEGER NOT NULL,
   valReorden INTEGER NOT NULL,
   fecVence DATE,
-  estado BOOLEAN NOT NULL DEFAULT TRUE,
+  estado BOOLEAN NOT NULL DEFAULT TRUE,--TRUE="ACTIVO" - FALSE="INACTIVO"
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
@@ -142,14 +142,11 @@ CREATE TABLE tabReciboMercancia(
   FOREIGN KEY (consecMarca) REFERENCES tabMarca(consecMarca)
 );
 
-
-
-
 CREATE TABLE tabEncabezadoVenta(
   idEncVenta BIGINT NOT NULL,
-  consecFactura BIGINT  UNIQUE,
-  consecCotizacion BIGINT   UNIQUE,
-  tipoFactura BOOLEAN NOT NULL, --TRUE='LEGAL' / FALSE='COTIZACION'
+  consecFactura BIGINT UNIQUE,
+  consecCotizacion BIGINT UNIQUE,
+  tipoFactura BOOLEAN NOT NULL, --TRUE='LEGAL' - FALSE='COTIZACION'
   estadoFactura BOOLEAN NOT NULL DEFAULT TRUE, --TRUE= "Generada" / FALSE="Anulada" 
   idCli VARCHAR NOT NULL,
   ciudad VARCHAR NOT NULL,
@@ -164,8 +161,8 @@ CREATE TABLE tabEncabezadoVenta(
 
 CREATE TABLE tabDetalleVenta(
   consecDetVenta BIGINT NOT NULL,
-  consecFactura BIGINT , 
-  consecCotizacion BIGINT ,
+  consecFactura BIGINT, 
+  consecCotizacion BIGINT,
   eanArt VARCHAR NOT NULL,
   cantArt INTEGER NOT NULL,
   valUnit NUMERIC(10) NOT NULL,
@@ -188,12 +185,12 @@ CREATE TABLE tabDetalleVenta(
 
 CREATE TABLE tabKardex(
   consecKardex BIGINT NOT NULL,
-  consecReciboMcia BIGINT ,
-  consecDetVenta BIGINT ,
+  consecReciboMcia BIGINT,
+  consecDetVenta BIGINT,
   tipoMov BOOLEAN NOT NULL DEFAULT TRUE, --TRUE="ENTRADA" FALSE="SALIDA"
   eanArt VARCHAR NOT NULL,
   cantArt INTEGER NOT NULL,
-  valProm NUMERIC(10), --Valor de compra promedio
+  valProm NUMERIC(10), --Valor de compra promedio del mismo articulo a diferentes proveedores
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,

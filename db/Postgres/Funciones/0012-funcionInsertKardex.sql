@@ -1,15 +1,16 @@
-/* Funcion para insertar un registro en la tabla kardex 'SALIDA',
-cada vez que se realice una insercion en la tabDetalleVenta*/
+/* Función para insertar un registro en la tabla kardex 'ENTRADA',
+cada vez que se realice una inserciÓn en la tabReciboMercancia.
 
---esto permite que se actualice el stock en la tabArticulo cada vez que se haga una venta.
+esto a su vez permite que se actualice el stock y el valUnit en la 
+tabArticulo cada vez que se haga una entrada(ReciboMercancia).*/
 
-CREATE OR REPLACE FUNCTION insertKardex()
+CREATE OR REPLACE FUNCTION insertKardexEntrada()
 RETURNS TRIGGER AS 
 $$
 DECLARE
-zValProm NUMERIC;
-zValTotal NUMERIC;
-zReciboMcia BIGINT;
+zValProm tabKardex.valProm%type;
+zValTotal tabReciboMercancia.valTotal%type;
+zReciboMcia tabReciboMercancia.consecReciboMcia%type;
 --zCantArt INTEGER;
 BEGIN
     /* Si el tipo de movimiento es entrada*/
@@ -17,11 +18,12 @@ BEGIN
     SELECT consecReciboMcia INTO zReciboMcia FROM tabReciboMercancia  where consecReciboMcia= new.consecReciboMcia;
 	--SELECT cantArt INTO zCantArt FROM tabReciboMercancia where consecReciboMcia= new.consecReciboMcia;
 	--IF zTipoMov = TRUE THEN
-        zValProm := zValTotal / new.cantArt;
-        INSERT INTO tabKardex (consecReciboMcia,
-        tipoMov, eanArt, cantArt, valProm) 
-        VALUES (zReciboMcia, TRUE, NEW.eanArt, NEW.cantArt, zValProm);
-        RETURN NEW;
+    zValProm := zValTotal / new.cantArt;
+    
+	INSERT INTO tabKardex (consecReciboMcia,tipoMov, eanArt, cantArt, valProm) 
+    VALUES (zReciboMcia, TRUE, NEW.eanArt, NEW.cantArt, zValProm);
+        
+    RETURN NEW;
    -- END IF;
 
     /* Si el tipo de movimiento es salida*/
@@ -34,19 +36,27 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER insertEntradaKardex
+--creamos el trigger
+CREATE TRIGGER insertEntradaKardexEntrada
 AFTER INSERT ON tabReciboMercancia
 FOR EACH ROW
-EXECUTE FUNCTION insertKardex();
+EXECUTE FUNCTION insertKardexEntrada();
 ---------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION insertKardex2()
+
+/* Función para insertar un registro en la tabla kardex 'SALIDA',
+cada vez que se realice una inserciÓn en la tabDetalleVenta.
+
+esto a su vez permite que se actualice el stock y el valUnit en la 
+tabArticulo cada vez que se haga una salida(venta).*/
+
+CREATE OR REPLACE FUNCTION insertKardexSalida()
 RETURNS TRIGGER AS 
 $$
 DECLARE
-zValProm NUMERIC :=0;
+zValProm tabKardex.valProm%type :=0;
 --zValTotal NUMERIC;
 --zReciboMcia BIGINT;
-zConsecDetVenta BIGINT;
+zConsecDetVenta tabDetalleVenta.consecDetVenta%type;
 --zCantArt INTEGER;
 BEGIN
     /* Si el tipo de movimiento es salida*/
@@ -73,8 +83,8 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-
-CREATE TRIGGER insertSalidaKardex2
+--creamos el trigger
+CREATE TRIGGER insertSalidaKardexSalida
 AFTER INSERT ON tabDetalleVenta
 FOR EACH ROW
-EXECUTE FUNCTION insertKardex2();
+EXECUTE FUNCTION insertKardexSalida();

@@ -1,15 +1,20 @@
 
---Creamos la funcion insertPermiso para insertar los permisos a los que tendran acceso los usuarios.
+--Creamos la función insertPermiso para insertar los permisos a los que tendrán acceso los usuarios.
 
 --SELECT insertPermiso('MODULO CLIENTES', 'Acceso a todos los registros del modulo clientes');
+--SELECT insertPermiso('MODULO PROVEEDORES', 'Acceso a todos los registros del modulo Proveedores');
+
 --select * from tabPermiso;
+
 CREATE OR REPLACE FUNCTION insertPermiso(
     zNomPermiso tabUsuario.idUsuario%type,
     zDescPermiso tabUsuario.nomUsuario%type
 ) RETURNS void AS 
 $$
+
 DECLARE
     permisoExistente BOOLEAN;
+	
 BEGIN
     -- Verificamos si ya existe un registro con el mismo nomPermiso
     SELECT EXISTS (SELECT 1 FROM tabPermiso WHERE nomPermiso = zNomPermiso) INTO permisoExistente;

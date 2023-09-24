@@ -88,7 +88,7 @@ RETURNS TRIGGER AS
 $$
 BEGIN
     IF NEW.tipoFactura = TRUE THEN
-    NEW.consecFactura := (SELECT COALESCE(MAX(consecFactura), 2221) + 1 FROM tabEncabezadoVenta);
+    NEW.consecFactura := (SELECT COALESCE(MAX(consecFactura), 111) + 1 FROM tabEncabezadoVenta);
     END IF;
 	RETURN NEW;
 END;
@@ -102,7 +102,7 @@ RETURNS TRIGGER AS
 $$
 BEGIN
     IF NEW.tipoFactura = FALSE THEN
-    NEW.consecCotizacion := (SELECT COALESCE(MAX(consecCotizacion), 111) + 1 FROM tabEncabezadoVenta);
+    NEW.consecCotizacion := (SELECT COALESCE(MAX(consecCotizacion), 222) + 1 FROM tabEncabezadoVenta);
     END IF;
 	RETURN NEW;
 END;
