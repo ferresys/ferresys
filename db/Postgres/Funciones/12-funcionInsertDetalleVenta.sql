@@ -1,8 +1,11 @@
---SELECT insertDetalleVenta ('00000002', 1, 0);
+--SELECT insertDetalleVenta ('00000002', 10, 0);
 --select * FROM tabKardex;
 --select * from tabArticulo;
 --select * from tabDetalleVenta;
 --delete from tabDetalleVenta;
+--delete from tabKardex;
+--delete from tabEncabezadoVenta;
+
 
 CREATE OR REPLACE FUNCTION insertDetalleVenta(
     zEanArt tabArticulo.eanArt%type,
@@ -16,9 +19,10 @@ DECLARE
     zSubTotal tabDetalleVenta.subTotal%type;
     zIva tabArticulo.iva%type;
     zTotalPagar tabDetalleVenta.totalPagar%type;
-    zConsecFactura tabEncabezadoVenta.consecFactura%type;
-    zConsecCotizacion tabEncabezadoVenta.consecCotizacion%type;
-	
+    --zConsecFactura tabDetalleVenta.consecFactura%type;
+    --zConsecCotizacion tabDetalleVenta.consecCotizacion%type;
+	zConsecFactura BIGINT;
+	zConsecCotizacion BIGINT;
 BEGIN
     -- Obtener el valor unitario (valUnit) del artículo desde la tabla "tabArticulo"
     SELECT valUnit INTO zValUnit FROM tabArticulo WHERE eanArt = zEanArt;

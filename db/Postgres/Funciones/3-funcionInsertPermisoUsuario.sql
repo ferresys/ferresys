@@ -3,7 +3,10 @@
 que tendra cada usuario y asi poder acceder a los modulos del sistema.*/
 
 --SELECT asignarPermisoUsuario('1005330671', '1');
+--SELECT asignarPermisoUsuario('1005330671', '2');
+--SELECT asignarPermisoUsuario('1095821827', '1');
 --SELECT asignarPermisoUsuario('1095821827', '2');
+
 --select * from tabUsuarioPermiso;
 --select * from tabPermiso;
 --select * from tabUsuario;
