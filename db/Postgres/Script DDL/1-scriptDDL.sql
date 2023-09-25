@@ -161,6 +161,7 @@ CREATE TABLE tabEncabezadoVenta(
 
 CREATE TABLE tabDetalleVenta(
   consecDetVenta BIGINT NOT NULL,
+  idEncVenta BIGINT NOT NULL;
   consecFactura BIGINT, 
   consecCotizacion BIGINT,
   eanArt VARCHAR NOT NULL,
@@ -175,6 +176,8 @@ CREATE TABLE tabDetalleVenta(
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
   userUpdate VARCHAR,
   PRIMARY KEY (consecDetVenta),
+  CONSTRAINT fkidEncVenta
+  FOREIGN KEY (idEncVenta) REFERENCES tabEncabezadoVenta(idEncVenta)
   CONSTRAINT fkConsecFactura
   FOREIGN KEY (consecFactura) REFERENCES tabEncabezadoVenta(consecFactura),
   CONSTRAINT fkArticulo

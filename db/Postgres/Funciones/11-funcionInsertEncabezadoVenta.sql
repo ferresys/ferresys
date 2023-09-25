@@ -1,4 +1,4 @@
-
+--IMPORTANTE: hay que insertar un encabezado de venta y un detalle de venta a la vez.
 --select insertEncVenta(TRUE, '1095847854', 'Bucaramanga');
 --select insertEncVenta(FALSE, '1095847854', 'Bucaramanga');
 --select insertEncVenta(TRUE, '1002567842', 'Bucaramanga');

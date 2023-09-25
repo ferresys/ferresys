@@ -5,6 +5,10 @@
 --SELECT insertCliente('1002567842', TRUE, 'pedro', 'orejas', NULL, NULL, '3226854124', 'pedro@gmail.com', 'calle 51 # 24-30');
 
 --SELECT * FROM tabCliente;
+--select idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli from tabCliente where idCli='1095847854';
+/*SELECT idCli, tipoCli, CONCAT(nomCli, ' ', apeCli) AS nombreCompleto, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli
+FROM tabCliente
+WHERE idCli = '1095847854';*/
 
 CREATE OR REPLACE FUNCTION insertCliente(
     zIdCli tabCliente.idCli%type,
