@@ -1,6 +1,3 @@
-
-//CONEXION BASE DE DATOS
-
 import dotenv from 'dotenv'; //Estamos trabajando con ES6 
 import pg from 'pg';
 
@@ -14,16 +11,4 @@ const dbPool = new Pool({   //incluye los datos privados como contraseña usuari
   database: process.env.DB_NAME,
 });
 
-
 export default dbPool; // de esta manera exportamos la constante o funcion para que pueda ser importada desde otro archivo
-
-
-
-
-
-
-
-
-
-
-

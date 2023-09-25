@@ -1,5 +1,5 @@
 import bwipjs from 'bwip-js';
-import dbPool from './conexion_db';
+import dbPool from './conectionDB';
 
 
 async function generarAlmacenarCodigoBarras() {

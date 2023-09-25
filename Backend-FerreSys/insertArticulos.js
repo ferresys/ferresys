@@ -1,4 +1,4 @@
-import { dbPool } from './conexion_db';
+import { dbPool } from './conectionDB';
 
 export const insertArticulo = async (data) => {
   try {

@@ -1,14 +1,14 @@
-import dbPool from './conexion_db';
+import dbPool from './conectionDB';
 
 export const consultarClientes = async () => {
   try {
     const cliente = await dbPool.connect();
     const result = await cliente.query(`
       SELECT  
-        codCli  
+        codCli,
         idCli,
         tipoCli,
-        CONCAT (nomCli, '', apeCli) as nombreCompleto
+        CONCAT (nomCli, '', apeCli) as nombreCompleto,
         telCli,
         emailCli,
         dirCli,

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { consultar_clientes } = require('./consultaclientes');
+const { consultarClientes } = require('./queryClientes');
 
 router.get('/', async (req, res) => {
   try {
-    const clientes = await consultar_clientes();
+    const clientes = await consultarClientes();
     res.json(clientes);
   } catch (error) {
     console.error(error);
