@@ -8,7 +8,7 @@ export const consultarClientes = async () => {
         codCli,
         idCli,
         tipoCli,
-        CONCAT (nomCli, '', apeCli) as nombreCompleto,
+        CONCAT (nomCli, '', apeCli) AS nombreCompleto,
         telCli,
         emailCli,
         dirCli,

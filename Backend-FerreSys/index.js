@@ -1,13 +1,26 @@
 //CREACION DEL SERVIDOR
 
+//import LIBRARIES
 import express from 'express'; //(Crear el servidor)
 import dotenv from 'dotenv'; //(.env)
 import { dbPool } from './conectionDB';
+
+//import AUTHENTICATE function
+import { validarInicioSesion } from './authenticateUser'; // Valor sin leer en el cuerpo del código
+
+//import INSERT
 import { insertArticulo } from './insertArticulos';
-import { consultaArticulos } from './queryArticulos';
+
+//import QUERIES
 import { consultarClientes } from './queryClientes';
-import { consultaKardex } from './queryKardex';
 import { consultarProveedores } from './queryProveedores';
+import { consultarCategorias } from './queryCategorias'; // Valor sin leer en el cuerpo del código
+import { consultarMarcas } from './queryMarcas'; // Valor sin leer en el cuerpo del código
+import { consultaArticulos } from './queryArticulos';
+import { consultarReciboMercancia } from './queryReciboMercancia'; // Valor sin leer en el cuerpo del código
+// ventas
+import { consultarVentas } from './queryVentas'; // Valor sin leer en el cuerpo del código
+import { consultaKardex } from './queryKardex';
 import cors from 'cors';  // <-- Asegúrate de importar cors
 
 //Cargar variables de entorno .env
