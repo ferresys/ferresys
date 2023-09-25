@@ -1,22 +1,125 @@
-# FerreSys
+**FerreSys** is an inventory management software for hardware stores. It empowers businesses to effortlessly record product details, maintain real-time inventory tracking, streamline procurement and sales operations, and proactively manage stock levels through automated alerts. This sophisticated tool enhances day-to-day workflow efficiency and empowers informed decision-making by providing comprehensive data analytics and detailed performance reports. With its intuitive and user-friendly interface, FerreSys ensures rapid adoption among staff, consequently elevating competitiveness and productivity within the ever-evolving hardware store market.
 
-![logo_ferreSysGit](https://github.com/davidadarme/FerreSys/assets/114038362/1743fa7d-b1b1-465e-ad23-2eabb7dc4c2a)
+## Requisitos Previos
 
+Asegúrate de tener instalados los siguientes requisitos previos antes de comenzar:
 
-FerreSys es un software de control e inventario enfocado para ferreterías. Permite registrar productos, realizar seguimiento en tiempo real del inventario, gestionar compras y ventas, y recibir alertas por niveles bajos de stock. Esta herramienta optimiza el flujo de trabajo diario y facilita la toma de decisiones informadas al brindar datos y reportes detallados sobre el rendimiento del negocio. Su interfaz intuitiva y amigable asegura una rápida adopción por parte del personal, mejorando la competitividad y productividad de las ferreterías en el mercado actual.
+- Node.js y npm
+- PostgreSQL
 
-## Descripción del Sistema de Información para el Control de Inventario en una Ferretería:
+## Configuración del Proyecto
 
-El Sistema de Información para el Control de Inventario en una ferretería es una plataforma eficiente y robusta que permite gestionar de manera integral todo el proceso de inventario en el establecimiento. Diseñado específicamente para satisfacer las necesidades de una ferretería, este sistema tiene como objetivo principal optimizar la gestión de los productos y garantizar un flujo de trabajo fluido y organizado.
+1. Clona este repositorio:
 
-### Características principales:
+   ```bash
+   git clone https://github.com/davidadarme/FerreSys.git
+   ```
+2. Navega al directorio del proyecto:
 
-1. Gestión de Productos: El sistema proporciona una base de datos centralizada para registrar todos los productos disponibles en la ferretería. Cada producto cuenta con detalles relevantes, como nombre, categoría, código de barras, descripción, proveedor y precio.
-2. Control de Inventario: El sistema permite realizar un seguimiento en tiempo real del inventario disponible. Se actualiza automáticamente cada vez que se realiza una compra o venta, evitando así posibles desequilibrios entre la cantidad de productos físicos y los registros en el sistema.
-3. Procesos de Compra: Facilita la administración de las compras al llevar un registro detallado de los proveedores y sus datos, además de permitir la creación de órdenes de compra. Así, se asegura un suministro constante y eficiente de nuevos productos para mantener el stock actualizado.
-4. Ventas y Facturación: El sistema simplifica el proceso de ventas al contar con un módulo de facturación integrado. Permite generar rápidamente facturas para los clientes, registrar los detalles de cada transacción y mantener un historial de ventas para fines de análisis.
-5. Alertas y Notificaciones: El sistema incluye un sistema de alertas que advierte sobre niveles bajos de inventario, productos próximos a agotarse o vencimiento de artículos perecederos, lo que permite una gestión proactiva y evita pérdidas por falta de stock.
-6. Reportes y Análisis: Se ofrecen informes detallados sobre el estado del inventario, el desempeño de las ventas, los productos más vendidos, los proveedores más confiables y otros datos clave. Estos informes ayudan en la toma de decisiones estratégicas y permiten identificar oportunidades de mejora.
-7. Seguridad y Privacidad: El sistema cuenta con medidas de seguridad sólidas para proteger la integridad de los datos y asegurar que solo el personal autorizado tenga acceso a funciones específicas.
+   ```bash
+   cd FerreSys
+   ```
 
-Resumen hecho por ChatGPT
+3. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+4. Iniciar un nuevo proyecto de `node.js`
+
+   ```bash
+   npm init -y
+   ```
+
+   La `-y` significa que se configure por default los datos que vaya a pedir. Si no queremos eso y queremos añadir datos adicionales
+   entonces solo usamos `npm init`.
+
+   Esto creará un archivo [`package.json`](Backend-FerreSys/package.json) con la configuración predeterminada
+
+5. Instalar los paquetes necesarios
+  
+    ```bash
+    npm install express pg dotenv @babel/core @babel/node @babel/preset-env
+    ```
+
+6. Crea un archivo `.env` en la raíz del proyecto para la conexión a la base de datos.
+
+   ```
+    DB_HOST=hostname
+    DB_USER=username
+    DB_PASS=password_user
+    DB_NAME=database_name
+   ```
+   
+7. Configurar babel y crear archivo `.babelrc`:
+  
+    ```/*
+    {
+      "presets": ["@babel/preset-env"]
+    }
+    */
+    ```
+    
+8. Crear el archivo [`index.js`](Backend-FerreSys/index.js)
+
+9. Crear conexión a la base de datos con [`conexion_db.js`](Backend-FerreSys/conexion_db.js)
+
+10. Inicializar el servidor
+    ```bash
+    npx babel-node index.js
+    ```
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+## Terminología
+
+`express`: es un framework y nos permite crear aplicaciones web en nodejs y con este creamos el servidor
+
+`pg`: para conectar con la base de datos
+
+`dotenv`: variables de entorno-para mantener los datos de conexion como contraseña, host,usuario en una carpeta oculta y que no se muestren en el codigo- esto se hace en un archivo `.env`
+
+`@babel/core @babel/node @babel/preset-env`: Herramientas para usar el estándar ES6 en el servidor
+
+ES6 ECMAScript (ES) es una especificación de lenguaje de programación que define los estándares para JavaScript. Es decir, ES es la especificación oficial que establece cómo debe comportarse el lenguaje JavaScript en diferentes versiones.
+(instalamos todas las dependencias que necesitemos para poder trabajar en el proyecto)
+
+# Contribución
+
+**Contribución mediante Fork y Pull Requests**
+
+1. **Fork del Repositorio:** Haz un fork de nuestro repositorio.
+
+2. **Clona el Repositorio:** Clona tu repositorio fork en tu máquina local utilizando el comando `git clone`.
+
+   ```bash
+   # Tu nombre de usuario
+   git clone https://github.com/tu_nombre_de_usuario/FerreSys.git
+   ```
+
+3. **Crea una Rama:** Crea una nueva rama para tu contribución.
+
+   ```bash
+   git checkout -b tu-nueva-funcion
+   ```
+
+4. **Realiza tus Cambios:** Realiza las modificaciones y mejoras que desees en tu rama local.
+
+5. **Confirma tus Cambios:** Confirma tus cambios con mensajes descriptivos.
+
+   ```bash
+   git commit -m "Añadida nueva función: <nombre-de-la-funcion>"
+   ```
+
+6. **Push a tu Repositorio Fork:** Sube tus cambios a tu repositorio fork en GitHub.
+
+   ```bash
+   git push origin tu-nueva-funcion
+   ```
+
+7. **Crea un Pull Request:** Visita nuestro repositorio en GitHub y selecciona tu rama. Luego, haz clic en **"New Pull Request"** para crear una solicitud de extracción. Asegúrate de proporcionar información detallada sobre tus cambios.
+
+8. **Revisión y Fusión:** Nuestro equipo revisará tu Pull Request y, si es aceptada, tus cambios se fusionarán con el repositorio principal.

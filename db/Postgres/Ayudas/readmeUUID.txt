@@ -5,7 +5,3 @@ La representación textual común de un UUID utiliza 32 caracteres hexadecimales
 Este formato de 128 bits proporciona una cantidad extremadamente grande de posibles combinaciones, lo que hace que la probabilidad de colisión (es decir, dos UUIDs iguales) sea extremadamente baja incluso en situaciones con una alta generación de UUIDs.
 
 En resumen, los UUIDs tienen un límite máximo de 128 bits o 16 bytes en longitud, y esta longitud es constante para todos los tipos de UUIDs.
-
-
-
-

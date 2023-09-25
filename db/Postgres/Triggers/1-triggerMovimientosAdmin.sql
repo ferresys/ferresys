@@ -2,7 +2,7 @@
 se vera reflejado en cada una de las tablas dependiendo de la 
 tabla donde se realizo la insercion, actualizacion o borrado*/
 
-CREATE OR REPLACE FUNCTION movimientosAdmin()
+CREATE OR REPLACE FUNCTION movimientosUsuario()
 RETURNS TRIGGER AS 
 
 $$
@@ -21,132 +21,125 @@ BEGIN
 	
 	IF TG_OP= 'DELETE' THEN
 	  INSERT INTO tabRegBorrados (fecDelete,userDelete,nomTabla)
-	  VALUES(current_timestamp,current_user,TG_RELNAME);
+	  VALUES(current_timestamp,current_user,TG_RELNAME);--cambiar por usuario de la pagina
 	
 	  RETURN OLD;
 	END IF ;
-
 END;
 
 $$ 
 LANGUAGE plpgsql;
 
--- Crear el trigger en la tabla tabAdministrador
-CREATE TRIGGER triggertabAdministrador
-BEFORE INSERT OR UPDATE ON tabAdministrador
+CREATE TRIGGER triggertabUsuario -- Crear el trigger en la tabla tabUsuario
+BEFORE INSERT OR UPDATE ON tabUsuario
 FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
+EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabAdministrador for each row execute procedure movimientosAdmin();
+AFTER DELETE ON tabUsuario FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
--- Crear el trigger en la tabla tabCliente
-CREATE TRIGGER triggertabCliente
+CREATE TRIGGER triggertabPermiso -- Crear el trigger en la tabla tabPermiso
+BEFORE INSERT OR UPDATE ON tabPermiso
+FOR EACH ROW
+EXECUTE FUNCTION movimientosUsuario();
+
+CREATE TRIGGER triggertabRegBorrados
+AFTER DELETE ON tabPermiso FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
+
+CREATE TRIGGER triggertabUsuarioPermiso -- Crear el trigger en la tabla tabUsuarioPermiso
+BEFORE INSERT OR UPDATE ON tabUsuarioPermiso
+FOR EACH ROW
+EXECUTE FUNCTION movimientosUsuario();
+
+CREATE TRIGGER triggertabRegBorrados
+AFTER DELETE ON tabUsuarioPermiso FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
+
+CREATE TRIGGER triggertabCliente -- Crear el trigger en la tabla tabCliente
 BEFORE INSERT OR UPDATE ON tabCliente
 FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
+EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabCliente for each row execute procedure movimientosAdmin();
+AFTER DELETE ON tabCliente FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
--- Crear el trigger en la tabla tabClienteNatural
-CREATE TRIGGER triggertabClienteNatural
-BEFORE INSERT OR UPDATE ON tabClienteNatural
-FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
-
-CREATE TRIGGER triggertabRegBorrados
-after delete on tabClienteNatural for each row execute procedure movimientosAdmin();
-
-
--- Crear el trigger en la tabla tabClienteJuridico
-CREATE TRIGGER triggertabClienteJuridico
-BEFORE INSERT OR UPDATE ON tabClienteJuridico
-FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
-
-CREATE TRIGGER triggertabRegBorrados
-after delete on tabClienteJuridico for each row execute procedure movimientosAdmin();
-
-
--- Crear el trigger en la tabla tabProveedor
-CREATE TRIGGER triggertabProveedor
+CREATE TRIGGER triggertabProveedor -- Crear el trigger en la tabla tabProveedor
 BEFORE INSERT OR UPDATE ON tabProveedor
 FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
+EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabProveedor for each row execute procedure movimientosAdmin();
+AFTER DELETE ON tabProveedor FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
--- Crear el trigger en la tabla tabCategoria
-CREATE TRIGGER triggertabCategoria
+CREATE TRIGGER triggertabCategoria -- Crear el trigger en la tabla tabCategoria
 BEFORE INSERT OR UPDATE ON tabCategoria
 FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
+EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabCategoria for each row execute procedure movimientosAdmin();
+AFTER DELETE ON tabCategoria 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
--- Crear el trigger en la tabla tabMarca
-CREATE TRIGGER triggertabMarca
+CREATE TRIGGER triggertabMarca -- Crear el trigger en la tabla tabMarca
 BEFORE INSERT OR UPDATE ON tabMarca
 FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
+EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabMarca for each row execute procedure movimientosAdmin();
+AFTER DELETE ON tabMarca 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
--- Crear el trigger en la tabla tabArticulo
-CREATE TRIGGER triggertabArticulo
+CREATE TRIGGER triggertabArticulo -- Crear el trigger en la tabla tabArticulo
 BEFORE INSERT OR UPDATE ON tabArticulo
 FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
+EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabArticulo for each row execute procedure movimientosAdmin();
+AFTER DELETE ON tabArticulo 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
--- Crear el trigger en la tabla tabKardex
-CREATE TRIGGER triggertabKardex
+CREATE TRIGGER triggertabKardex -- Crear el trigger en la tabla tabKardex
 BEFORE INSERT OR UPDATE ON tabKardex
 FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
+EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabKardex for each row execute procedure movimientosAdmin();
+AFTER DELETE ON tabKardex 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
--- Crear el trigger en la tabla tabproveedorArticulo
-CREATE TRIGGER triggertabproveedorArticulo
-BEFORE INSERT OR UPDATE ON tabproveedorArticulo
+CREATE TRIGGER triggertabReciboMercancia -- Crear el trigger en la tabla tabReciboMercancia
+BEFORE INSERT OR UPDATE ON tabReciboMercancia
 FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
+EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabproveedorArticulo for each row execute procedure movimientosAdmin();
+AFTER DELETE ON tabReciboMercancia 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
--- Crear el trigger en la tabla tabproveedorMarca
-CREATE TRIGGER triggertabproveedorMarca
-BEFORE INSERT OR UPDATE ON tabproveedorMarca
-FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
-
-CREATE TRIGGER triggertabRegBorrados
-after delete on tabproveedorMarca for each row execute procedure movimientosAdmin();
-
-
--- Crear el trigger en la tabla tabEncabezadoVenta
-CREATE TRIGGER triggertabEncabezadoVenta
+CREATE TRIGGER triggertabEncabezadoVenta -- Crear el trigger en la tabla tabEncabezadoVenta
 BEFORE INSERT OR UPDATE ON tabEncabezadoVenta
 FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
+EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabEncabezadoVenta for each row execute procedure movimientosAdmin();
+AFTER DELETE ON tabEncabezadoVenta 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
+--------------------------------------------------------------------------------------------------
 
--- Crear el trigger en la tabla tabDetalleVenta
-CREATE TRIGGER triggertabDetalleVenta
+CREATE TRIGGER triggertabDetalleVenta -- Crear el trigger en la tabla tabDetalleVenta
 BEFORE INSERT OR UPDATE ON tabDetalleVenta
 FOR EACH ROW
-EXECUTE FUNCTION movimientosAdmin();
+EXECUTE FUNCTION movimientosUsuario();
 
 CREATE TRIGGER triggertabRegBorrados
-after delete on tabDetalleVenta for each row execute procedure movimientosAdmin();
+AFTER DELETE ON tabDetalleVenta 
+FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();

@@ -14,11 +14,11 @@ DECLARE
 
 BEGIN
 select Porcentaje into zPorcentaje from tabArticulo where eanArt = NEW.eanArt;
-  IF NEW.tipoMov = 'ENTRADA' THEN
+  IF NEW.tipoMov = TRUE THEN
     	zValStock := (SELECT COALESCE(valStock, 0) + NEW.cantArt FROM tabArticulo WHERE eanArt = NEW.eanArt);
     	zValUnit := NEW.valProm * zPorcentaje ; --(el porcentaje debe ser ingresado como 1.20, 1.30, 1.10..etc)
 	
-  	 ELSIF NEW.tipoMov = 'SALIDA' THEN
+  	 ELSIF NEW.tipoMov = FALSE THEN
     	zValStock := (SELECT COALESCE(valStock, 0) - NEW.cantArt FROM tabArticulo WHERE eanArt = NEW.eanArt);
     	zValUnit := (SELECT valUnit FROM tabArticulo WHERE eanArt = NEW.eanArt);
   END IF;
