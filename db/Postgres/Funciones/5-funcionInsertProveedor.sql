@@ -2,6 +2,7 @@
 -- Función para insertar datos en la tabla "tabProveedor"
 
 --select insertProveedor('0-12','DEWALT','3156478952','dewalt@gmail.com','calle 22 #1-14');
+--select insertProveedor('0-13','MAKITA','3225468794','makita@gmail.com','calle 45 #1-21');
 --select * from tabProveedor;
 
 CREATE OR REPLACE FUNCTION insertProveedor(

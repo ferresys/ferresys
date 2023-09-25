@@ -2,6 +2,8 @@
 --Habilitar la extension uuid 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+------------------------------------------------------------------------
+
 --creamos la función para generar un UUID por registro
 
 CREATE OR REPLACE FUNCTION uuidtabUsuario()
