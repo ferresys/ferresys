@@ -1,75 +1,60 @@
-**FerreSys** is an inventory management software. It empowers businesses to effortlessly record product details, maintain real-time inventory tracking, streamline procurement and sales operations, and proactively manage stock levels through automated alerts.
+## Prerequisites
 
-## Requisitos Previos
+Make sure you have the following prerequisites installed before you begin:
 
-Asegúrate de tener instalados los siguientes requisitos previos antes de comenzar:
-
-- Node.js y npm
+- Node.js and npm
 - PostgreSQL
 
-## Configuración del Proyecto
+## Project Setup
 
-1. Clona este repositorio:
+1. Clone this repository:
 
    ```bash
    git clone https://github.com/davidadarme/FerreSys.git
    ```
-2. Navega al directorio del proyecto:
+
+2. Configure localhost in the backend directory of the project:
 
    ```bash
-   cd FerreSys
+   cd FerreSys/CRUDFerreSys
    ```
 
-3. Instala las dependencias:
+3. Install dependencies:
 
    ```bash
    npm install
    ```
 
-4. Iniciar un nuevo proyecto de `node.js`
+4. Initialize a new Node.js project:
 
    ```bash
    npm init -y
    ```
 
-   La `-y` significa que se configure por default los datos que vaya a pedir. Si no queremos eso y queremos añadir datos adicionales
-   entonces solo usamos `npm init`.
+5. Install the necessary packages:
 
-   Esto creará un archivo [`package.json`](Backend-FerreSys/package.json) con la configuración predeterminada
-
-5. Instalar los paquetes necesarios
-  
     ```bash
-    npm install express pg dotenv @babel/core @babel/node @babel/preset-env
+    npm i express pg nodemom
     ```
 
-6. Crea un archivo `.env` en la raíz del proyecto para la conexión a la base de datos.
+6. Create a connection to the database in [`index.controller.js`](Backend-FerreSys/CRUDFerreSys/index.controller.js):
 
+   ```javascript
+    const pool = new Pool({
+      host: 'localhost',
+      user: 'pg_username',
+      password: 'password_user',
+      database: 'database_name',
+      port: 'port'
+    });
    ```
-    DB_HOST=hostname
-    DB_USER=username
-    DB_PASS=password_user
-    DB_NAME=database_name
-   ```
-   
-7. Configurar babel y crear archivo `.babelrc`:
-  
-    ```/*
-    {
-      "presets": ["@babel/preset-env"]
-    }
-    */
-    ```
-    
-8. Crear el archivo [`index.js`](Backend-FerreSys/index.js)
 
-9. Crear conexión a la base de datos con [`conexion_db.js`](Backend-FerreSys/conexion_db.js)
+7. Start the server:
 
-10. Inicializar el servidor
     ```bash
-    npx babel-node index.js
+    npm run dev
     ```
 
-## Licencia
+## License
 
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+This project is under the MIT License. See the [LICENSE](LICENSE) file for more details.
