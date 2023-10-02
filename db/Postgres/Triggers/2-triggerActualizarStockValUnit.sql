@@ -70,3 +70,56 @@ AFTER INSERT ON tabDetalleVenta
 FOR EACH ROW
 EXECUTE FUNCTION actualizarStockValUnitSalidas();
 
+-- TRIGGER para control del stock en Kardex
+
+/*
+No permitir la salida de un artículo si el stock es menor al valor stockmin
+
+Y no permitir el ingreso de artículos si la cantidad supera el stockmax.
+
+Tenga presente que el stock no puede quedar en 0. Ya que la idea del sistema es que el administrador elija un stockmin por ejemplo 10. Y que cuando el stock llegue a 10, no deje sacar más artículos.
+*/
+CREATE OR REPLACE FUNCTION ControlKardex () RETURNS BOOLEAN AS
+
+DECLARE
+  zValStock tabArticulo.valStock%type;
+  zStockMin tabArticulo.stockMin%type;
+  zStockMax tabArticulo.stockMax%type;
+  zCantArt tabDetalleVenta.cantArt%type;
+
+$$
+BEGIN
+-- newStock := zValStock - zCantArt
+
+SELECT tipoMov INTO zTipoMov FROM tabKardex WHERE eanArt = NEW.eanArt;
+SELECT valStock, stockMin, stockMax INTO zValStock, zStockMin, zStockMax FROM tabArticulo WHERE zEanArt = NEW.eanArt;
+SELECT cantArt INTO zCantArt FROM tabDetalleVenta WHERE zEanArt = NEW.eanArt;
+
+    -- Si la cantidad de articulos VENTA es mayor al stock y al stock maximo
+    ELSIF zCantArt > zValStock AND zStockMax THEN
+      RAISE EXCEPTION 'No se puede realizar la operación, la compra supera el stock y stock maximo';
+
+    ELSIF zCantArt <= zValStock AND => zStockMin THEN
+      RAISE EXCEPTION 'Operación completa';
+
+    ELSIF zCantArt > (zValStock - zStockMin) THEN
+    RAISE EXCEPTION 'La salida de este artículo hará que el stock sea menor que stockMin.';
+  
+
+    ELSIF zValStock <= 0 THEN
+      RAISE EXCEPTION 'No se puede realizar la operacion, stock negativo';
+    
+    ELSE
+      RETURN FALSE;
+
+    UPDATE tabArticulo SET valStock = zValStock, valUnit = zValUnit WHERE eanArt = NEW.eanArt;
+
+RETURN NEW;
+END; 
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER ControlKardex
+AFTER INSERT ON tabKardex
+FOR EACH ROW
+EXECUTE FUNCTION ControlKardex();
