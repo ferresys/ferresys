@@ -19,41 +19,57 @@ Make sure you have the following prerequisites installed before you begin:
    cd FerreSys/CRUDFerreSys
    ```
 
-3. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-4. Initialize a new Node.js project:
+3. Initialize a new Node.js project:
 
    ```bash
    npm init -y
    ```
 
-5. Install the necessary packages:
+4. Install the necessary packages:
 
     ```bash
-    npm i express pg nodemom
+    npm i express pg
+    ```
+    
+    ```bash
+    npm i nodemon -D
     ```
 
-6. Create a connection to the database in [`index.controller.js`](Backend-FerreSys/CRUDFerreSys/index.controller.js):
+
+5. Configure nodemos in [package.json](
+CRUDFerreSys/src/controllers/index.controller.js) as follows
 
    ```javascript
-    const pool = new Pool({
-      host: 'localhost',
-      user: 'pg_username',
-      password: 'password_user',
-      database: 'database_name',
-      port: 'port'
-    });
+   {
+   "name": "crudferresys",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "dev": "nodemon src/index.js" (esta parte es la que hay que establecer.)
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "dotenv": "^16.3.1",
+      "express": "^4.18.2",
+      "pg": "^8.11.3"
+   },
+   "devDependencies": {
+      "nodemon": "^3.0.1"
+   }
+   }
+
    ```
 
-7. Start the server:
+6. Start the server:
 
     ```bash
     npm run dev
     ```
+
+Done! the server is running correctly through CLI, remember to save all the changes that you make to the code and check constantly the CLI to see that everything is correct. After that, you can run queries through you web browser or Postman, using url http://localhost:4000/
 
 ## License
 
