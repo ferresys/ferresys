@@ -9,7 +9,7 @@ Tenga presente que el stock no puede quedar en 0. Ya que la idea del sistema es 
 https://github.com/Yocser/InvAdso2023/blob/main/PROYECTO_INVENTARIO-VENTAS/Funciones/1-KARDEX%20CORRECTO.sql
 */
 
-CREATE OR REPLACE FUNCTION ControlKardex ()
+CREATE OR REPLACE FUNCTION controlKardex ()
 RETURNS TRIGGER AS
 
 $$
@@ -18,49 +18,70 @@ DECLARE
   zStockMin tabArticulo.stockMin%type;
   zStockMax tabArticulo.stockMax%type;
   zCantArt tabDetalleVenta.cantArt%type;
-  zTipoMov tabKardex.tipoMov%type;
 
 BEGIN
 
     --SELECT tipoMov INTO zTipoMov FROM tabKardex WHERE eanArt = NEW.enArt;
-    SELECT valStock, stockMin, stockMax INTO zValStock, zStockMin, zStockMax FROM tabArticulo WHERE zEanArt = NEW.eanArt;
-    SELECT cantArt INTO zCantArt FROM tabDetalleVenta WHERE zEanArt = NEW.eanArt;
+    SELECT valStock, stockMin, stockMax INTO zValStock, zStockMin, zStockMax FROM tabArticulo WHERE eanArt = NEW.eanArt;
+    SELECT cantArt INTO zCantArt FROM tabDetalleVenta WHERE eanArt = NEW.eanArt;
 
     -- SELECT ztipoMov WHERE ztipoMov = TRUE
-    IF ztipoMov = TRUE THEN -- ENTRADA / tipoMov = TRUE
+    -- ENTRADA / tipoMov = TRUE
 
-        IF CantArt <= zValStock AND CantArt <= zStockMax AND CantArt > zStockMin  THEN
-            RAISE EXCEPTION 'Operación completa';
-            RAISE NOTICE 'Exitoso';
-        END IF;
+    IF zCantArt <= zStockMax AND zCantArt > 0 THEN
+        RAISE NOTICE 'Exitoso';
     END IF;
 
-    IF ztipoMov = FALSE THEN -- SALIDA / tipoMov = FALSE
+    -- SALIDA / tipoMov = FALSE
 
-        IF zCantArt > zValStock THEN
-            RAISE EXCEPTION 'La cantidad de salida supera el stock disponible.';
-            RAISE NOTICE 'Error 1';
-        END IF;
-
-        IF (zCantArt - zValStock) < zStockMin THEN
-            RAISE EXCEPTION 'No se puede realizar la operacion, el stock hara que sea menor que el stock minimo';
-            RAISE NOTICE 'Error 4';
-        END IF;
-
-        IF zValStock IS NULL OR zValStock <= 0 THEN
-            RAISE EXCEPTION 'No se puede realizar la operacion, stock negativo';
-            RAISE NOTICE 'Error NULL';
-        END IF;
+    IF zCantArt <= 0 THEN
+        RAISE NOTICE 'Debe ingresar una cantidad';
     END IF;
 
-    -- UPDATE tabArticulo SET valStock = zValStock, valUnit = zValUnit WHERE eanArt = NEW.eanArt;
+    IF zCantArt > zValStock OR zCantArt > zStockMax THEN
+        RAISE NOTICE 'La cantidad de salida supera el stock disponible';
+    END IF;
+
+    IF ABS(zCantArt - zValStock) < zStockMin THEN
+        RAISE NOTICE 'No se puede realizar la operacion, el stock hara que sea menor que el stock minimo';
+    END IF;
+
+    IF zCantArt = zValStock AND zValStock <= zStockMin THEN
+		RAISE NOTICE 'la cantidad supera las existencias minimas en stock';
+	END IF;
+
+    IF zValStock IS NULL OR zValStock <= 0 THEN
+        RAISE EXCEPTION 'No se puede realizar la operacion, stock negativo o en cero';
+    END IF;
+
+    --SELECT * from tabArticulo
+    --SELECT insertReciboMercancia('00000001', 20, 5000, '0-12', '1', '1', 'pulidora en buen estado');
+    --SELECT insertReciboMercancia('00000002', 30, 1000, '0-12', '2', '2', 'Alambre eléctrico');
+    --SELECT insertReciboMercancia('00000002', 10, 8000, '0-12', '2', '2', 'Alambre eléctrico');
+    --SELECT insertReciboMercancia('00000002', -700, 8000, '0-12', '2', '2', 'Alambre eléctrico');
+	--SELECT insertReciboMercancia('00000002', 700, 8000, '0-12', '2', '2', 'Alambre eléctrico');
+	--SELECT insertDetalleVenta ('00000002', 1000, 0);
+
+    UPDATE tabArticulo SET valStock = zValStock WHERE eanArt = NEW.eanArt;
 
   RETURN NEW;
 END;
 $$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER ControlKardex
-BEFORE INSERT ON tabKardex
+-- Trigger para tabReciboMercancia
+CREATE TRIGGER ControlKardexReciboMercancia
+BEFORE INSERT ON tabReciboMercancia
+FOR EACH ROW
+EXECUTE FUNCTION ControlKardex();
+
+-- Trigger para tabDetalleVenta
+CREATE TRIGGER ControlKardexDetalleVenta
+BEFORE INSERT ON tabDetalleVenta
+FOR EACH ROW
+EXECUTE FUNCTION ControlKardex();
+
+CREATE TRIGGER ControlKardexDetalleVenta
+AFTER INSERT ON tabArticulo
 FOR EACH ROW
 EXECUTE FUNCTION ControlKardex();
