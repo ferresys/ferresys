@@ -33,7 +33,7 @@
     npm i nodemon -D
     ```
     
-5. Configure nodemos in [package.json](
+5. Configure nodemon in [package.json](
 CRUDFerreSys/src/controllers/index.controller.js) as follows
 
    ```javascript
