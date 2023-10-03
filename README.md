@@ -1,7 +1,5 @@
 ## Prerequisites
 
-Make sure you have the following prerequisites installed before you begin:
-
 - Node.js and npm
 - PostgreSQL
 
@@ -34,8 +32,7 @@ Make sure you have the following prerequisites installed before you begin:
     ```bash
     npm i nodemon -D
     ```
-
-
+    
 5. Configure nodemos in [package.json](
 CRUDFerreSys/src/controllers/index.controller.js) as follows
 
@@ -46,7 +43,7 @@ CRUDFerreSys/src/controllers/index.controller.js) as follows
    "description": "",
    "main": "index.js",
    "scripts": {
-      "dev": "nodemon src/index.js" (esta parte es la que hay que establecer.)
+      "dev": "nodemon src/index.js"
    },
    "keywords": [],
    "author": "",
@@ -60,10 +57,20 @@ CRUDFerreSys/src/controllers/index.controller.js) as follows
       "nodemon": "^3.0.1"
    }
    }
-
    ```
 
-6. Start the server:
+6. Configures [index.controller.js](CRUDFerreSys\src\controllers\index.controller.js)
+   ```javascript
+   const pool = new Pool({
+   	host: 'localhost',
+     	user: 'postgres or username',
+     	password: 'passwordUser',
+     	database: 'databaseName',
+     	port: '5432'
+   });
+   ```
+   
+7. Start the server:
 
     ```bash
     npm run dev
