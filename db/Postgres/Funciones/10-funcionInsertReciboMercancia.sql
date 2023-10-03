@@ -10,7 +10,7 @@
 --DELETE FROM tabReciboMercancia;
 
 CREATE OR REPLACE FUNCTION insertReciboMercancia(
-    zEanArt tabArticulo.eanArt%type,
+    zEanArt tabReciboMercancia.eanArt%type,
     zCantArt tabReciboMercancia.cantArt%type,
     zValCompra tabReciboMercancia.valCompra%type,
     zIdProv tabProveedor.idProv%type,
