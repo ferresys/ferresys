@@ -7,8 +7,8 @@ const { Pool } = require('pg');
 const pool = new Pool({
 	host: 'localhost',
   	user: 'postgres',
-  	password: '',
-  	database: 'dbFerreSys',
+  	password: 'Escorpio11',
+  	database: 'FerreSysDB',
   	port: '5432'
 });
 
@@ -168,11 +168,11 @@ const getUsuarioPermisoById = async (req,res) => {
 	res.json(response.rows);
 };
 
-
+/*
 //función insertar datos a la base de datos.
 const insertMarca = async (req, res) => {
 	/*console.log(req.body);
-	res.send('Marca registrada con éxito');*/
+	res.send('Marca registrada con éxito');
 	const {nomMarca} = req.body;
 
 	const response = await pool.query('INSERT INTO tabMarca (nomMarca) VALUES ($1)', [nomMarca]);
@@ -184,7 +184,249 @@ const insertMarca = async (req, res) => {
 				Marca:{nomMarca}
 			}
 		})
+};*/
+
+//función insertar datos a la base de datos.
+
+const insertCliente = async (req, res) => {
+  const { idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli  } = req.body;
+
+  try {
+    const response = await pool.query('SELECT insertCliente($1, $2, $3, $4, $5, $6, $7, $8, $9)', 
+    	[idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli ]);
+    console.log(response);
+    res.json({
+      message: 'Cliente RegistradO con éxito',
+      body: {
+        Cliente: {idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli},
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar cliente',
+    });
+  }
 };
+
+
+const insertProveedor = async (req, res) => {
+  const { idProv, nomProv, telProv, emailProv, dirProv } = req.body;
+
+  try {
+    const response = await pool.query('SELECT insertProveedor($1, $2, $3, $4, $5)', 
+    	[idProv, nomProv, telProv, emailProv, dirProv ]);
+    console.log(response);
+    res.json({
+      message: 'Proveedor RegistradO con éxito',
+      body: {
+        Proveedor: {idProv, nomProv, telProv, emailProv, dirProv},
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Proveedor',
+    });
+  }
+};
+
+
+const insertMarca = async (req, res) => {
+  const { nomMarca } = req.body;
+
+  try {
+    const response = await pool.query('SELECT insertMarca($1)', [nomMarca]);
+    console.log(response);
+    res.json({
+      message: 'Marca Registrada con éxito',
+      body: {
+        Marca: { nomMarca },
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar la marca',
+    });
+  }
+};
+
+
+const insertCategoria = async (req, res) => {
+  const { nomCateg } = req.body;
+
+  try {
+    const response = await pool.query('SELECT insertCategoria($1)', [nomCateg]);
+    console.log(response);
+    res.json({
+      message: 'Categoria Registrada con éxito',
+      body: {
+        Categoria: {nomCateg},
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Categoria',
+    });
+  }
+};
+
+
+const insertArticulo = async (req, res) => {
+  const { eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence } = req.body;
+
+  try {
+    const response = await pool.query('SELECT insertArticulo($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', 
+    	[eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence]);
+    console.log(response);
+    res.json({
+      message: 'Artículo Registrado con éxito',
+      body: {
+        Articulo: {eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence},
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Categoria',
+    });
+  }
+};
+
+
+const insertReciboMercancia = async (req, res) => {
+  const { eanArt, cantArt, valCompra, idProv, consecMarca, observacion } = req.body;
+
+  try {
+    const response = await pool.query('SELECT insertReciboMercancia($1, $2, $3, $4, $5, $6)', 
+    	[eanArt, cantArt, valCompra, idProv,  consecMarca, observacion]);
+    console.log(response);
+    res.json({
+      message: 'Entrada Registrada con éxito',
+      body: {
+        ReciboMercancia: {eanArt, cantArt, valCompra, idProv,  consecMarca, observacion},
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Entrada',
+    });
+  }
+};
+
+
+const insertEncabezadoVenta = async (req, res) => {
+  const { tipoFactura, idCli, ciudad } = req.body;
+
+  try {
+    const response = await pool.query('SELECT insertEncVenta($1, $2, $3)', 
+    	[tipoFactura, idCli, ciudad]);
+    console.log(response);
+    res.json({
+      message: 'Encabezado de Venta Registrado con éxito',
+      body: {
+        EncabezadoVenta: {tipoFactura, idCli, ciudad},
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Encabezado de Venta',
+    });
+  }
+};
+
+
+const insertDetalleVenta = async (req, res) => {
+  const { eanArt, cantArt, descuento } = req.body;
+
+  try {
+    const response = await pool.query('SELECT insertDetalleVenta($1, $2, $3)', 
+    	[eanArt, cantArt, descuento]);
+    console.log(response);
+    res.json({
+      message: 'Detalle venta Registrado con éxito',
+      body: {
+        DetalleVenta: {eanArt, cantArt, descuento },
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Detalle de Venta',
+    });
+  }
+};
+
+
+const insertUsuario = async (req, res) => {
+  const { idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password } = req.body;
+
+  try {
+    const response = await pool.query('SELECT insertUsuario($1, $2, $3, $4, $5, $6)', 
+    	[idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password]);
+    console.log(response);
+    res.json({
+      message: 'Usuario Registrado con éxito',
+      body: {
+        Usuario: {idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password},
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Usuario',
+    });
+  }
+};
+
+
+const insertPermiso = async (req, res) => {
+  const { nomPermiso, descPermiso } = req.body;
+
+  try {
+    const response = await pool.query('SELECT insertPermiso($1, $2)', 
+    	[nomPermiso, descPermiso]);
+    console.log(response);
+    res.json({
+      message: 'Permiso Registrado con éxito',
+      body: {
+        Permiso: {nomPermiso, descPermiso},
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Permiso',
+    });
+  }
+};
+
+
+const insertUsuarioPermiso = async (req, res) => {
+  const { idUsuario, consecPermiso } = req.body;
+
+  try {
+    const response = await pool.query('SELECT asignarPermisoUsuario($1, $2)', 
+    	[idUsuario, consecPermiso]);
+    console.log(response);
+    res.json({
+      message: 'Permisos por usuario Registrado con éxito',
+      body: {
+        usuarioPermiso: {idUsuario, consecPermiso},
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Permisos por Usuario',
+    });
+  }
+};
+
 
 
 //función actualizar datos a la base de datos.
@@ -291,7 +533,19 @@ module.exports = {
 	getPermisoById,
 	getUsuarioPermisoById,
 
+	
+	insertCliente,
+	insertProveedor,
 	insertMarca,
+	insertCategoria,
+	insertArticulo,
+	insertReciboMercancia,
+	insertEncabezadoVenta,
+	insertDetalleVenta,
+	insertUsuario,
+	insertPermiso,
+	insertUsuarioPermiso,
+
 
 	updateMarca,
 

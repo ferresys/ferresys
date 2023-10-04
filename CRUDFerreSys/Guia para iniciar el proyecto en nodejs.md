@@ -11,6 +11,10 @@ GUIA PARA INICIAR EL PROYECTO EN NODEJS.
 
 	npm i express pg 
 
+
+IMPORTANTE : EL PASO 3 Y 4 NO HAY NECESIDAD DE HACERLO SIEMPRE Y CUANDO REVISES EN EL ARCHIVO package.json QUE 
+             YA ESTE LA DEPENDENCIA NODEMON JUNTO CON EL SCRIPT.
+
 3. instala nodemon(el cual va a permitir que el servidor se reinice automaticamente)
 
 	npm i nodemon -D
@@ -37,6 +41,7 @@ GUIA PARA INICIAR EL PROYECTO EN NODEJS.
     "nodemon": "^3.0.1"
   }
 }
+
 
 5. configura tu codigo, realiza los cambios necesarios y guarda. 
 

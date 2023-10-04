@@ -3,7 +3,8 @@ const router = Router();
 
 const {getClientes, getProveedores, getMarcas, getCategorias, getArticulos, getReciboMercancias, getKardex, getUsuarios, getPermisos, getUsuarioPermisos,  
 getClienteById, getProveedorById, getMarcaById, getCategoriaById,getArticuloById, getReciboMercanciaById, getKardexById, getUsuarioById, getPermisoById, getUsuarioPermisoById, 
-insertMarca, updateMarca, 
+insertCliente, insertProveedor, insertMarca, insertCategoria, insertArticulo, insertReciboMercancia, insertEncabezadoVenta, insertDetalleVenta, insertUsuario, insertPermiso, insertUsuarioPermiso,
+updateMarca, 
 deleteCliente, deleteProveedor, deleteMarca, deleteCategoria, deleteArticulo, deleteUsuario, deletePermiso, deleteUsuarioPermiso}= require('../controllers/index.controller')
 
 //consultas generales
@@ -33,9 +34,17 @@ router.get('/permisos/:id', getPermisoById);
 router.get('/usuarioPermisos/:id', getUsuarioPermisoById);
 
 // insertar datos
+router.post('/clientes', insertCliente);
+router.post('/proveedores', insertProveedor);
 router.post('/marcas', insertMarca);
-
-
+router.post('/categorias', insertCategoria);
+router.post('/articulos', insertArticulo);
+router.post('/reciboMercancias', insertReciboMercancia);
+router.post('/encabezadoVenta', insertEncabezadoVenta);
+router.post('/detalleVenta', insertDetalleVenta);
+router.post('/usuarios', insertUsuario);
+router.post('/permisos', insertPermiso);
+router.post('/usuarioPermisos', insertUsuarioPermiso);
 
 
 //actualizar datos
@@ -46,14 +55,14 @@ router.put('/marcas/:id', updateMarca);
 
 //eliminar registros.
 
-router.delete('/marcas/:id', deleteCliente);
-router.delete('/marcas/:id', deleteProveedor);
+router.delete('/clientes/:id', deleteCliente);
+router.delete('/proveedores/:id', deleteProveedor);
 router.delete('/marcas/:id', deleteMarca);
-router.delete('/marcas/:id', deleteCategoria);
-router.delete('/marcas/:id', deleteArticulo);
-router.delete('/marcas/:id', deleteUsuario);
-router.delete('/marcas/:id', deletePermiso);
-router.delete('/marcas/:id', deleteUsuarioPermiso);
+router.delete('/categorias/:id', deleteCategoria);
+router.delete('/articulos/:id', deleteArticulo);
+router.delete('/usuarios/:id', deleteUsuario);
+router.delete('/permisos/:id', deletePermiso);
+router.delete('/usuarioPermisos/:id', deleteUsuarioPermiso);
 
 
 module.exports = router;
