@@ -7,7 +7,7 @@ const { Pool } = require('pg');
 const pool = new Pool({
 	host: 'localhost',
   	user: 'postgres',
-  	password: 'panda21',
+  	password: '',
   	database: 'dbFerreSys',
   	port: '5432'
 });
@@ -279,6 +279,7 @@ module.exports = {
 	getUsuarios,
 	getPermisos,
 	getUsuarioPermisos,
+
 	getClienteById,
 	getProveedorById,
 	getMarcaById,
@@ -289,8 +290,11 @@ module.exports = {
 	getUsuarioById,
 	getPermisoById,
 	getUsuarioPermisoById,
+
 	insertMarca,
+
 	updateMarca,
+
 	deleteCliente,
 	deleteProveedor,
 	deleteMarca,
