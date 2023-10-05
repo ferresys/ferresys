@@ -20,7 +20,6 @@ DECLARE
   zCantArt tabDetalleVenta.cantArt%type;
 
 BEGIN
-
     SELECT valStock, stockMin, stockMax INTO zValStock, zStockMin, zStockMax FROM tabArticulo WHERE eanArt = NEW.eanArt;
     SELECT cantArt INTO zCantArt FROM tabDetalleVenta WHERE eanArt = NEW.eanArt;
 
@@ -30,27 +29,17 @@ BEGIN
         -- ENTRADA / tipoMov = TRUE
         IF zCantArt <= zStockMax AND zCantArt > 0 THEN
             RAISE NOTICE 'Exitoso';
-        END IF;
-    
         -- SALIDA / tipoMov = FALSE
-        IF zCantArt <= 0 THEN
+        ELSIF zCantArt <= 0 THEN
             RAISE NOTICE 'Debe ingresar una cantidad';
-        END IF;
-
-        IF zCantArt > zValStock OR zCantArt > zStockMax THEN
+        ELSIF zCantArt > zValStock OR zCantArt > zStockMax THEN
             RAISE NOTICE 'La cantidad de salida supera el stock disponible';
-        END IF;
-
-        IF ABS(zCantArt - zValStock) < zStockMin THEN
-            RAISE NOTICE 'No se puede realizar la operacion, el stock hara que sea menor que el stock minimo';
-        END IF;
-
-        IF zCantArt = zValStock AND zValStock <= zStockMin THEN
-            RAISE NOTICE 'la cantidad supera las existencias minimas en stock';
-        END IF;
-
-        IF zValStock IS NULL OR zValStock <= 0 THEN
-            RAISE EXCEPTION 'No se puede realizar la operacion, stock negativo o en cero';
+        ELSIF ABS(zCantArt - zValStock) < zStockMin THEN
+            RAISE NOTICE 'No se puede realizar la operación, el stock hará que sea menor que el stock mínimo';
+        ELSIF zCantArt = zValStock AND zValStock <= zStockMin THEN
+            RAISE NOTICE 'La cantidad supera las existencias mínimas en stock';
+        ELSIF zValStock IS NULL OR zValStock <= 0 THEN
+            RAISE EXCEPTION 'No se puede realizar la operación, stock negativo o en cero';
         END IF;
     END IF;
 
