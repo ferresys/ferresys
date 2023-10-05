@@ -10,20 +10,25 @@ DECLARE
 BEGIN
     -- obtenemos el valor del stock máximo de la tabArticulo
     SELECT valStock, stockMin, stockMax INTO zValStock, zStockMin, zStockMax FROM tabArticulo WHERE eanArt = NEW.eanArt;
-    zCantArtZvalStock := NEW.cantArt + zValStock;
 
+        --SELECT insertDetalleVenta ('00000001', 6, 0);
+        -- valstock = 15
+        --val min= 10
         CASE
             -- Verificar que el valor ingresado corresponda a una cantidad contable positiva
-            WHEN NEW.cantArt <= 0 THEN
-                RAISE NOTICE 'Debe ingresar una cantidad';
-            
-            -- Verifica que el valor ingresado no supere al atributo StockMax (Stock Máximo)
-            WHEN NEW.cantArt > zStockMax THEN
-                RAISE NOTICE 'La cantidad de salida supera el stock máximo';
+            WHEN CAST(NEW.eanArt AS NUMERIC) <= 0 THEN
+                RAISE EXCEPTION 'Debe ingresar una cantidad';
 
-            -- No puede sacar la misma cantidad de stock actual ya que viola la restricción del stock mínimo 
-            WHEN NEW.cantArt = zValStock AND zValStock <= zStockMin THEN
-                RAISE NOTICE 'La cantidad supera las existencias mínimas en stock';
+            WHEN (CAST(NEW.eanArt AS numeric) + zValStock) <= zStockMin THEN
+                RAISE EXCEPTION 'Error stock min';
+
+            -- Verifica que el valor ingresado no supere al atributo StockMax (Stock Máximo)
+            WHEN CAST(NEW.eanArt AS numeric) > zStockMax THEN
+                RAISE EXCEPTION 'La cantidad de salida supera el stock máximo';
+
+            -- No puede sacar la misma cantidad de stock actual ya que viola la restricción del stock mínimo
+            WHEN CAST(NEW.eanArt AS numeric) = zValStock THEN
+                RAISE EXCEPTION 'La cantidad supera las existencias mínimas en stock';
             
             -- Verificar el valor de stock no esté en mínimo o sea menor/igual que cero
             WHEN zValStock IS NULL OR zValStock <= 0 THEN

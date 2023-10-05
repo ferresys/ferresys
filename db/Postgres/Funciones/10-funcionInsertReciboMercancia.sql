@@ -25,6 +25,10 @@ DECLARE
 
 BEGIN
 
+IF zCantArt <= 0 THEN
+    RAISE EXCEPTION 'La cantidad debe ser un número positivo';
+END IF;
+
 SELECT consecMarca INTO zMarca FROM tabMarca WHERE consecMarca = zConsecMarca;
 zValTotal := zCantArt * zValCompra;
 

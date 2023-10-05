@@ -26,7 +26,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 --Creamos el trigger 
-CREATE TRIGGER triggerValidacionEntrada
+CREATE TRIGGER validacionEntrada
 BEFORE INSERT ON tabReciboMercancia
 FOR EACH ROW EXECUTE FUNCTION validacionEntrada();
 
