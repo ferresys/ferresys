@@ -1,4 +1,4 @@
---SELECT insertReciboMercancia('00000001', 20, 5000, '0-12', '1', '1', 'pulidora en buen estado');
+--SELECT insertReciboMercancia('00000001', 1000, 5000, '0-12', '1', '1', 'pulidora en buen estado');
 --SELECT insertReciboMercancia('00000002', 30, 1000, '0-12', '2', '2', 'Alambre eléctrico');
 --SELECT insertReciboMercancia('00000002', 10, 8000, '0-12', '2', '2', 'Alambre eléctrico');
 --select * from tabReciboMercancia;
