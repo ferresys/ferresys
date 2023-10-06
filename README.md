@@ -2,7 +2,7 @@
 
 Make sure you have the following prerequisites installed before you begin:
 
-- Node.js and npm
+- Node.js
 - PostgreSQL
 
 ## Project Setup
@@ -30,46 +30,14 @@ Make sure you have the following prerequisites installed before you begin:
     ```bash
     npm i express pg
     ```
-    
-    ```bash
-    npm i nodemon -D
-    ```
 
-
-5. Configure nodemos in [package.json](
-CRUDFerreSys/src/controllers/index.controller.js) as follows
-
-   ```javascript
-   {
-   "name": "crudferresys",
-   "version": "1.0.0",
-   "description": "",
-   "main": "index.js",
-   "scripts": {
-      "dev": "nodemon src/index.js" (esta parte es la que hay que establecer.)
-   },
-   "keywords": [],
-   "author": "",
-   "license": "ISC",
-   "dependencies": {
-      "dotenv": "^16.3.1",
-      "express": "^4.18.2",
-      "pg": "^8.11.3"
-   },
-   "devDependencies": {
-      "nodemon": "^3.0.1"
-   }
-   }
-
-   ```
-
-6. Start the server:
+5. Start the server:
 
     ```bash
     npm run dev
     ```
 
-Done! the server is running correctly through CLI, remember to save all the changes that you make to the code and check constantly the CLI to see that everything is correct. After that, you can run queries through you web browser or Postman, using url http://localhost:4000/
+After that, you can run queries through you web browser or Postman, using url http://localhost:4000/
 
 ## License
 
