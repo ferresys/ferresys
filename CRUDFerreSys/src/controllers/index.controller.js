@@ -7,7 +7,7 @@ const { Pool } = require('pg');
 const pool = new Pool({
 	host: 'localhost',
   	user: 'postgres',
-  	password: 'Escorpio11',
+  	password: 'PgSena2023',
   	database: 'FerreSysDB',
   	port: '5432'
 });
@@ -318,6 +318,7 @@ const insertReciboMercancia = async (req, res) => {
 };
 
 
+
 const insertEncabezadoVenta = async (req, res) => {
   const { tipoFactura, idCli, ciudad } = req.body;
 
@@ -384,6 +385,7 @@ const insertUsuario = async (req, res) => {
 };
 
 
+
 const insertPermiso = async (req, res) => {
   const { nomPermiso, descPermiso } = req.body;
 
@@ -441,6 +443,60 @@ const updateMarca = async (req, res) => {
 	res.send('Marca Actualizada con éxito');
 };
 
+const updateCliente = async (req, res) => {
+
+	const id= req.params.id;
+	const {idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli} = req.body;
+	//console.log(id,nomMarca); para que me muestre los datos actualizados, es solo prueba ya que aun no inserta nada
+	//res.send('Marca Actualizada con éxito');lo que se muestra al usuario, en este caso en postman
+	const response = await pool.query('UPDATE tabCliente SET idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli = $1,$2,$3,$4,$5,$6,$7,$8,$9 WHERE idCli= $10',[idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli , id]); 
+	console.log(response);
+	res.send('Cliente Actualizado con éxito');
+};
+
+const updateProveedor= async (req, res) => {
+
+	const id= req.params.id;
+	const {idProv, nomProv, telProv, emailProv, dirProv} = req.body;
+	//console.log(id,nomMarca); para que me muestre los datos actualizados, es solo prueba ya que aun no inserta nada
+	//res.send('Marca Actualizada con éxito');lo que se muestra al usuario, en este caso en postman
+	const response = await pool.query('UPDATE tabMarca SET idProv, nomProv, telProv, emailProv, dirProv = $1, $2, $3, $4, $5 WHERE consecMarca= $6',[idProv, nomProv, telProv, emailProv, dirProv, id]); 
+	console.log(response);
+	res.send('Proveedor Actualizado con éxito');
+};
+
+const updateCategoria = async (req, res) => {
+
+	const id= req.params.id;
+	const {nomCateg } = req.body;
+	//console.log(id,nomMarca); para que me muestre los datos actualizados, es solo prueba ya que aun no inserta nada
+	//res.send('Marca Actualizada con éxito');lo que se muestra al usuario, en este caso en postman
+	const response = await pool.query('UPDATE tabMarca SET nomCateg  = $1 WHERE consecMarca= $2',[nomCateg , id]); 
+	console.log(response);
+	res.send('Categoria Actualizada con éxito');
+};
+
+const updateArticulo = async (req, res) => {
+
+	const id= req.params.id;
+	const {eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence } = req.body;
+	//console.log(id,nomMarca); para que me muestre los datos actualizados, es solo prueba ya que aun no inserta nada
+	//res.send('Marca Actualizada con éxito');lo que se muestra al usuario, en este caso en postman
+	const response = await pool.query('UPDATE tabMarca SET eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence  = $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 WHERE consecMarca= $12',[eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence , id]); 
+	console.log(response);
+	res.send('Articulo Actualizado con éxito');
+};
+
+const updateUsuario = async (req, res) => {
+
+	const id= req.params.id;
+	const {idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password} = req.body;
+	//console.log(id,nomMarca); para que me muestre los datos actualizados, es solo prueba ya que aun no inserta nada
+	//res.send('Marca Actualizada con éxito');lo que se muestra al usuario, en este caso en postman
+	const response = await pool.query('UPDATE tabMarca SET idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password = $1, $2, $3, $4, $5, $6 WHERE consecMarca= $7',[idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password, id]); 
+	console.log(response);
+	res.send('Usuario Actualizado con éxito');
+};
 
 //función eliminar datos a la base de datos.
 const deleteCliente= async (req, res) => {
