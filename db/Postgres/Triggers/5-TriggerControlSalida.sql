@@ -11,7 +11,7 @@ DECLARE
 BEGIN
     
     SELECT valStock, stockMin, stockMax INTO zValStock, zStockMin, zStockMax FROM tabArticulo WHERE eanArt = NEW.eanArt;
-    zVar := NEW.cantArt + zValStock;
+    zVar := NEW.cantArt - zValStock;
 
         --Estas son las restricciones
         CASE
