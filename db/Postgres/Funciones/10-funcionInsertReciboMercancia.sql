@@ -15,7 +15,6 @@ CREATE OR REPLACE FUNCTION insertReciboMercancia(
     zValCompra tabReciboMercancia.valCompra%type,
     zIdProv tabProveedor.idProv%type,
     zConsecMarca tabMarca.consecMarca%type,
-	zConsecCateg tabCategoria.consecCateg%type,
     zObservacion tabReciboMercancia.observacion%type
 ) RETURNS void AS 
 $$
