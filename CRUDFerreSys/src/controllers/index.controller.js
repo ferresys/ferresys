@@ -7,8 +7,8 @@ const { Pool } = require('pg');
 const pool = new Pool({
 	host: 'localhost',
   	user: 'postgres',
-  	password: 'PgSena2023',
-  	database: 'FerreSysDB',
+  	password: 'Escorpio11',
+  	database: 'Ferreteria',
   	port: '5432'
 });
 
@@ -432,7 +432,7 @@ const insertUsuarioPermiso = async (req, res) => {
 
 
 //función actualizar datos a la base de datos.
-const updateMarca = async (req, res) => {
+/*const updateMarca = async (req, res) => {
 
 	const id= req.params.id;
 	const {nomMarca} = req.body;
@@ -441,127 +441,248 @@ const updateMarca = async (req, res) => {
 	const response = await pool.query('UPDATE tabMarca SET nomMarca = $1 WHERE consecMarca= $2',[nomMarca, id]); 
 	console.log(response);
 	res.send('Marca Actualizada con éxito');
-};
+};*/
 
 const updateCliente = async (req, res) => {
+  const id = req.params.id;
+  const { idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli } = req.body;
 
-	const id= req.params.id;
-	const {idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli} = req.body;
-	//console.log(id,nomMarca); para que me muestre los datos actualizados, es solo prueba ya que aun no inserta nada
-	//res.send('Marca Actualizada con éxito');lo que se muestra al usuario, en este caso en postman
-	const response = await pool.query('UPDATE tabCliente SET idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli = $1,$2,$3,$4,$5,$6,$7,$8,$9 WHERE idCli= $10',[idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli , id]); 
-	console.log(response);
-	res.send('Cliente Actualizado con éxito');
+  try {
+    const response = await pool.query(
+      'UPDATE tabCliente SET idCli = $1, tipoCli = $2, nomCli = $3, apeCli = $4, nomRepLegal = $5, nomEmpresa = $6, telCli = $7, emailCli = $8, dirCli = $9 WHERE idCli = $10',
+      [idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli, id]
+    );
+
+    console.log(response);
+    res.send('Cliente Actualizado con éxito');
+  } catch (error) {
+    console.error('Error al actualizar datos del Cliente:', error);
+    res.status(500).send('Error al actualizar datos del Cliente');
+  }
 };
 
-const updateProveedor= async (req, res) => {
 
-	const id= req.params.id;
-	const {idProv, nomProv, telProv, emailProv, dirProv} = req.body;
-	//console.log(id,nomMarca); para que me muestre los datos actualizados, es solo prueba ya que aun no inserta nada
-	//res.send('Marca Actualizada con éxito');lo que se muestra al usuario, en este caso en postman
-	const response = await pool.query('UPDATE tabMarca SET idProv, nomProv, telProv, emailProv, dirProv = $1, $2, $3, $4, $5 WHERE consecMarca= $6',[idProv, nomProv, telProv, emailProv, dirProv, id]); 
-	console.log(response);
-	res.send('Proveedor Actualizado con éxito');
+const updateProveedor = async (req, res) => {
+  const id = req.params.id;
+  const { idProv, nomProv, telProv, emailProv, dirProv } = req.body;
+
+  try {
+    const response = await pool.query(
+      'UPDATE tabProveedor SET idProv = $1, nomProv = $2, telProv = $3, emailProv = $4, dirProv = $5 WHERE idProv = $6',
+      [idProv, nomProv, telProv, emailProv, dirProv, id]
+    );
+
+    console.log(response);
+    res.send('Proveedor Actualizado con éxito');
+  } catch (error) {
+    console.error('Error al actualizar datos del Proveedor:', error);
+    res.status(500).send('Error al actualizar datos del Proveedor');
+  }
 };
+
+
+const updateMarca = async (req, res) => {
+  const id = req.params.id;
+  const { nomMarca } = req.body;
+
+  try {
+    const response = await pool.query(
+      'UPDATE tabMarca SET nomMarca = $1 WHERE consecMarca = $2',
+      [nomMarca, id]
+    );
+
+    console.log(response);
+    res.send('Marca Actualizada con éxito');
+  } catch (error) {
+    console.error('Error al actualizar marca:', error);
+    res.status(500).send('Error al actualizar marca');
+  }
+};
+
 
 const updateCategoria = async (req, res) => {
+  const id = req.params.id;
+  const { nomCateg } = req.body;
 
-	const id= req.params.id;
-	const {nomCateg } = req.body;
-	//console.log(id,nomMarca); para que me muestre los datos actualizados, es solo prueba ya que aun no inserta nada
-	//res.send('Marca Actualizada con éxito');lo que se muestra al usuario, en este caso en postman
-	const response = await pool.query('UPDATE tabMarca SET nomCateg  = $1 WHERE consecMarca= $2',[nomCateg , id]); 
-	console.log(response);
-	res.send('Categoria Actualizada con éxito');
+  try {
+   
+    const response = await pool.query(
+      'UPDATE tabCategoria SET nomCateg = $1 WHERE consecCateg = $2',
+      [nomCateg, id]
+    );
+
+    console.log(response);
+    res.send('Categoría Actualizada con éxito');
+  } catch (error) {
+    console.error('Error al actualizar categoría:', error);
+    res.status(500).send('Error al actualizar categoría');
+  }
 };
 
-const updateArticulo = async (req, res) => {
 
-	const id= req.params.id;
-	const {eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence } = req.body;
-	//console.log(id,nomMarca); para que me muestre los datos actualizados, es solo prueba ya que aun no inserta nada
-	//res.send('Marca Actualizada con éxito');lo que se muestra al usuario, en este caso en postman
-	const response = await pool.query('UPDATE tabMarca SET eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence  = $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 WHERE consecMarca= $12',[eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence , id]); 
-	console.log(response);
-	res.send('Articulo Actualizado con éxito');
+const updateArticulo = async (req, res) => {
+  const id = req.params.id;
+  const { eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence } = req.body;
+
+  try {
+    
+    const response = await pool.query(
+      'UPDATE tabArticulo SET eanArt = $1, nomArt = $2, consecMarca = $3, consecCateg = $4, descArt = $5, porcentaje = $6, iva = $7, stockMin = $8, stockMax = $9, valReorden = $10, fecVence = $11 WHERE eanArt = $12',
+      [eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence, id]
+    );
+
+    console.log(response);
+    res.send('Artículo Actualizado con éxito');
+  } catch (error) {
+    console.error('Error al actualizar artículo:', error);
+    res.status(500).send('Error al actualizar artículo');
+  }
 };
 
 const updateUsuario = async (req, res) => {
+  const id = req.params.id;
+  const { idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password } = req.body;
 
-	const id= req.params.id;
-	const {idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password} = req.body;
-	//console.log(id,nomMarca); para que me muestre los datos actualizados, es solo prueba ya que aun no inserta nada
-	//res.send('Marca Actualizada con éxito');lo que se muestra al usuario, en este caso en postman
-	const response = await pool.query('UPDATE tabMarca SET idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password = $1, $2, $3, $4, $5, $6 WHERE consecMarca= $7',[idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password, id]); 
-	console.log(response);
-	res.send('Usuario Actualizado con éxito');
+  try {
+    
+    const response = await pool.query(
+      'UPDATE tabUsuario SET idUsuario = $1, nomUsuario = $2, apeUsuario = $3, emailUsuario = $4, usuario = $5, password = $6 WHERE idUsuario = $7',
+      [idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password, id]
+    );
+
+    console.log(response);
+    res.send('Usuario Actualizado con éxito');
+  } catch (error) {
+    console.error('Error al actualizar usuario:', error);
+    res.status(500).send('Error al actualizar usuario');
+  }
 };
+
+
+const updatePermiso = async (req, res) => {
+  const id = req.params.id;
+  const { nomPermiso, descPermiso } = req.body;
+
+  try {
+    
+    const response = await pool.query(
+      'UPDATE tabPermiso SET nomPermiso = $1, descPermiso = $2 WHERE consecPermiso = $3',
+      [nomPermiso, descPermiso, id]
+    );
+
+    console.log(response);
+    res.send('Permiso Actualizado con éxito');
+  } catch (error) {
+    console.error('Error al actualizar permiso:', error);
+    res.status(500).send('Error al actualizar permiso');
+  }
+};
+
+
+const updateUsuarioPermiso = async (req, res) => {
+  const id = req.params.id;
+  const { idUsuario, consecPermiso } = req.body;
+
+  try {
+    
+    const response = await pool.query(
+      'UPDATE tabUsuarioPermiso SET idUsuario = $1, consecPermiso = $2 WHERE consecUsuarioPermiso = $3',
+      [idUsuario, consecPermiso, id]
+    );
+
+    console.log(response);
+    res.send('Permisos por Usuario Actualizado con éxito');
+  } catch (error) {
+    console.error('Error al actualizar permisos por usuario:', error);
+    res.status(500).send('Error al actualizar permisos por usuario');
+  }
+};
+
 
 //función eliminar datos a la base de datos.
-const deleteCliente= async (req, res) => {
-	//res.send('Cliente Eliminado con éxito' + req.params.id); para probar si nos funciona " solo mostrara mensaje pero no hara nada en la db"
-	const id= req.params.id;
-	const response = await pool.query('DELETE FROM tabCliente WHERE idCli = $1', [id]);
-	console.log(response);
-	res.json(`Cliente' ${id} Eliminado con éxito`);
+const deleteCliente = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const response = await pool.query('DELETE FROM tabCliente WHERE idCli = $1', [id]);
+    console.log(response);
+    res.json(`Cliente ${id} Eliminado con éxito`);
+  } catch (error) {
+    console.error('Error al eliminar cliente:', error);
+    res.status(500).send('Error al eliminar cliente');
+  }
 };
 
-const deleteProveedor= async (req, res) => {
-	//res.send('Proveedor Eliminado con éxito' + req.params.id); para probar si nos funciona " solo mostrara mensaje pero no hara nada en la db"
-	const id= req.params.id;
-	const response = await pool.query('DELETE FROM tabProveedor WHERE idProv = $1', [id]);
-	console.log(response);
-	res.json(`Proveedor' ${id} Eliminado con éxito`);
-};
-
-const deleteMarca = async (req, res) => {
-	//res.send('Marca Eliminada con éxito' + req.params.id); para probar si nos funciona " solo mostrara mensaje pero no hara nada en la db"
-	const id= req.params.id;
-	const response = await pool.query('DELETE FROM tabMarca WHERE consecMarca = $1', [id]);
-	console.log(response);
-	res.json(`Marca' ${id} Eliminada con éxito`);
-};
-
-const deleteCategoria= async (req, res) => {
-	//res.send('Categoria Eliminado con éxito' + req.params.id); para probar si nos funciona " solo mostrara mensaje pero no hara nada en la db"
-	const id= req.params.id;
-	const response = await pool.query('DELETE FROM tabCategoria WHERE consecCategoria = $1', [id]);
-	console.log(response);
-	res.json(`Categoria' ${id} Eliminada con éxito`);
-};
-
-const deleteArticulo= async (req, res) => {
-	//res.send('Articulo Eliminado con éxito' + req.params.id); para probar si nos funciona " solo mostrara mensaje pero no hara nada en la db"
-	const id= req.params.id;
-	const response = await pool.query('DELETE FROM tabArticulo WHERE eanArticulo = $1', [id]);
-	console.log(response);
-	res.json(`Articulo' ${id} Eliminado con éxito`);
+const deleteProveedor = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const response = await pool.query('DELETE FROM tabProveedor WHERE idProv = $1', [id]);
+    console.log(response);
+    res.json(`Proveedor ${id} Eliminado con éxito`);
+  } catch (error) {
+    console.error('Error al eliminar proveedor:', error);
+    res.status(500).send('Error al eliminar proveedor');
+  }
 };
 
 
-const deleteUsuario= async (req, res) => {
-	//res.send('Usuario Eliminado con éxito' + req.params.id); para probar si nos funciona " solo mostrara mensaje pero no hara nada en la db"
-	const id= req.params.id;
-	const response = await pool.query('DELETE FROM tabUsuario WHERE idUsuario = $1', [id]);
-	console.log(response);
-	res.json(`Usuario' ${id} Eliminado con éxito`);
+const deleteCategoria = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const response = await pool.query('DELETE FROM tabCategoria WHERE consecCateg = $1', [id]);
+    console.log(response);
+    res.json(`Categoria ${id} Eliminada con éxito`);
+  } catch (error) {
+    console.error('Error al eliminar categoria:', error);
+    res.status(500).send('Error al eliminar categoria');
+  }
 };
 
-const deletePermiso= async (req, res) => {
-	//res.send('Permiso Eliminado con éxito' + req.params.id); para probar si nos funciona " solo mostrara mensaje pero no hara nada en la db"
-	const id= req.params.id;
-	const response = await pool.query('DELETE FROM tabPermiso WHERE idPermiso = $1', [id]);
-	console.log(response);
-	res.json(`Permiso' ${id} Eliminado con éxito`);
+const deleteArticulo = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const response = await pool.query('DELETE FROM tabArticulo WHERE eanArt = $1', [id]);
+    console.log(response);
+    res.json(`Articulo ${id} Eliminado con éxito`);
+  } catch (error) {
+    console.error('Error al eliminar articulo:', error);
+    res.status(500).send('Error al eliminar articulo');
+  }
 };
 
-const deleteUsuarioPermiso= async (req, res) => {
-	//res.send('Registro Eliminado con éxito' + req.params.id); para probar si nos funciona " solo mostrara mensaje pero no hara nada en la db"
-	const id= req.params.id;
-	const response = await pool.query('DELETE FROM tabUsuarioPermiso WHERE consecUsuarioPermiso = $1', [id]);
-	console.log(response);
-	res.json(`Registro' ${id} Eliminado con éxito`);
+const deleteUsuario = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const response = await pool.query('DELETE FROM tabUsuario WHERE idUsuario = $1', [id]);
+    console.log(response);
+    res.json(`Usuario ${id} Eliminado con éxito`);
+  } catch (error) {
+    console.error('Error al eliminar usuario:', error);
+    res.status(500).send('Error al eliminar usuario');
+  }
+};
+
+const deletePermiso = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const response = await pool.query('DELETE FROM tabPermiso WHERE idPermiso = $1', [id]);
+    console.log(response);
+    res.json(`Permiso ${id} Eliminado con éxito`);
+  } catch (error) {
+    console.error('Error al eliminar permiso:', error);
+    res.status(500).send('Error al eliminar permiso');
+  }
+};
+
+const deleteUsuarioPermiso = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const response = await pool.query('DELETE FROM tabUsuarioPermiso WHERE consecUsuarioPermiso = $1', [id]);
+    console.log(response);
+    res.json(`Registro ${id} Eliminado con éxito`);
+  } catch (error) {
+    console.error('Error al eliminar registro:', error);
+    res.status(500).send('Error al eliminar registro');
+  }
 };
 
 
@@ -603,11 +724,18 @@ module.exports = {
 	insertUsuarioPermiso,
 
 
+	
+	updateCliente,
+	updateProveedor,
 	updateMarca,
+	updateCategoria,
+	updateArticulo,
+	updateUsuario,
+	updatePermiso,
+	updateUsuarioPermiso,
 
 	deleteCliente,
 	deleteProveedor,
-	deleteMarca,
 	deleteCategoria,
 	deleteArticulo,
 	deleteUsuario,

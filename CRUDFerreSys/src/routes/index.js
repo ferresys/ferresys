@@ -4,8 +4,8 @@ const router = Router();
 const {getClientes, getProveedores, getMarcas, getCategorias, getArticulos, getReciboMercancias, getKardex, getUsuarios, getPermisos, getUsuarioPermisos,  
 getClienteById, getProveedorById, getMarcaById, getCategoriaById,getArticuloById, getReciboMercanciaById, getKardexById, getUsuarioById, getPermisoById, getUsuarioPermisoById, 
 insertCliente, insertProveedor, insertMarca, insertCategoria, insertArticulo, insertReciboMercancia, insertEncabezadoVenta, insertDetalleVenta, insertUsuario, insertPermiso, insertUsuarioPermiso,
-updateMarca, 
-deleteCliente, deleteProveedor, deleteMarca, deleteCategoria, deleteArticulo, deleteUsuario, deletePermiso, deleteUsuarioPermiso}= require('../controllers/index.controller')
+updateCliente,updateProveedor,updateMarca, updateCategoria, updateArticulo, updateUsuario, updatePermiso, updateUsuarioPermiso,
+deleteCliente, deleteProveedor, deleteCategoria, deleteArticulo, deleteUsuario, deletePermiso, deleteUsuarioPermiso}= require('../controllers/index.controller')
 
 //consultas generales
 router.get('/clientes', getClientes);
@@ -48,8 +48,14 @@ router.post('/usuarioPermisos', insertUsuarioPermiso);
 
 
 //actualizar datos
+router.put('/clientes/:id', updateCliente);
+router.put('/proveedores/:id', updateProveedor);
 router.put('/marcas/:id', updateMarca);
-
+router.put('/categorias/:id', updateCategoria);
+router.put('/articulos/:id', updateArticulo);
+router.put('/usuarios/:id', updateUsuario);
+router.put('/permisos/:id', updatePermiso);
+router.put('/usuarioPermisos/:id', updateUsuarioPermiso);
 
 
 
@@ -57,7 +63,6 @@ router.put('/marcas/:id', updateMarca);
 
 router.delete('/clientes/:id', deleteCliente);
 router.delete('/proveedores/:id', deleteProveedor);
-router.delete('/marcas/:id', deleteMarca);
 router.delete('/categorias/:id', deleteCategoria);
 router.delete('/articulos/:id', deleteArticulo);
 router.delete('/usuarios/:id', deleteUsuario);
