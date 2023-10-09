@@ -4,7 +4,7 @@
   "description": "Sistema de Gestión de Inventarios y Ventas para Ferreterías en Node.js",
   "main": "index.js",
   "scripts": {
-    "kraken": "nodemon src/index.js --exec babel-node"
+    "kraken": "nodemon config/index.js --exec babel-node"
   },
   "keywords": [
     "FerreSys"

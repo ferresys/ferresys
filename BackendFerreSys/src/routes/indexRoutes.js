@@ -1,40 +1,58 @@
 
-import { Router } from 'express';
-const router = Router();
+//IMPORTAMOS LA CLASE ROUTER 
+//Los routers se utilizan para organizar y modularizar las rutas y controladores de una aplicación web o API.
 
-import { getClientesWithManejoErrores, getProveedoresWithManejoErrores,getMarcasWithManejoErrores,
-getCategoriasWithManejoErrores,getArticulosWithManejoErrores, getReciboMercanciasWithManejoErrores,
-getKardexWithManejoErrores,getUsuariosWithManejoErrores,getPermisosWithManejoErrores, 
-getUsuarioPermisosWithManejoErrores,
-getClienteById, getProveedorById, getMarcaById, getCategoriaById,getArticuloById, getReciboMercanciaById, getKardexById, getUsuarioById, getPermisoById, getUsuarioPermisoById, 
-insertCliente, insertProveedor, insertMarca, insertCategoria, insertArticulo, insertReciboMercancia, insertEncabezadoVenta, insertDetalleVenta, insertUsuario, insertPermiso, insertUsuarioPermiso,
+import { Router } from 'express';
+const router = Router();//Creamos la instancia router.
+
+//IMPORTAMOS LAS FUNCIONES-CONTROLADORES
+
+import { insertCliente, insertProveedor, insertMarca, insertCategoria, insertArticulo, insertReciboMercancia, insertEncabezadoVenta, insertDetalleVenta, insertUsuario, insertPermiso, insertUsuarioPermiso,
 updateCliente,updateProveedor,updateMarca, updateCategoria, updateArticulo, updateUsuario, updatePermiso, updateUsuarioPermiso,
 deleteCliente, deleteProveedor, deleteCategoria, deleteArticulo, deleteUsuario, deletePermiso, deleteUsuarioPermiso} from '../controllers/crudController';
 
-// Consultas generales
-router.get('/clientes', getClientesWithManejoErrores);
-router.get('/proveedores', getProveedoresWithManejoErrores);
-router.get('/marcas', getMarcasWithManejoErrores);
-router.get('/categorias', getCategoriasWithManejoErrores);
-router.get('/articulos', getArticulosWithManejoErrores);
-router.get('/reciboMercancias', getReciboMercanciasWithManejoErrores);
-router.get('/kardex', getKardexWithManejoErrores);
-router.get('/usuarios', getUsuariosWithManejoErrores);
-router.get('/permisos', getPermisosWithManejoErrores);
-router.get('/usuarioPermisos', getUsuarioPermisosWithManejoErrores);
+import { getClientesError, getProveedoresError, getMarcasError, getCategoriasError, getArticulosError,
+		 getReciboMercanciasError, getKardexError, getUsuariosError, getPermisosError, getUsuarioPermisosError }from '../controllers/crudController'; 
+
+import { getClienteByIdError, getProveedorByIdError, getMarcaByIdError, getCategoriaByIdError, getArticuloByIdError, 
+getReciboMercanciaByIdError, getKardexByIdError,getUsuarioByIdError, getPermisoByIdError, getUsuarioPermisoByIdError } from '../controllers/crudController'; 
+
+
+
+// ESTABLECEMOS LA RUTA Y EL CONTROLADOR
+
+/********************************************************************************************
+ * 																							*
+ * esta línea de código configura una ruta en el servidor que, cuando se accede 			*
+ * mediante una solicitud GET a /clientes, ejecuta la función getClientesError, 			*
+ * que se encarga de manejar la lógica de obtención de clientes y manejo de errores 		*
+ * para esa ruta específica.																*						*
+ * 																							*
+ * ******************************************************************************************/
+
+router.get('/clientes', getClientesError);
+router.get('/proveedores', getProveedoresError);
+router.get('/marcas', getMarcasError);
+router.get('/categorias', getCategoriasError);
+router.get('/articulos', getArticulosError);
+router.get('/reciboMercancias', getReciboMercanciasError);
+router.get('/kardex', getKardexError);
+router.get('/usuarios', getUsuariosError);
+router.get('/permisos', getPermisosError);
+router.get('/usuarioPermisos', getUsuarioPermisosError);
 
 //consultas por id .
 
-router.get('/clientes/:id', getClienteById);
-router.get('/proveedores/:id', getProveedorById);
-router.get('/marcas/:id', getMarcaById);
-router.get('/categorias/:id', getCategoriaById);
-router.get('/articulos/:id', getArticuloById);
-router.get('/reciboMercancias/:id', getReciboMercanciaById);
-router.get('/kardex/:id', getKardexById);
-router.get('/Usuarios/:id', getUsuarioById);
-router.get('/permisos/:id', getPermisoById);
-router.get('/usuarioPermisos/:id', getUsuarioPermisoById);
+router.get('/clientes/:id', getClienteByIdError);
+router.get('/proveedores/:id', getProveedorByIdError);
+router.get('/marcas/:id', getMarcaByIdError);
+router.get('/categorias/:id', getCategoriaByIdError);
+router.get('/articulos/:id', getArticuloByIdError);
+router.get('/reciboMercancias/:id', getReciboMercanciaByIdError);
+router.get('/kardex/:id', getKardexByIdError);
+router.get('/Usuarios/:id', getUsuarioByIdError);
+router.get('/permisos/:id', getPermisoByIdError);
+router.get('/usuarioPermisos/:id', getUsuarioPermisoByIdError);
 
 // insertar datos
 router.post('/clientes', insertCliente);

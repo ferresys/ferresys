@@ -20,7 +20,11 @@ export default pool;
 /***************************************************************************************
 *                                                                                      *
 * Pool es un grupo de conexiones que se utiliza para administrar conexiones eficientes *
-* a la base de datos PostgreSQL en Node.js.                                            *
+* a la base de datos PostgreSQL en Node.js. a traves de pg .                           *
+*                                                                                      *
+* La idea detrás de un "pool de conexiones" es que en lugar de abrir y cerrar una nueva*
+* conexión a la base de datos cada vez que se necesita interactuar con ella, puedes    *
+* reutilizar conexiones existentes desde el pool.                                      *
 *                                                                                      *                                                 
 * *************************************************************************************/
 
