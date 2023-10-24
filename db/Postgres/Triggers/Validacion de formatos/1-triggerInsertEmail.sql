@@ -1,45 +1,22 @@
-CREATE OR REPLACE FUNCTION validarEmail () 
-
-RETURNS BOOLEAN AS
+CREATE OR REPLACE FUNCTION validarEmail() 
+RETURNS TRIGGER AS
 $$
 DECLARE
-    zEmailUsuario tabUsuario.emailUsuario%type;
-    zEmailCli tabCliente.emailCli%type;
-    zEmailProv tabProveedor.emailProv%type;
     zEmailValido BOOLEAN;
-
 BEGIN
-    SELECT TRUE 
-	INTO zEmailValido 
-	FROM tabUsuario, tabCliente, tabProveedor 
-    WHERE zEmailUsuario = emailUsuario;
-	
-	SELECT TRUE 
-	INTO zEmailValido 
-	FROM tabCliente
-    WHERE zEmailCli = emailCli;
-	
-    SELECT TRUE 
-	INTO zEmailValido 
-	FROM tabProveedor 
-    WHERE zEmailProv = emailProv;
+    zEmailValido := TRUE;
 
-    CASE 
-        WHEN NEW.emailUsuario = '' AND NEW.emailCli = '' AND NEW.emailProv = '' THEN
-            RAISE EXCEPTION 'Debes proporcionar al menos un correo electrónico.';
+    -- Verificar el formato del correo electrónico del Usuario
+    IF NEW.emailUsuario !~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,63}$' THEN
+        zEmailValido := FALSE;
+    END IF;
 
-        -- Verificar el formato del correo electrónico
-        WHEN NEW.emailUsuario IS NOT NULL AND NEW.emailUsuario !~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$' THEN
-            RAISE EXCEPTION 'El formato del correo electrónico de Usuario no es válido.';
+    IF NOT zEmailValido THEN
+        RAISE EXCEPTION 'El formato del correo electrónico no es válido.';
+    END IF;
 
-        WHEN NEW.emailCli IS NOT NULL AND NEW.emailCli !~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$' THEN
-            RAISE EXCEPTION 'El formato del correo electrónico de Cliente no es válido.';
-
-        WHEN NEW.emailProv IS NOT NULL AND NEW.emailProv !~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$' THEN
-            RAISE EXCEPTION 'El formato del correo electrónico de Proveedor no es válido.';
-    END CASE;
-
-  RETURN NEW;
+    -- Si el correo es válido, permitimos la inserción
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
