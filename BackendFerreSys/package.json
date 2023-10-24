@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.23.0",
-    "@babel/core": "^7.23.0",
-    "@babel/preset-env": "^7.22.20",
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
     "nodemon": "^3.0.1"
   }
 }

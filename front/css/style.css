@@ -72,9 +72,14 @@
     width: 250px;
     height: 100vh;
     overflow-y: auto;
-    background: #fff;
+    background-image: url(https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+   
     transition: 0.5s;
-    z-index: 999;
+    z-index: 5;
 }
 
 .content {

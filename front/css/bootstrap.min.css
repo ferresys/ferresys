@@ -538,6 +538,27 @@ progress {
     margin-right: auto;
     margin-left: auto;
 }
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
 @media (min-width: 576px) {
     .container,
     .container-sm {
@@ -3692,6 +3713,10 @@ fieldset:disabled .btn {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
+
+.style-nav{ 
+   bac
+}
 .navbar > .container,
 .navbar > .container-fluid,
 .navbar > .container-sm,
@@ -3704,12 +3729,15 @@ fieldset:disabled .btn {
     align-items: center;
     justify-content: space-between;
 }
+
 .navbar-brand {
     padding-top: 0.3125rem;
     padding-bottom: 0.3125rem;
     margin-right: 1rem;
     font-size: 1.25rem;
     white-space: nowrap;
+    z-index: 99;
+
 }
 .navbar-nav {
     display: flex;
