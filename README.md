@@ -1,6 +1,6 @@
 ## Prerequisites
 
-- Node.js
+- Node.js 18
 - PostgreSQL 15
 
 ## Project Setup
@@ -10,20 +10,14 @@
    ```bash
    git clone https://github.com/davidadarme/FerreSys.git
    ```
-
-2. Configure localhost in the directory of the project:
-
-   ```bash
-   cd FerreSys
-   ```
-
-3. Initialize the project:
+   
+2. Initialize the project:
 
    ```bash
    npm init -y
    ```
 
-4. Install the necessary packages:
+3. Install the necessary packages:
 
     ```bash
    npm install express pg dotenv
@@ -41,7 +35,7 @@
    npm i nodemon -D
    ```
 
-5. Configure package.json:
+4. Configure package.json:
 
    ```bash
    {
@@ -71,7 +65,7 @@
    }
    ```
 
-6. Create `.env` file:
+5. Create `.env` file:
 
    Create the .env file and enter the credentials of the postgres database
 
@@ -83,7 +77,7 @@
    DB_PORT=port
    ```
 
-7. Configure the Babel file:
+6. Configure the Babel file:
 
    ```bash
    {
@@ -93,7 +87,7 @@
    }
    ```
 
-8. Star the server
+7. Star the server
 
    ```bash
    npm run kraken
