@@ -1,0 +1,13 @@
+.tns-brands .tns-outer [data-action],.tns-brands .tns-nav{display:none}
+.tns-brands .tns-outer{margin-top:28px}
+.tns-brands .tns-outer [aria-controls]{background-color:transparent;border:none;box-shadow:none;color:transparent;width:15px;height:15px;padding:10px;box-sizing:border-box;border-top:2px solid #FF8000;border-right:2px solid #FF8000;cursor:pointer;margin:0 20px;z-index: 2;}
+.tns-brands .tns-outer [aria-controls]:nth-child(1){transform:rotate(-135deg)}
+.tns-brands .tns-outer [aria-controls]:nth-child(1):active{transform:rotate(-135deg) scale(0.9)}
+.tns-brands .tns-outer [aria-controls]:nth-last-child(1){transform:rotate(45deg)}
+.tns-brands .tns-outer [aria-controls]:nth-last-child(1):active{transform:rotate(45deg) scale(0.9)}
+.tns-brands .tns-controls{display:flex;justify-content:space-between;margin-bottom:-48px}
+.tns-brands .tns-item{text-align:center;transition:opacity 150ms linear;}
+.tns-brands .tns-item:hover{opacity:.5}
+@media (max-width:992px){
+  .tns-brands .tns-item{transform:scale(0.6)}
+}

@@ -1,2 +1,6 @@
 .env
 node_modules/
+/BackendFerreSys/package.json
+/BackendFerreSys/package-lock.json
+package.json
+package-lock.json

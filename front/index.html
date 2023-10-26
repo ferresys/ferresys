@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
-    <title>FerreSys</title>
+    <title>Home - FerreSys</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/logo_ferreSys1.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,500&display=swap" rel="stylesheet"> 
     
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -29,7 +29,20 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+/>
+<link rel="stylesheet" href="css/carru.css">
+
 </head>
+
+<header>
+    <div class="headerferresys">
+        
+    </div>
+    
+</header>
 
 <body>
     <div class="container-fluid position-relative d-flex p-0">
@@ -44,7 +57,7 @@
 
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-secondary navbar-dark">
+            <nav class="navbar  style-nav">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
                     <span ><img src="img/logo_ferreSys1.png" alt="" width="80"></span>
                 </a>
@@ -59,21 +72,22 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="empresa.html" class="nav-item nav-link"><i class="bi bi-info-circle"></i> Info Empresa</a>
-                    
+                   
                     <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Inicio</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Compras</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Ventas</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">Ilegal</a>
-                            <a href="typography.html" class="dropdown-item">Legal</a>
+                            <a href="button.html" class="dropdown-item">Facturas</a>
+                            <a href="typography.html" class="dropdown-item">Cotización</a>
                             <a href="element.html" class="dropdown-item">Otros</a>
                         </div>
                     </div>
+
+                    <a href="" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Compras</a>
                     <a href="" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Inventario</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Informes</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Clientes</a>
-                    <a href="" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Pendientes</a>
+                    <a href="cliente.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Clientes</a>
+                    <a href="" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Proveedores</a>
                     
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Aplicaciones</a>
@@ -87,6 +101,8 @@
                 </div>
             </nav>
         </div>
+
+        
         <!-- Sidebar End -->
 
 
@@ -180,10 +196,38 @@
                     </div>
                 </div>
             </nav>
+            
             <!-- Navbar End -->
 
 
             <!-- Sale & Revenue Start -->
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="https://img.freepik.com/vector-premium/plantilla-banner-servicio-tienda-herramientas-construccion_38901-507.jpg?w=2000" height="300px" class="d-block w-100" alt="..." >
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://img.freepik.com/vector-premium/plantilla-banner-servicio-tienda-herramientas-construccion_38901-507.jpg?w=2000" height="300px" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://img.freepik.com/vector-premium/plantilla-banner-servicio-tienda-herramientas-construccion_38901-507.jpg?w=2000" height="300px" class="d-block w-100" alt="...">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Siguiente</span>
+                </button>
+              </div>
+
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-3">
@@ -224,10 +268,12 @@
                     </div>
                 </div>
             </div>
+            
             <!-- Sale & Revenue End -->
 
 
             <!-- Sales Chart Start -->
+            
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">
@@ -470,9 +516,32 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="js/cliente.js" ></script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/carrusel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      cssMode: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      mousewheel: true,
+      keyboard: true,
+    });
+  </script>
 </body>
 
 </html>
