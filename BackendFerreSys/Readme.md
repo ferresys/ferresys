@@ -8,7 +8,9 @@
 
 2. **INICIAMOS UN NUEVO PROYECTO**
 
-    - [x] npm init -y 
+```bash
+npm init -y
+``` 
 
 * la -y significa que se configure por default los datos que vaya a pedir. si no queremos eso y queremos añadir datos adicionales entonces solo usamos "npm init" *
 
@@ -18,7 +20,9 @@
 
 3. **INSTALAMOS LOS PAQUETES NECESARIOS PARA EL PROYECTO.**
 
-    - [x] npm install express pg dotenv 
+```bash
+npm install express pg dotenv
+``` 
 
 *express: es un framework y nos permite crear aplicaciones web en nodejs y con este creamos el servidor.*
 
@@ -26,9 +30,9 @@
 
 *dotenv: variables de entorno-para mantener los datos de conexion como contraseña, host,usuario en una carpeta oculta y que no se muestren en el codigo- esto se hace en un archivo ".env".*
 
-------
-
-    - [X]npm install @babel/node -g
+```bash
+npm install @babel/node -g
+```
 
 *Babel es una herramienta que se utiliza para transpilar (convertir) código JavaScript moderno (por ejemplo, 
  ECMAScript 6 y superiores) en código JavaScript compatible con versiones anteriores de navegadores.*
@@ -37,7 +41,9 @@
 
 ------
 
-   - [x]npm install @babel/cli @babel/core @babel/preset-env -D
+```bash
+npm install @babel/cli @babel/core @babel/preset-env -D
+```
 
 -@babel/cli: Este paquete proporciona una interfaz de línea de comandos (CLI) para Babel. Te permite ejecutar Babel desde la línea de comandos para transpilar tu código JavaScript. Puedes usarlo para compilar tus archivos de origen con sintaxis moderna a una forma que sea compatible con navegadores y entornos más antiguos. La CLI es útil para tareas de compilación manual o en secuencias de comandos personalizadas.*
 
@@ -51,13 +57,16 @@
 -*COMMONJS* es un sistema de módulos utilizado principalmente en entornos de servidor, como Node.js. Proporciona una forma de organizar y modularizar el código en módulos reutilizables. En CommonJS, se utilizan las palabras clave require para importar módulos y module.exports (o exports) para exportar valores desde un módulo. 
 
 
-    - [X] npm i nodemon -D
+```bash
+npm i nodemon -D
+```
 
 *Te permite reiniciar automáticamente tu servidor de Node.js cada vez que detecta cambios en tus archivos de código fuente, lo que facilita el proceso de desarrollo y pruebas. La opción `-D` en `npm install` indica que `nodemon` se instala como una dependencia de desarrollo.*
 
 
 4. **EN  package.json CONFIGURA NODEMON Y BABEL DE LA SIGUIENTE MANERA:**
 
+```bash
   {
   "name": "backendferresyscrud",
   "version": "1.0.0",
@@ -83,6 +92,7 @@
     "nodemon": "^3.0.1"
   }
 }
+```
 
 ------
 
@@ -97,12 +107,13 @@ DB_NAME=nombre_de_la_base_de_datos
 DB_PORT=puerto especificado
 
 **ejemplo:**
-
+```bash
 DB_HOST=localhost
 DB_USER=postgres
 DB_PASS=Kraken123
 DB_NAME=FerreSysDB
 DB_PORT=5432
+```
 ------------------------------------------------------------------------------------------------
 
 5.**CONFIGURAMOS BABEL**
@@ -110,12 +121,13 @@ DB_PORT=5432
 *crear archivo ".babelrc" y crear codigo:*
 
 
-
+```bash
 {
   "presets": [
   "@babel/preset-env"
   ]
 }
+```
 
 
 ------
@@ -160,17 +172,13 @@ DB_PORT=5432
 
 en la consola usamos el siguiente comando:
 
-    -[X]npm run kraken
+```bash
+npm run kraken
+```
 
 *esto iniciara el servidor y quedara escuchando en la ruta y el puerto especificado.*
 
 PORT: - [X] http//localhost/4000
-
-
-
-
-
-
 
 ***glosario java script***
 
@@ -180,7 +188,3 @@ PORT: - [X] http//localhost/4000
 **metodo:** get,post,put,patch,delete 
 **ECMAScript (ES13):** estandar actualizado
 **pg:** paquete o modulo para postgresql que contiene Pool de conexiones.
-
-
-
-
