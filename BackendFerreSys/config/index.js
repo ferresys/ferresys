@@ -1,12 +1,13 @@
 
 import express from 'express';
-
+import cors from 'cors';
 //creamos la instancia para express.
 const app = express();
 
 // Middlewares (funciones que se ejecutan antes de llegar a las rutas, en este caso, para procesar JSON y formularios)
 app.use(express.json()); // para procesar formatos tipo JSON
 app.use(express.urlencoded({ extended: false })); // para entender datos de formularios y rechazar imágenes, solo texto
+app.use(cors());
 
 // Rutas
 import router from '../src/routes/indexRoutes';
