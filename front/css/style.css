@@ -298,26 +298,3 @@
     background: var(--dark);
     border-color: var(--primary);
 }
-
-/*tables*/
-
-        .table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 2px solid blueligth;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #065b94   ;
-            color: white; 
-        }
-
-        button {
-            margin-top: 10px;
-        }
-    
