@@ -5,7 +5,7 @@ document.getElementById('consultarButton').addEventListener('click', () => {
             const tableBody = document.querySelector('#clienteTable tbody');
             tableBody.innerHTML = ''; // Limpiar la tabla antes de agregar nuevos datos
 
-            data.forEach(cliente => {
+            /*data.forEach(cliente => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${cliente.codcli}</td>
@@ -25,6 +25,26 @@ document.getElementById('consultarButton').addEventListener('click', () => {
                 `;
                 tableBody.appendChild(row);
             });
+            */
+            data.forEach(cliente => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    
+                    <td>${cliente.idcli}</td>
+                    <td>${cliente.tipocli}</td>
+                    <td>${cliente.nomcli}</td>
+                    <td>${cliente.apecli}</td>
+                    <td>${cliente.nomreplegal}</td>
+                    <td>${cliente.nomempresa}</td>
+                    <td>${cliente.telcli}</td>
+                    <td>${cliente.emailcli}</td>
+                    <td>${cliente.dircli}</td>
+                    
+                `;
+                tableBody.appendChild(row);
+            });
+
+            
         })
         .catch(error => {
             console.error('Error al realizar la consulta:', error);
@@ -35,7 +55,7 @@ document.getElementById('consultarButton').addEventListener('click', () => {
 
 
     
-
+/*
     
         document.addEventListener("DOMContentLoaded", function() {
             const searchInput = document.getElementById("searchInput");
@@ -54,5 +74,5 @@ document.getElementById('consultarButton').addEventListener('click', () => {
                 }
             });
         });
-   
+   */
 
