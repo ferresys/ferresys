@@ -1,46 +1,36 @@
-document.getElementById('consultarButton').addEventListener('click', () => {
-    fetch('http://localhost:4000/proveedores')
+document.getElementById('consultarCategorias').addEventListener('click', () => {
+    fetch('http://localhost:4000/categorias')
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.querySelector('#proveedorTable tbody');
-            tableBody.innerHTML = ''; // Limpiar la tabla antes de agregar nuevos datos
+            const tablaMarca = document.querySelector('#tablaCategoria tbody');
+            tablaMarca.innerHTML = ''; // Limpiar la tabla antes de agregar nuevos datos
 
-            
-            data.forEach(proveedor => {
+            data.forEach(categoria => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    
-                    <td>${proveedor.idprov}</td>
-                    <td>${proveedor.nomprov}</td>
-                    <td>${proveedor.telprov}</td>
-                    <td>${proveedor.emailprov}</td>
-                    <td>${proveedor.dirprov}</td>
-                    
+                    <td>${categoria.conseccateg}</td>
+                    <td>${categoria.nomcateg}</td>
+                   
+                   
                 `;
-                tableBody.appendChild(row);
+                tablaMarca.appendChild(row);
             });
-
-            
         })
         .catch(error => {
             console.error('Error al realizar la consulta:', error);
         });
 });
 
-   
-
-
-    
-/*
+/* codigo para la barra de busqueda
     
         document.addEventListener("DOMContentLoaded", function() {
             const searchInput = document.getElementById("searchInput");
-            const clienteTable = document.getElementById("clienteTable").querySelector("tbody").children;
+            const proveedorTable = document.getElementById("proveedorTable").querySelector("tbody").children;
 
             searchInput.addEventListener("input", function() {
                 const searchTerm = searchInput.value.toLowerCase();
 
-                for (const row of clienteTable) {
+                for (const row of proveedorTable) {
                     const text = row.innerText.toLowerCase();
                     if (text.includes(searchTerm)) {
                         row.style.display = "table-row";
@@ -49,10 +39,4 @@ document.getElementById('consultarButton').addEventListener('click', () => {
                     }
                 }
             });
-        });
-   */
-
-
-
-
-
+        });*/

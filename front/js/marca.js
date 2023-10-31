@@ -8,7 +8,8 @@ document.getElementById('consultarMarcas').addEventListener('click', () => {
             data.forEach(marca => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${marca.nomMarca}</td>
+                    <td>${marca.consecmarca}</td>
+                    <td>${marca.nommarca}</td>
                    
                    
                 `;
