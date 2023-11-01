@@ -298,3 +298,16 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+/* Clase para organizar un formulario horizontal con tres inputs por fila */
+.form-horizontal-three-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Ajustar el ancho de cada campo de entrada para ocupar el espacio disponible */
+.form-horizontal-three-inputs .form-control {
+    flex: 1;
+    margin-right: 10px; /* Ajusta el margen entre los campos */
+}
