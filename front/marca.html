@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Clientes</title>
+    <title>Marcas</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -199,28 +199,23 @@
                 <div class="row g-4">    
                     <div class="col-12">
                         <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Tabla cliente</h6>
+                            <h6 class="mb-4">Tabla Marcas</h6>
                             <div class="table-responsive">
-                                <table id="clienteTable" class="table">
+                                <table id="tablaMarca" class="table">
                                     <thead>
                                         <tr>
                                         
+                                            <th scope="col">ID Marca</th>
+                                            <th scope="col">Nombre Marca</th>
+                                           
+
                                             
-                                            <th scope="col">ID Cliente</th>
-                                            <th scope="col">Tipo</th>
-                                            <th scope="col">Nombres</th>
-                                            <th scope="col">Apellidos</th>
-                                            <th scope="col">Rpte.Legal</th>
-                                            <th scope="col">Empresa</th>
-                                            <th scope="col">Telefóno</th>
-                                            <th scope="col">E-mail</th>
-                                            <th scope="col">Dirección</th>
-                                            
-                                            
+
+
                                             
                                         </tr>
                                     </thead>
-                                    <tbody id="clientes-tbody">
+                                    <tbody id="marcas-tbody">
                                         <tr>
                                             
                                         </tr>
@@ -229,11 +224,9 @@
                                 </table>
                             </div>
                             <div class="btn-group" role="group">
-                                <button type="button" id="agregarclientes" class="btn btn-success">Agregar cliente</button>
-
-
-                                <button type="button" id="consultarButton" class="btn btn-warning">Mostrar clientes</button>
-                                <button type="button" class="btn btn-danger">Borrar usuario</button>
+                                <button type="button" class="btn btn-success">Agregar Marca</button>
+                                <button type="button" id="consultarMarcas" class="btn btn-warning">Consultar Marcas</button>
+                                <button type="button" class="btn btn-danger">Borrar Marca</button>
                             </div>
                            
                             
@@ -264,8 +257,8 @@
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="js/front.js"></script>
-    <script src="js/clientes.js"></script>
-    <script src="js/buttonAgregarCliente.js"></script>
+    <script src="js/marca.js"></script>
+
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>

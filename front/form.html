@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DarkPan - Bootstrap 5 Admin Template</title>
+    <title>Registro Clientes</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -59,28 +59,42 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                   <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Inicio</a>
+
+                    <a href="" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Compras</a>
+
+                    <a href="" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Inventario</a>
+                    
+                    <a href="cliente.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Clientes</a>
+
+                    <a href="proveedor.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Proveedores</a>
+
+                    <a href="marca.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Marcas</a>
+
+                    <a href="categoria.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Categorias</a>
+
+                     <a href="articulo.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Articulos</a>
+                    
+                    
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Aplicaciones</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">Buttons</a>
-                            <a href="typography.html" class="dropdown-item">Typography</a>
-                            <a href="element.html" class="dropdown-item">Other Elements</a>
+                            <a href="signin.html" class="dropdown-item">Inicio sesion</a>
+                            <!-- <a href="signup.html" class="dropdown-item">Sign Up</a> -->
+                            <!-- <a href="404.html" class="dropdown-item">404 Error</a>
+                            <a href="blank.html" class="dropdown-item">Blank Page</a> -->
                         </div>
                     </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.html" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Components</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Sign In</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>
+                            <a href="button.html" class="dropdown-item">button</a>
+                            <a href="typography.html" class="dropdown-item">typography</a>
+                            <a href="element.html" class="dropdown-item">element</a>
+                            <a href="chart.html" class="dropdown-item"><i class="fa fa-keyboard me-2"></i>chart</a>
                         </div>
                     </div>
+
                 </div>
             </nav>
         </div>
@@ -208,21 +222,67 @@
                     </div>
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Horizontal Form</h6>
-                            <form>
+                            <div class="bg-secondary rounded h-100 p-4">
+
+                            <h6 class="mb-4">Registrar Cliente</h6>
+                           <form id="registroForm" >
+            
+
                                 <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                    <label for="idCli" class="col-sm-2 col-form-label">ID Cliente</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3">
+                                        <input type="string" class="form-control" id="idCli" name="idCli">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                    <label for="tipoCli" class="col-sm-2 col-form-label">Tipo</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="inputPassword3">
+                                        <input type="text" class="form-control" id="tipoCli" name="tipoCli">
                                     </div>
                                 </div>
-                                <fieldset class="row mb-3">
+                                <div class="row mb-3">
+                                    <label for="nomCli" class="col-sm-2 col-form-label">Nombre</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="nomCli" name="nomCli">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="apeCli" class="col-sm-2 col-form-label">Apellido</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="apeCli" name="apeCli">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="nomRepLegal" class="col-sm-2 col-form-label">Representante Legal</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="nomRepLegal" name="nomRepLegal">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="nomEmpresa" class="col-sm-2 col-form-label">Empresa</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="nomEmpresa" name="nomEmpresa">
+                                    </div>
+                                </div>
+                                    <div class="row mb-3">
+                                    <label for="telCli" class="col-sm-2 col-form-label">Teléfono</label>
+                                    <div class="col-sm-10">
+                                        <input type="string" class="form-control" id="telCli" name="telCli">
+                                    </div>
+                                </div>
+                                    <div class="row mb-3">
+                                    <label for="emailCli" class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="emailCli" name="emailCli">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="dirCli" class="col-sm-2 col-form-label">Dirección</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="dirCli" name="dirCli">
+                                    </div>
+                                </div>
+                               <!-- <fieldset class="row mb-3">
                                     <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
                                     <div class="col-sm-10">
                                         <div class="form-check">
@@ -251,8 +311,12 @@
                                             </label>
                                         </div>
                                     </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Sign in</button>
+                                </div>-->
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                               
+                                <button type="submit" class="btn btn-primary" id="cancelButton">Cancelar</button>
+                                <a href="form.html" id="reloadLink" style="display: none;">Recargar</a>
+
                             </form>
                         </div>
                     </div>
@@ -508,6 +572,8 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/formularios/clientes.js"></script>
+    <script src="js/formularios/cancelar.js"></script>
 </body>
 
 </html>

@@ -1,30 +1,26 @@
 document.getElementById('consultarButton').addEventListener('click', () => {
-    fetch('http://localhost:4000/clientes')
+    fetch('http://localhost:4000/proveedores')
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.querySelector('#clienteTable tbody');
+            const tableBody = document.querySelector('#proveedorTable tbody');
             tableBody.innerHTML = ''; // Limpiar la tabla antes de agregar nuevos datos
 
-            data.forEach(cliente => {
+            
+            data.forEach(proveedor => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${cliente.codcli}</td>
-                    <td>${cliente.idcli}</td>
-                    <td>${cliente.tipocli}</td>
-                    <td>${cliente.nomcli}</td>
-                    <td>${cliente.apecli}</td>
-                    <td>${cliente.nomreplegal}</td>
-                    <td>${cliente.nomempresa}</td>
-                    <td>${cliente.telcli}</td>
-                    <td>${cliente.emailcli}</td>
-                    <td>${cliente.dircli}</td>
-                    <td>${cliente.fecinsert}</td>
-                    <td>${cliente.userinsert}</td>
-                    <td>${cliente.fecupdate}</td>
-                    <td>${cliente.userupdate}</td>
+                    
+                    <td>${proveedor.idprov}</td>
+                    <td>${proveedor.nomprov}</td>
+                    <td>${proveedor.telprov}</td>
+                    <td>${proveedor.emailprov}</td>
+                    <td>${proveedor.dirprov}</td>
+                    
                 `;
                 tableBody.appendChild(row);
             });
+
+            
         })
         .catch(error => {
             console.error('Error al realizar la consulta:', error);
@@ -35,7 +31,7 @@ document.getElementById('consultarButton').addEventListener('click', () => {
 
 
     
-
+/*
     
         document.addEventListener("DOMContentLoaded", function() {
             const searchInput = document.getElementById("searchInput");
@@ -54,3 +50,9 @@ document.getElementById('consultarButton').addEventListener('click', () => {
                 }
             });
         });
+   */
+
+
+
+
+
