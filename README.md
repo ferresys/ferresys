@@ -9,59 +9,41 @@
 
    ```bash
    git clone https://github.com/davidadarme/FerreSys.git
+   cd BackendFerreSys/ #Directory to setup
    ```
-   
+
 2. Initialize the project:
 
    ```bash
-   npm init -y
+   npm install
    ```
-
-3. Install the necessary packages:
-
-    ```bash
-   npm install express pg dotenv
-    ```
-
-    ```bash
-   npm install @babel/node -g
-   ```
-
-   ```bash
-   npm install @babel/cli @babel/core @babel/preset-env -D
-   ```
-
-   ```bash
-   npm i nodemon -D
-   ```
-
+   
 4. Configure package.json:
 
    ```bash
    {
-   "name": "FerreSys",
-   "version": "1.0.0",
-   "description": "Sistema de Gestión de Inventarios y Ventas para Ferreterías en Node.js",
-   "main": "index.js",
-   "scripts": {
-      "kraken": "nodemon BackendFerreSys/config/index.js --exec babel-node"
-   },
-   "keywords": [
-      "FerreSys"
-   ],
-   "author": "Yocser Chavez, David Adarme, Diego Largo",
-   "license": "MIT",
-   "dependencies": {
-      "dotenv": "^16.3.1",
-      "express": "^4.18.2",
-      "pg": "^8.11.3"
-   },
-   "devDependencies": {
-      "@babel/cli": "^7.23.0",
-      "@babel/core": "^7.23.0",
-      "@babel/preset-env": "^7.22.20",
-      "nodemon": "^3.0.1"
-   }
+     "name": "backendferresys",
+     "version": "1.0.0",
+     "description": "",
+     "main": "index.js",
+     "scripts": {
+       "dev": "nodemon config/index.js --exec babel-node"
+     },
+     "keywords": [],
+     "author": "",
+     "license": "ISC",
+     "dependencies": {
+       "cors": "^2.8.5",
+       "dotenv": "^16.3.1",
+       "express": "^4.18.2",
+       "pg": "^8.11.3"
+     },
+     "devDependencies": {
+       "@babel/cli": "^7.23.0",
+       "@babel/core": "^7.23.2",
+       "@babel/preset-env": "^7.23.2",
+       "nodemon": "^3.0.1"
+     }
    }
    ```
 
@@ -77,20 +59,10 @@
    DB_PORT=port
    ```
 
-6. Configure the Babel file:
-
-   ```bash
-   {
-   "presets": [
-   "@babel/preset-env"
-   ]
-   }
-   ```
-
 7. Star the server
 
    ```bash
-   npm run kraken
+   npm run dev
    ```
 
 This will start the server and it will be listening on the specified path and port http://localhost/4000
