@@ -19,9 +19,10 @@ BEGIN
         RETURN TRUE;
 		
     ELSE
-        RAISE NOTICE 'Credenciales de inicio de sesión incorrectas';
-        RETURN FALSE;
+        RAISE EXCEPTION 'Credenciales de inicio de sesión incorrectas';
+
     END IF;
+
 END;
 $$ LANGUAGE plpgsql;
 
