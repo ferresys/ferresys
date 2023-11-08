@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "hallowen": "nodemon config/index.js --exec babel-node"
+    "dev": "nodemon config/index.js --exec babel-node"
   },
   "keywords": [],
   "author": "",
