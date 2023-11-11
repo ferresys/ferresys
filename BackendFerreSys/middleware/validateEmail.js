@@ -20,5 +20,6 @@ try {
 }
 
 
-// como hago para llamar esta validacion de email en distintas 
-// funciones antes de realizar su funcion 
+// crear una funcion para utilizarla en proveeddor, cliente y usuario ()
+// y que valide el email antes de insertar el dato en la base de datos
+// Path: BackendFerreSys/middleware/validateEmail.js

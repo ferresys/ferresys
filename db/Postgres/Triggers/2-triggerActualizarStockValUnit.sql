@@ -68,5 +68,4 @@ LANGUAGE plpgsql;
 CREATE TRIGGER triggerActualizarStockValUnitSalidas
 AFTER INSERT ON tabDetalleVenta
 FOR EACH ROW
-EXECUTE FUNCTION actualizarStockValUnitSalidas();
-
+EXECUTE FUNCTION actualizarStockValUnitSalidas()

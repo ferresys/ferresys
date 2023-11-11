@@ -1,4 +1,4 @@
---SELECT insertReciboMercancia('00000001', 20, 5000, '0-12', '1', '1', 'pulidora en buen estado');
+--SELECT insertReciboMercancia('00000001', 1000, 5000, '0-12', '1', '1', 'pulidora en buen estado');
 --SELECT insertReciboMercancia('00000002', 30, 1000, '0-12', '2', '2', 'Alambre eléctrico');
 --SELECT insertReciboMercancia('00000002', 10, 8000, '0-12', '2', '2', 'Alambre eléctrico');
 --select * from tabReciboMercancia;
@@ -10,12 +10,11 @@
 --DELETE FROM tabReciboMercancia;
 
 CREATE OR REPLACE FUNCTION insertReciboMercancia(
-    zEanArt tabArticulo.eanArt%type,
+    zEanArt tabReciboMercancia.eanArt%type,
     zCantArt tabReciboMercancia.cantArt%type,
     zValCompra tabReciboMercancia.valCompra%type,
     zIdProv tabProveedor.idProv%type,
     zConsecMarca tabMarca.consecMarca%type,
-	zConsecCateg tabCategoria.consecCateg%type,
     zObservacion tabReciboMercancia.observacion%type
 ) RETURNS void AS 
 $$
@@ -24,6 +23,10 @@ DECLARE
     zValTotal tabReciboMercancia.valTotal%type;
 
 BEGIN
+
+IF zCantArt <= 0 THEN
+    RAISE EXCEPTION 'La cantidad debe ser un número positivo';
+END IF;
 
 SELECT consecMarca INTO zMarca FROM tabMarca WHERE consecMarca = zConsecMarca;
 zValTotal := zCantArt * zValCompra;
