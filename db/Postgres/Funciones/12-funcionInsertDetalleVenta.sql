@@ -1,4 +1,5 @@
 --SELECT insertDetalleVenta ('00000002', 10, 0);
+--SELECT insertDetalleVenta ('00000001', 5, 0);
 --select * FROM tabKardex;
 --select * from tabArticulo;
 --select * from tabDetalleVenta;
