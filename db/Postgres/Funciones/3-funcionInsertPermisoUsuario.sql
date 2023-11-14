@@ -4,21 +4,22 @@ que tendra cada usuario y asi poder acceder a los modulos del sistema.*/
 
 --SELECT asignarPermisoUsuario('1005330671', '1');
 --SELECT asignarPermisoUsuario('1005330671', '2');
---SELECT asignarPermisoUsuario('1095821827', '1');
---SELECT asignarPermisoUsuario('1095821827', '2');
+--SELECT asignarPermisoUsuario('1095821825', '1');
+--SELECT asignarPermisoUsuario('1095821825', '2');
 
 --select * from tabUsuarioPermiso;
 --select * from tabPermiso;
 --select * from tabUsuario;
 --delete from tabUsuarioPermiso;
 
---select idUsuario, ConsecPermiso from tabUsuarioPermiso where idUsuario='1095821827';
+--select idUsuario, ConsecPermiso from tabUsuarioPermiso where idUsuario='1095821825';
 
---utilizamos el JOIN para realizar consultas desde diferentes tablas.
+/*utilizamos el JOIN para realizar consultas desde diferentes tablas.
+ojo: este join es el que usaremos en el servidor para manejar las consultas*/
 /*SELECT up.idUsuario, up.ConsecPermiso, tp.nomPermiso, tp.descPermiso
 FROM tabUsuarioPermiso up
 JOIN tabPermiso tp ON up.consecPermiso = tp.consecPermiso
-WHERE up.idUsuario = '1095821827';*/
+WHERE up.idUsuario = '1095821825';*/
 
 CREATE OR REPLACE FUNCTION asignarPermisoUsuario(
     zIdUsuario tabUsuario.idUsuario%type,

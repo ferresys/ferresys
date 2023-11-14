@@ -1,5 +1,6 @@
 
 --Habilitar la extension uuid 
+
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 ------------------------------------------------------------------------
