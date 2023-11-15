@@ -3,7 +3,9 @@ import pool from '../../config/connectionDB';
 import { manejoErrores } from '../../middleware/error';
 import { ErrorDeBaseDeDatos } from '../../middleware/classError';
 import { manejoErroresInsert } from '../../middleware/error';
-
+import QRCode from 'qrcode'; // Importa la biblioteca para generar códigos QR
+import { v4 as uuidv4 } from 'uuid';
+import { generateQRCode } from './codigoQR'; 
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
@@ -39,10 +41,12 @@ export const getArticuloByIdError = manejoErrores(getArticuloById);
 
 //  INSERTAR DATOS 
 
-export const insertArticulo = async (req, res) => {
+/*export const insertArticulo = async (req, res) => {
   const { eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence } = req.body;
 
   try {
+     
+
     const response = await pool.query('SELECT insertArticulo($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', 
       [eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence]);
     console.log(response);
@@ -56,6 +60,68 @@ export const insertArticulo = async (req, res) => {
     console.error(error);
     res.status(500).json({
       message: 'Error al registrar Categoria',
+    });
+  }
+};*/
+
+
+ /*
+
+export const insertArticulo = async (req, res) => {
+  const { nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence } = req.body;
+
+  try {
+    // Genera un identificador único para el código QR
+    const qrCodeUUID = uuidv4();
+    console.log('UUID generado:', qrCodeUUID);
+    const qrCodeURL = await generateQRCode(`QR-${qrCodeUUID}`);
+
+    const response = await pool.query('SELECT insertArticulo($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', 
+      [qrCodeURL, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence]);
+
+    console.log(response);
+    res.json({
+      message: 'Artículo Registrado con éxito',
+      body: {
+        Articulo: { eanArt: qrCodeURL, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence },
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Artículo',
+    });
+  }
+};
+*/
+
+
+
+export const insertArticulo = async (req, res) => {
+  const { nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence } = req.body;
+
+  try {
+    // Genera un identificador único para el código QR
+    const qrCodeUUID = uuidv4();
+    console.log('UUID generado:', qrCodeUUID);
+
+    // Genera la ruta donde se guardará el código QR y devuelve la URL para la base de datos
+    const qrCodePath = await generateQRCode(`QR-${qrCodeUUID}`, qrCodeUUID);
+
+    const response = await pool.query('SELECT insertArticulo($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', 
+      [qrCodePath, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence]);
+
+    console.log(response);
+    res.json({
+      message: 'Artículo Registrado con éxito',
+      body: {
+        Articulo: { eanArt: qrCodePath, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence },
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error al registrar Artículo',
     });
   }
 };
@@ -97,4 +163,10 @@ export const deleteArticulo = async (req, res) => {
     res.status(500).send('Error al eliminar Artículo');
   }
 };
+
+
+
+   
+
+
 
