@@ -3,6 +3,7 @@ import pool from '../../config/connectionDB';
 import { manejoErrores } from '../../middleware/error';
 import { ErrorDeBaseDeDatos } from '../../middleware/classError';
 import { manejoErroresInsert } from '../../middleware/error';
+import { validateEmail } from '../../middleware/validateEmail';
 
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
@@ -46,6 +47,10 @@ export const getClienteByIdError = manejoErrores(getClienteById);
 export const insertCliente = async (req, res) => {
   const { idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli } = req.body;
 
+  if(!validateEmail(emailCli)){
+    return res.status(400).json({message: 'El formato del correo electrónico no es válido.'});
+  }
+  
   const response = await pool.query('SELECT insertCliente($1, $2, $3, $4, $5, $6, $7, $8, $9)', 
     [idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli ]);
 
