@@ -47,8 +47,13 @@ export const getClienteByIdError = manejoErrores(getClienteById);
 export const insertCliente = async (req, res) => {
   const { idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli } = req.body;
 
-  if(!validateEmail(emailCli)){
-    return res.status(400).json({message: 'El formato del correo electrónico no es válido.'});
+  try {
+    if (!validateEmail(emailCli)) {
+      throw new Error('Invalid email format');
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    return;
   }
   
   const response = await pool.query('SELECT insertCliente($1, $2, $3, $4, $5, $6, $7, $8, $9)', 
