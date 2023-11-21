@@ -3,6 +3,7 @@ import pool from '../../config/connectionDB';
 import { manejoErrores } from '../../middleware/error';
 import { ErrorDeBaseDeDatos } from '../../middleware/classError';
 import { manejoErroresInsert } from '../../middleware/error';
+import { validateEmail } from '../../middleware/validateEmail';
 
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
@@ -43,6 +44,15 @@ export const getProveedorByIdError = manejoErrores(getProveedorById);
 
 export const insertProveedor = async (req, res) => {
   const { idProv, nomProv, telProv, emailProv, dirProv } = req.body;
+
+  try {
+    if (!validateEmail(emailProv)) {
+      throw new Error('Invalid email format');
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    return;
+  }
 
   const response = await pool.query('SELECT insertProveedor($1, $2, $3, $4, $5)', 
     [idProv, nomProv, telProv, emailProv, dirProv ]);
