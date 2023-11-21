@@ -1,5 +1,5 @@
 /*esta función trigger es importante para:
-cuando el usuario ingrese datos en el kardex ya sea de entrada o de salida
+cuando el usuario ingrese datos de recibo de mercancia o venta de mercancia,
 debemos llamar esta función para que me actualice los datos 
 valStock y valUnit en la tabArticulo*/
 

@@ -42,13 +42,13 @@ CREATE TABLE tabUsuarioPermiso(
 
 CREATE TABLE tabCliente(
   codCli UUID NOT NULL,
-  idCli VARCHAR NOT NULL UNIQUE,
+  idCli VARCHAR  NOT NULL UNIQUE,
   tipoCli BOOLEAN NOT NULL DEFAULT TRUE, --TRUE="CLIENTE NATURAL" / FALSE="CLIENTE JURIDICO"
   nomCli VARCHAR,
   apeCli VARCHAR,
   nomRepLegal VARCHAR,
   nomEmpresa VARCHAR,
-  telCli VARCHAR NOT NULL,
+  telCli VARCHAR (10) NOT NULL,
   emailCli VARCHAR NOT NULL,
   dirCli VARCHAR NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
@@ -100,7 +100,7 @@ CREATE TABLE tabArticulo(
   consecCateg SMALLINT NOT NULL,
   descArt TEXT,
   valUnit NUMERIC(10),
-  porcentaje NUMERIC(10,2),
+  porcentaje NUMERIC(10,2), /*porcentaje de ganancia por articulo que pone el administrador*/
   iva NUMERIC (10,2) NOT NULL,
   valStock INTEGER,
   stockMin INTEGER NOT NULL,
