@@ -17,39 +17,8 @@
    ```bash
    npm install
    ```
-   
-4. Configure package.json:
 
-   ```bash
-   {
-     "name": "backendferresys",
-     "version": "1.0.0",
-     "description": "",
-     "main": "index.js",
-     "scripts": {
-       "dev": "nodemon config/index.js --exec babel-node"
-     },
-     "keywords": [],
-     "author": "",
-     "license": "ISC",
-     "dependencies": {
-       "cors": "^2.8.5",
-       "dotenv": "^16.3.1",
-       "express": "^4.18.2",
-       "pg": "^8.11.3"
-     },
-     "devDependencies": {
-       "@babel/cli": "^7.23.0",
-       "@babel/core": "^7.23.2",
-       "@babel/preset-env": "^7.23.2",
-       "nodemon": "^3.0.1"
-     }
-   }
-   ```
-
-5. Create `.env` file:
-
-   Create the .env file and enter the credentials of the postgres database
+3. Create the `.env` file and enter the credentials of the postgres database:
 
    ```bash
    DB_HOST=host_name 
