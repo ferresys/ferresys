@@ -5,6 +5,8 @@
     --light: #6C7293;
     --dark: #000000;
     --marca: #ffcc29;
+    --marc-hover: #34e27b;
+    
 }
 
 .back-to-top {
@@ -72,11 +74,10 @@
     width: 250px;
     height: 100vh;
     overflow-y: auto;
-    background-image: url(https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
-    background-repeat: no-repeat;
+    background-color: #022232;
     background-size: cover;
     background-position: center;
-    opacity: 0.5;
+   
    
     transition: 0.5s;
     z-index: 5;
@@ -127,7 +128,7 @@
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
     padding: 7px 20px;
-    color: var(--dark);
+    color: var(--primary);
     font-weight: 500;
     border-left: 3px solid var(--primary);
     border-radius: 0 30px 30px 0;
@@ -177,18 +178,18 @@
 .sidebar .navbar .dropdown-item {
     padding-left: 25px;
     border-radius: 0 30px 30px 0;
-    color: var(--light);
+    color: var(--r);
 }
 
 .sidebar .navbar .dropdown-item:hover,
 .sidebar .navbar .dropdown-item.active {
-    background: var(--marca);
+    color: var(--marca);
 }
 
 .content .navbar .navbar-nav .nav-link {
     margin-left: 25px;
     padding: 12px 0;
-    color: var(--dark);
+    color: var(--primary);
     outline: none;
 }
 
@@ -197,6 +198,7 @@
     color: var(--marca);
 }
 
+
 .content .navbar .sidebar-toggler,
 .content .navbar .navbar-nav .nav-link i {
     width: 40px;
@@ -204,10 +206,21 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--primary);
+    background-color: var(--marca);
+    color: black;
     border-radius: 40px;
-    box-shadow: 8px 10px 15px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 0 40px rgba(241,203,73,.4);
 }
+
+.content .navbar .sidebar-toggler:hover,
+.content .navbar .navbar-nav  .nav-link:hover i {
+    color: var(--marca);
+    border: 1px solid var(--marca);
+    background-color: #022232;
+}
+
+
+
 
 .content .navbar .dropdown-item {
     color: var(--light);
@@ -218,15 +231,15 @@
     background: var(--dark);
     
 }
-
+/*desplegable submenu*/
 .content .navbar .dropdown-toggle::after {
     margin-left: 6px;
     vertical-align: middle;
     border: none;
-    content: "\f107";
-    font-family: 'DM Sans', sans-serif;
+    content: " \f107";/*\f054*/
+    font-family:'Font Awesome 5 Free','DM Sans', sans-serif;
     font-weight: 900;
-    transition: .5s;
+    
 }
 
 .content .navbar .dropdown-toggle[aria-expanded=true]::after {
@@ -238,7 +251,6 @@
         margin-left: 15px;
     }
 }
-
 
 /*** Date Picker ***/
 .bootstrap-datetimepicker-widget.bottom {
