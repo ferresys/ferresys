@@ -9,16 +9,18 @@
 
    ```bash
    git clone https://github.com/davidadarme/FerreSys.git
-   cd BackendFerreSys/ #Directory to setup
    ```
 
-2. Initialize the project:
+2. Setup postgres database with the [following instructions](db/Postgres/README.md):
+
+3. Initialize the project:
 
    ```bash
+   cd BackendFerreSys/ #Directory to setup
    npm install
    ```
 
-3. Create the `.env` file and enter the credentials of the postgres database:
+4. Create the `.env` file and enter the credentials of the postgres database:
 
    ```bash
    DB_HOST=host_name 
@@ -28,7 +30,7 @@
    DB_PORT=port
    ```
 
-7. Star the server
+5. Star the server
 
    ```bash
    npm run dev
