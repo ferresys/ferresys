@@ -1,4 +1,4 @@
-/*!
+/*
  * Bootstrap v5.0.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
@@ -203,8 +203,7 @@ a {
     
 }
 a:hover {
-    color: var(--marca);
-    
+    color: var(--bs-gray-dark);
 }
 a:not([href]):not([class]),
 a:not([href]):not([class]):hover {
@@ -3714,9 +3713,7 @@ fieldset:disabled .btn {
     padding-bottom: 0.5rem;
 }
 
-.style-nav{ 
-   bac
-}
+
 .navbar > .container,
 .navbar > .container-fluid,
 .navbar > .container-sm,
@@ -6871,7 +6868,7 @@ fieldset:disabled .btn {
     color: inherit !important;
 }
 .bg-primary {
-    background-color: #eb1616 !important;
+    background-color: #022232 !important;
 }
 .bg-secondary {
     background-color: #fff !important;
