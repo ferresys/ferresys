@@ -17,6 +17,7 @@
 
    ```bash
    cd BackendFerreSys/ #Directory to setup
+   npm install @babel/node -g
    npm install
    ```
 
