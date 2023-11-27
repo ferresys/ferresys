@@ -1,83 +1,46 @@
-CREATE OR REPLACE FUNCTION validarEmailUsuarioTrigger()
+CREATE OR REPLACE FUNCTION validarEmailGenerico()
 RETURNS TRIGGER AS
 $$
 DECLARE
-    zEmailValido BOOLEAN;
-	
+    emailRegex VARCHAR := '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$';
+    emailValue VARCHAR;
 BEGIN
-    zEmailValido := TRUE;
+    IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
+        CASE
+            WHEN TG_RELID = 'tabusuario'::regclass THEN
+                emailValue := NEW.emailUsuario;
+            WHEN TG_RELID = 'tabcliente'::regclass THEN
+                emailValue := NEW.emailCli;
+            WHEN TG_RELID = 'tabproveedor'::regclass THEN
+                emailValue := NEW.emailProv;
+            ELSE
+                RAISE EXCEPTION 'Tabla no soportada por el trigger.';
+        END CASE;
 
-    IF NEW.emailUsuario !~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$' THEN
-        zEmailValido := FALSE;
+        IF emailValue IS NOT NULL AND emailValue !~ emailRegex THEN
+            RAISE EXCEPTION 'El formato del correo electrónico no es válido para la tabla %.', TG_RELID::text;
+        END IF;
     END IF;
 
-    IF NOT zEmailValido THEN
-        RAISE EXCEPTION 'El formato del correo electrónico no es válido.';
-    END IF;
-	
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
--------------------------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION validarEmailClienteTrigger()
-RETURNS TRIGGER AS
-$$
-DECLARE
-    zEmailValido BOOLEAN;
-	
-BEGIN
-    zEmailValido := TRUE;
-
-	IF NEW.emailCli !~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$' THEN
-    	zEmailValido := FALSE;
-    END IF;
-
-    IF NOT zEmailValido THEN
-        RAISE EXCEPTION 'El formato del correo electrónico no es válido.';
-    END IF;
-	
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
--------------------------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION validarEmailProveedorTrigger()
-RETURNS TRIGGER AS
-$$
-DECLARE
-    zEmailValido BOOLEAN;
-	
-BEGIN
-    zEmailValido := TRUE;
-
-    IF NEW.emailProv !~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$' THEN
-        zEmailValido := FALSE;
-    END IF;
-
-    IF NOT zEmailValido THEN
-        RAISE EXCEPTION 'El formato del correo electrónico no es válido.';
-    END IF;
-	
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER validarEmailUsuario
 BEFORE INSERT ON tabUsuario
-FOR EACH ROW EXECUTE FUNCTION validarEmailUsuarioTrigger();
+FOR EACH ROW EXECUTE FUNCTION validarEmailGenerico();
 
 CREATE TRIGGER validarEmailCliente
 BEFORE INSERT ON tabCliente
-FOR EACH ROW EXECUTE FUNCTION validarEmailClienteTrigger();
+FOR EACH ROW EXECUTE FUNCTION validarEmailGenerico();
 
 CREATE TRIGGER validarEmailProveedor
 BEFORE INSERT ON tabProveedor
-FOR EACH ROW EXECUTE FUNCTION validarEmailProveedorTrigger();
+FOR EACH ROW EXECUTE FUNCTION validarEmailGenerico();
 
 -- SELECT * FROM tabUsuario
--- SELECT insertUsuario('7005330671', 'Bonita', 'loco', 'ingespailas.com', 'Peto123', 'abcd1234');
--- SELECT insertUsuario('4005330671', 'Sr', 'Nigga', 'micorreoreal+aliasparausoeninternet@gmail.com', 'Peto321', 'abcd1234');
+-- SELECT insertUsuario('7005330671', 'Daniel', 'Bruce', 'ingespailas.com', 'Peto123', 'abcd1234');
+-- SELECT insertUsuario('4005330671', 'Tim', 'David', 'micorreoreal+aliasparausoeninternet@gmail.com', 'Peto321', 'abcd1234');
 
 -- SELECT * FROM tabCliente
 -- SELECT insertCliente('1215673034', TRUE, 'juan', 'Rojas', NULL, NULL, '3012545874', 'juan@gmail.com', 'avenida 45 # 54-30');
