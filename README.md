@@ -17,7 +17,7 @@
 3. Initialize the project:
 
    ```bash
-   cd app/ #Directory to setup
+   cd app/
    npm install @babel/node -g
    npm install
    ```
