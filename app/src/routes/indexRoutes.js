@@ -7,29 +7,29 @@ const router = Router();//Creamos la instancia router.
 
 //IMPORTAMOS LAS FUNCIONES-CONTROLADORES
 
-import { getClientesError, getClienteByIdError, insertCliente, updateCliente, deleteCliente  }from '../controllers/ClientesCRUD';
+import { getClientesError, getClienteByIdError, insertCliente, updateCliente, deleteCliente  }from '../controllers/Clientes';
 
-import { getProveedoresError, getProveedorByIdError, insertProveedor, updateProveedor, deleteProveedor  }from '../controllers/proveedoresCRUD';
+import { getProveedoresError, getProveedorByIdError, insertProveedor, updateProveedor, deleteProveedor  }from '../controllers/proveedores';
 
-import { getMarcasError, getMarcaByIdError, insertMarca, updateMarca, deleteMarca }from '../controllers/marcasCRUD';
+import { getMarcasError, getMarcaByIdError, insertMarca, updateMarca, deleteMarca }from '../controllers/marcas';
 
-import { getCategoriasError, getCategoriaByIdError, insertCategoria, updateCategoria, deleteCategoria  }from '../controllers/categoriasCRUD';
+import { getCategoriasError, getCategoriaByIdError, insertCategoria, updateCategoria, deleteCategoria  }from '../controllers/categorias';
 
-import { getArticulosError, getArticuloByIdError, insertArticulo, updateArticulo, deleteArticulo  }from '../controllers/articulosCRUD';
+import { getArticulosError, getArticuloByIdError, insertArticulo, updateArticulo, deleteArticulo  }from '../controllers/articulos';
 
-import { getReciboMercanciasError, getReciboMercanciaByIdError, insertReciboMercancia }from '../controllers/reciboMercanciasCRUD';
+import { getReciboMercanciasError, getReciboMercanciaByIdError, insertReciboMercancia }from '../controllers/reciboMercancias';
 
-import { getKardexError, getKardexByIdError }from '../controllers/kardexCRUD';
+import { getKardexError, getKardexByIdError }from '../controllers/kardex';
 
-import { getUsuariosError, getUsuarioByIdError, insertUsuario, updateUsuario, deleteUsuario  }from '../controllers/usuariosCRUD';
+import { getUsuariosError, getUsuarioByIdError, insertUsuario, updateUsuario, deleteUsuario  }from '../controllers/usuarios';
 
-import { getPermisosError, getPermisoByIdError, insertPermiso, updatePermiso, deletePermiso  }from '../controllers/permisosCRUD';
+import { getPermisosError, getPermisoByIdError, insertPermiso, updatePermiso, deletePermiso  }from '../controllers/permisos';
 
-import { getUsuarioPermisosError, getUsuarioPermisoByIdError, insertUsuarioPermiso, updateUsuarioPermiso, deleteUsuarioPermiso  }from '../controllers/usuarioPermisosCRUD';
+import { getUsuarioPermisosError, getUsuarioPermisoByIdError, insertUsuarioPermiso, updateUsuarioPermiso, deleteUsuarioPermiso  }from '../controllers/usuarioPermisos';
 
-import { insertEncabezadoVenta }from '../controllers/encabezadoVentaCRUD';
+import { insertEncabezadoVenta }from '../controllers/encabezadoVenta';
 
-import { insertDetalleVenta }from '../controllers/detalleVentaCRUD';
+import { insertDetalleVenta }from '../controllers/detalleVenta';
 
 
 

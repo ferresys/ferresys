@@ -1,5 +1,6 @@
 ## Prerequisites
 
+- Git
 - Node.js 18
 - PostgreSQL 15
 
@@ -8,15 +9,15 @@
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/davidadarme/FerreSys.git
+   git clone https://github.com/ferresys/ferresys
    ```
 
-2. Setup postgres database with the [following instructions](db/Postgres/README.md):
+2. Setup postgres database with this [instructions](database/README.md):
 
 3. Initialize the project:
 
    ```bash
-   cd BackendFerreSys/ #Directory to setup
+   cd app/ #Directory to setup
    npm install @babel/node -g
    npm install
    ```
@@ -37,7 +38,17 @@
    npm run dev
    ```
 
-This will start the server and it will be listening on the specified path and port http://localhost/4000
+## Get routes
+
+This will start the server and it will be listening on the specified path and port http://localhost:4000/
+
+   ```bash
+   /articulos
+   /clientes
+   /usuarios/123456789 #example
+   /proveedores
+   /marcas
+   ```
 
 ## License
 
