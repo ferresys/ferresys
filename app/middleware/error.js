@@ -1,6 +1,6 @@
 
 //CONFIGURAMOS un Middleware para el manejo de errores en las solicitudes HTTP.
-import pool from '../config/connectionDB';
+import pool from '../config/config-database';
 
 import {ErrorDeBaseDeDatos} from './classError';
 

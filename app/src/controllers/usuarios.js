@@ -1,5 +1,5 @@
 //IMPORTAMOS LAS FUNCIONES E INSTANCIAS NECESARIAS.
-import pool from '../../config/connectionDB';
+import pool from '../../config/config-database';
 import { manejoErrores } from '../../middleware/error';
 import { ErrorDeBaseDeDatos } from '../../middleware/classError';
 import { manejoErroresInsert } from '../../middleware/error';
