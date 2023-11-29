@@ -3,7 +3,7 @@ import pool from '../../config/connectionDB';
 import { manejoErrores } from '../../middleware/error';
 import { ErrorDeBaseDeDatos } from '../../middleware/classError';
 import { manejoErroresInsert } from '../../middleware/error';
-import { validateEmail } from '../../middleware/validateEmail';
+import { validateEmail } from '../../middleware/email';
 
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
