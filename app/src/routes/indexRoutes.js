@@ -87,6 +87,9 @@ router.get('/permisos/:id', getPermisoByIdError);
 
 router.get('/usuarioPermisos/:id', getUsuarioPermisoByIdError);
 
+app.get('/protected', verifyToken, (req, res) => {
+    res.send('This is a protected route');
+  });
 
 // insertar datos
 router.post('/clientes', insertCliente);
