@@ -18,7 +18,6 @@
 
    ```bash
    cd app/
-   npm install @babel/node -g
    npm install
    ```
 

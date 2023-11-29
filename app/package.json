@@ -7,7 +7,7 @@
     "dev": "nodemon config/index.js --exec babel-node"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yocser Chavez, David Adarme, Diego Largo",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
@@ -20,7 +20,8 @@
   "devDependencies": {
     "@babel/cli": "^7.23.0",
     "@babel/core": "^7.23.2",
-    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-env": "^7.23.3",
+    "@babel/node": "^7.22.19",
     "nodemon": "^3.0.1"
   }
 }
