@@ -1,9 +1,8 @@
 //IMPORTAMOS LAS FUNCIONES E INSTANCIAS NECESARIAS.
-import pool from '../../config/connectionDB';
+import pool from '../../config/config-database';
 import { manejoErrores } from '../../middleware/error';
-import { ErrorDeBaseDeDatos } from '../../middleware/classError';
+import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
-
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
@@ -18,10 +17,8 @@ const getKardex = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-
 //Aplicar el middleware de manejo de errores al controlador
 export const getKardexError = manejoErrores(getKardex);
-
 
 // CONSULTAS POR ID 
 
@@ -34,6 +31,5 @@ const getKardexById = async (req, res) => {
   }
   res.json(response.rows);
 };
-
 
 export const getKardexByIdError = manejoErrores(getKardexById);

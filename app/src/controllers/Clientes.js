@@ -1,10 +1,9 @@
 //IMPORTAMOS LAS FUNCIONES E INSTANCIAS NECESARIAS.
-import pool from '../../config/connectionDB';
+import pool from '../../config/config-database';
 import { manejoErrores } from '../../middleware/error';
-import { ErrorDeBaseDeDatos } from '../../middleware/classError';
+import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
 import { validateEmail } from '../../middleware/email';
-
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
@@ -20,11 +19,8 @@ const getClientes = async (req, res) => { //la funcion se llama getClientes.y co
   res.status(200).json(response.rows);
 };
 
-
 //Aplicar el middleware de manejo de errores al controlador
 export const getClientesError = manejoErrores(getClientes);
-
-
 
 // CONSULTAS POR ID 
 
@@ -39,8 +35,6 @@ const getClienteById = async (req, res) => {
 };
 
 export const getClienteByIdError = manejoErrores(getClienteById);
-
-
 
 //  INSERTAR DATOS 
 
@@ -68,8 +62,6 @@ export const insertCliente = async (req, res) => {
     });
 };
 
-
-
 //ACTUALIZAR DATOS
 
 export const updateCliente = async (req, res) => {
@@ -89,7 +81,6 @@ export const updateCliente = async (req, res) => {
     res.status(500).send('Error al actualizar datos del Cliente');
   }
 };
-
 
 //ELIMINAR DATOS
 

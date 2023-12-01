@@ -1,9 +1,8 @@
 //IMPORTAMOS LAS FUNCIONES E INSTANCIAS NECESARIAS.
-import pool from '../../config/connectionDB';
+import pool from '../../config/config-database';
 import { manejoErrores } from '../../middleware/error';
-import { ErrorDeBaseDeDatos } from '../../middleware/classError';
+import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
-
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
@@ -18,11 +17,8 @@ const getMarcas = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-
 //Aplicar el middleware de manejo de errores al controlador
 export const getMarcasError = manejoErrores(getMarcas);
-
-
 
 // CONSULTAS POR ID 
 
@@ -37,7 +33,6 @@ const getMarcaById = async (req, res) => {
 };
 
 export const getMarcaByIdError = manejoErrores(getMarcaById);
-
 
 //  INSERTAR DATOS 
 
@@ -61,7 +56,6 @@ export const insertMarca = async (req, res) => {
   }
 };
 
-
 //ACTUALIZAR DATOS
 
 export const updateMarca = async (req, res) => {
@@ -81,7 +75,6 @@ export const updateMarca = async (req, res) => {
     res.status(500).send('Error al actualizar marca');
   }
 };
-
 
 //ELIMINAR DATOS
 

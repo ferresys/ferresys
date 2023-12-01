@@ -1,8 +1,6 @@
-
-//CONFIGURAMOS un Middleware para el manejo de errores en las solicitudes HTTP.
 import pool from '../config/config-database';
 
-import {ErrorDeBaseDeDatos} from './classError';
+import {ErrorDeBaseDeDatos} from './class-error';
 
 export const manejoErrores = (manejarSolicitud) => {
   return async (req, res, next) => { 
@@ -21,10 +19,7 @@ export const manejoErrores = (manejarSolicitud) => {
   };
 };
 
-
-
 // Función para manejar errores de inserción con funciones plpgsql
-
 
 export const manejoErroresInsert = async (res, errorNumero = null) => {
   try {
@@ -49,25 +44,6 @@ export const manejoErroresInsert = async (res, errorNumero = null) => {
     });
   }
 };
-
-/*funcion PLPGSQL
-CREATE OR REPLACE FUNCTION validacion(error_numero INT) RETURNS BOOLEAN AS $$
-BEGIN
-  -- Realiza validaciones aquí
-  -- Si se detecta un error, devuelve true
-  -- De lo contrario, devuelve false
-  IF error_numero = 1 THEN
-    -- Error detectado
-    RETURN true;
-  ELSE
-    -- Sin error
-    RETURN false;
-  END IF;
-END;
-$$ LANGUAGE plpgsql;*/
-
-
-
 
  /********************************************************************************************
  *(=>)Las funciones de flecha son una forma más concisa de escribir funciones en comparación * 

@@ -1,11 +1,11 @@
 //IMPORTAMOS LAS FUNCIONES E INSTANCIAS NECESARIAS.
-import pool from '../../config/connectionDB';
+import pool from '../../config/config-database';
 import { manejoErrores } from '../../middleware/error';
-import { ErrorDeBaseDeDatos } from '../../middleware/classError';
+import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
 import QRCode from 'qrcode'; // Importa la biblioteca para generar códigos QR
 import { v4 as uuidv4 } from 'uuid';
-import { generateQRCode } from './codigoQR'; 
+import { generateQRCode } from './codigo-QR'; 
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
@@ -23,7 +23,6 @@ const getArticulos = async (req, res) => {
 //Aplicar el middleware de manejo de errores al controlador
 export const getArticulosError = manejoErrores(getArticulos);
 
-
 // CONSULTAS POR ID 
 
 const getArticuloById = async (req, res) => {
@@ -37,65 +36,6 @@ const getArticuloById = async (req, res) => {
 };
 
 export const getArticuloByIdError = manejoErrores(getArticuloById);
-
-
-//  INSERTAR DATOS 
-
-/*export const insertArticulo = async (req, res) => {
-  const { eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence } = req.body;
-
-  try {
-     
-
-    const response = await pool.query('SELECT insertArticulo($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', 
-      [eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence]);
-    console.log(response);
-    res.json({
-      message: 'Artículo Registrado con éxito',
-      body: {
-        Articulo: {eanArt, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence},
-      },
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      message: 'Error al registrar Categoria',
-    });
-  }
-};*/
-
-
- /*
-
-export const insertArticulo = async (req, res) => {
-  const { nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence } = req.body;
-
-  try {
-    // Genera un identificador único para el código QR
-    const qrCodeUUID = uuidv4();
-    console.log('UUID generado:', qrCodeUUID);
-    const qrCodeURL = await generateQRCode(`QR-${qrCodeUUID}`);
-
-    const response = await pool.query('SELECT insertArticulo($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', 
-      [qrCodeURL, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence]);
-
-    console.log(response);
-    res.json({
-      message: 'Artículo Registrado con éxito',
-      body: {
-        Articulo: { eanArt: qrCodeURL, nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence },
-      },
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      message: 'Error al registrar Artículo',
-    });
-  }
-};
-*/
-
-
 
 export const insertArticulo = async (req, res) => {
   const { nomArt, consecMarca, consecCateg, descArt, porcentaje, iva, stockMin, stockMax, valReorden, fecVence } = req.body;
@@ -126,7 +66,6 @@ export const insertArticulo = async (req, res) => {
   }
 };
 
-
 //ACTUALIZAR DATOS
 
 export const updateArticulo = async (req, res) => {
@@ -148,7 +87,6 @@ export const updateArticulo = async (req, res) => {
   }
 };
 
-
 //ELIMINAR DATOS
 
 export const deleteArticulo = async (req, res) => {
@@ -163,10 +101,3 @@ export const deleteArticulo = async (req, res) => {
     res.status(500).send('Error al eliminar Artículo');
   }
 };
-
-
-
-   
-
-
-

@@ -1,23 +1,3 @@
-
-/*
-import QRCode from 'qrcode'; // Importa la biblioteca para generar códigos QR
-
-
-
-import { toBuffer } from 'qrcode';
-
-// Función para generar el código QR y devolver la URL
-export const generateQRCode = async (data) => {
-  try {
-    const qrCodeBuffer = await toBuffer(data);
-    const qrCodeURL = `data:image/png;base64,${qrCodeBuffer.toString('base64')}`;
-    return qrCodeURL;
-  } catch (error) {
-    throw error;
-  }
-};*/
-
-
 import QRCode from 'qrcode'; // Importa la biblioteca para generar códigos QR
 import { toBuffer } from 'qrcode';
 import { writeFile } from 'fs/promises';

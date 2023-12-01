@@ -1,10 +1,9 @@
 //IMPORTAMOS LAS FUNCIONES E INSTANCIAS NECESARIAS.
-import pool from '../../config/connectionDB';
+import pool from '../../config/config-database';
 import { manejoErrores } from '../../middleware/error';
-import { ErrorDeBaseDeDatos } from '../../middleware/classError';
+import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
 import { validateEmail } from '../../middleware/email';
-
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
@@ -19,11 +18,9 @@ const getProveedores = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-
 //Aplicar el middleware de manejo de errores al controlador
 
 export const getProveedoresError = manejoErrores(getProveedores);
-
 
 // CONSULTAS POR ID 
 
@@ -38,7 +35,6 @@ const getProveedorById = async (req, res) => {
 };
 
 export const getProveedorByIdError = manejoErrores(getProveedorById);
-
 
 //  INSERTAR DATOS 
 
@@ -73,7 +69,6 @@ export const insertProveedor = async (req, res) => {
   }
 };
 
-
 //ACTUALIZAR DATOS
 
 export const updateProveedor = async (req, res) => {
@@ -93,7 +88,6 @@ export const updateProveedor = async (req, res) => {
     res.status(500).send('Error al actualizar datos del Proveedor');
   }
 };
-
 
 //ELIMINAR DATOS
 
