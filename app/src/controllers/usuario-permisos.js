@@ -1,9 +1,8 @@
 //IMPORTAMOS LAS FUNCIONES E INSTANCIAS NECESARIAS.
-import pool from '../../config/connectionDB';
+import pool from '../../config/config-database';
 import { manejoErrores } from '../../middleware/error';
-import { ErrorDeBaseDeDatos } from '../../middleware/classError';
+import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
-
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
@@ -21,7 +20,6 @@ const getUsuarioPermisos = async (req, res) => {
 //Aplicar el middleware de manejo de errores al controlador
 export const getUsuarioPermisosError = manejoErrores(getUsuarioPermisos);
 
-
 // CONSULTAS POR ID 
 
 const getUsuarioPermisoById = async (req, res) => {
@@ -35,7 +33,6 @@ const getUsuarioPermisoById = async (req, res) => {
 };
 
 export const getUsuarioPermisoByIdError = manejoErrores(getUsuarioPermisoById);
-
 
 //  INSERTAR DATOS 
 
@@ -60,7 +57,6 @@ export const insertUsuarioPermiso = async (req, res) => {
   }
 };
 
-
 //ACTUALIZAR DATOS
 
 export const updateUsuarioPermiso = async (req, res) => {
@@ -81,7 +77,6 @@ export const updateUsuarioPermiso = async (req, res) => {
     res.status(500).send('Error al actualizar permisos por usuario');
   }
 };
-
 
 //ELIMINAR DATOS
 

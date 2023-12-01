@@ -34,7 +34,6 @@ BEGIN
 
         END CASE;
 
-        -- Este es el caso valido
         CASE 
             -- Que sea la salida sea mayor al stock mínimo
             WHEN zVar <= 0 THEN

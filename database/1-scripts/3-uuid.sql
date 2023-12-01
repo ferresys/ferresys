@@ -56,5 +56,3 @@ CREATE TRIGGER uuidProveedor
 BEFORE INSERT ON tabProveedor
 FOR EACH ROW
 EXECUTE FUNCTION uuidtabProveedor();
-
-

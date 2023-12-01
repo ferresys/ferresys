@@ -28,4 +28,3 @@ CREATE TRIGGER NitValidacion
 BEFORE INSERT OR UPDATE ON tabCliente
 FOR EACH ROW
 EXECUTE FUNCTION validacionIdCliente();
-

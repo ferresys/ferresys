@@ -1,9 +1,8 @@
 //IMPORTAMOS LAS FUNCIONES E INSTANCIAS NECESARIAS.
-import pool from '../../config/connectionDB';
+import pool from '../../config/config-database';
 import { manejoErrores } from '../../middleware/error';
-import { ErrorDeBaseDeDatos } from '../../middleware/classError';
+import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
-
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
@@ -21,7 +20,6 @@ const getCategorias = async (req, res) => {
 //Aplicar el middleware de manejo de errores al controlador
 export const getCategoriasError = manejoErrores(getCategorias);
 
-
 // CONSULTAS POR ID 
 
 const getCategoriaById = async (req, res) => {
@@ -35,7 +33,6 @@ const getCategoriaById = async (req, res) => {
 };
 
 export const getCategoriaByIdError = manejoErrores(getCategoriaById);
-
 
 //  INSERTAR DATOS 
 
@@ -59,7 +56,6 @@ export const insertCategoria = async (req, res) => {
   }
 };
 
-
 //ACTUALIZAR DATOS
 
 export const updateCategoria = async (req, res) => {
@@ -80,7 +76,6 @@ export const updateCategoria = async (req, res) => {
     res.status(500).send('Error al actualizar categoría');
   }
 };
-
 
 //ELIMINAR DATOS
 

@@ -1,9 +1,5 @@
-
-// CONFIGURAMOS LA CONEXION A LA BASE DE DATOS A TRAVES DE POOL.
-
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
-
 
 dotenv.config();
 
