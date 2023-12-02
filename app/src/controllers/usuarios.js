@@ -4,10 +4,30 @@ import { manejoErrores } from '../../middleware/error';
 import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
 import { validateEmail } from '../../middleware/email';
+import bcrypt from 'bcrypt';
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
 //CONSULTAS GENERALES
+
+export const login = async (req, res) => {
+  const { usuario, password } = req.body;
+
+  const user = await pool.query('SELECT * FROM tabUsuario WHERE usuario = $1', [usuario]);
+
+  if (user.rows.length > 0) {
+    // Comparar la contraseña con la contraseña encriptada almacenada
+    const match = await bcrypt.compare(password, user.rows[0].password);
+
+    if (match) {
+      res.json({ message: 'Ingreso exitoso' });
+    } else {
+      res.status(400).json({ message: 'Contraseña incorrecta' });
+    }
+  } else {
+    res.status(400).json({ message: 'Usuario no existe' });
+  }
+};
 
 const getUsuarios = async (req, res) => {
   const response = await pool.query('SELECT * FROM tabUsuario LIMIT 100');
@@ -50,13 +70,15 @@ export const insertUsuario = async (req, res) => {
   }
 
   try {
+    const hashedpassword = await bcrypt.hash(password, 10);
+
     const response = await pool.query('SELECT insertUsuario($1, $2, $3, $4, $5, $6)', 
-      [idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password]);
+      [idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, hashedpassword]);
     console.log(response);
     res.json({
       message: 'Usuario Registrado con éxito',
       body: {
-        Usuario: {idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password},
+        Usuario: {idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, hashedpassword},
       },
     });
   } catch (error) {
@@ -74,10 +96,19 @@ export const updateUsuario = async (req, res) => {
   const { idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password } = req.body;
 
   try {
-    
+    const user = await pool.query('SELECT * FROM tabUsuario WHERE idUsuario = $1', [id]);
+
+    const match = await bcrypt.compare(password, user.rows[0].password);
+
+    if (match) {
+      return res.status(400).send('No puedes usar la misma contraseña');
+    }
+
+    const hashedpassword = await bcrypt.hash(password, 10);
+
     const response = await pool.query(
       'UPDATE tabUsuario SET idUsuario = $1, nomUsuario = $2, apeUsuario = $3, emailUsuario = $4, usuario = $5, password = $6 WHERE idUsuario = $7',
-      [idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password, id]
+      [idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, hashedpassword, id]
     );
 
     console.log(response);
