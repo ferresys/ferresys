@@ -8,7 +8,7 @@ import { getCategoriasError, getCategoriaByIdError, insertCategoria, updateCateg
 import { getArticulosError, getArticuloByIdError, insertArticulo, updateArticulo, deleteArticulo} from '../controllers/articulos';
 import { getReciboMercanciasError, getReciboMercanciaByIdError, insertReciboMercancia} from '../controllers/recibo-mercancias';
 import { getKardexError, getKardexByIdError} from '../controllers/kardex';
-import { getUsuariosError, getUsuarioByIdError, insertUsuario, updateUsuario, deleteUsuario} from '../controllers/usuarios';
+import { getUsuariosError, getUsuarioByIdError, insertUsuario, updateUsuario, deleteUsuario, login} from '../controllers/usuarios';
 import { getPermisosError, getPermisoByIdError, insertPermiso, updatePermiso, deletePermiso} from '../controllers/permisos';
 import { getUsuarioPermisosError, getUsuarioPermisoByIdError, insertUsuarioPermiso, updateUsuarioPermiso, deleteUsuarioPermiso  }from '../controllers/usuario-permisos';
 import { insertEncabezadoVenta} from '../controllers/encabezado-venta';
@@ -42,6 +42,7 @@ router.get('/usuarioPermisos/:id', getUsuarioPermisoByIdError);
 
 // insertar datos
 
+router.post('/login', login);
 router.post('/clientes', insertCliente);
 router.post('/proveedores', insertProveedor);
 router.post('/marcas', insertMarca);
