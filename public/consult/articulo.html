@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Artículos</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="../img/logo-pri.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,500&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+
+        <!-- Spinner Start (indicador de pagina cargando...-->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+
+           <!--<nav class="navbar bg-primary navbar-secundary">-->
+            <nav class="navbar ">
+             
+                <a href="../../index.html" class="navbar-brand mx-4 mb-3">
+                    <span ><img src="../img/logo-pri.png" alt="" width="80" ></span>
+                </a>
+
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="../../img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+
+                    <div class="ms-3">
+                        <p class="mb-0">Yoc crack</p>
+                        <span>Admin</span>
+                    </div>
+                </div>
+
+            <div class="navbar-nav w-100 ">   
+                <a href="../index.html" class="nav-item nav-link"><i class="fas fa-home me-2"></i>Inicio</a>
+                <a href="" class="nav-item nav-link"><i class="fas fa-dollar-sign me-2"></i>Ventas</a>
+                <a href="" class="nav-item nav-link"><i class="fas fa-shopping-cart me-2"></i>Compras</a>
+                <a href="" class="nav-item nav-link active"><i class="fas fa-tools me-2"></i>Articulos</a>
+                <a href="marca.html" class="nav-item nav-link"><i class="fas fa-tags me-2"></i>Marcas</a>
+                <a href="categoria.html" class="nav-item nav-link"><i class="fas fa-sitemap me-2"></i>Categorias</a>
+                <a href="cliente.html" class="nav-item nav-link"><i class="fas fa-user me-2"></i>Clientes</a>
+                <a href="proveedor.html" class="nav-item nav-link"><i class="fas fa-truck me-2"></i>Proveedores</a>    
+                <a href="" class="nav-item nav-link"><i class="fas fa-boxes me-2"></i>Inventario</a>
+                <a href="" class="nav-item nav-link"><i class="fas fa-users me-2"></i>Usuarios</a>
+                    
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Aplicaciones</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="../../signin.html" class="dropdown-item">Inicio sesion</a>
+                            <a href="../../signup.html" class="dropdown-item">Sign Up</a> 
+                            <!-- <a href="404.html" class="dropdown-item">404 Error</a>
+                            <a href="blank.html" class="dropdown-item">Blank Page</a> -->
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Components</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="../../button.html" class="dropdown-item">button</a>
+                            <a href="../../typography.html" class="dropdown-item">typography</a>
+                            <a href="../../element.html" class="dropdown-item">element</a>
+                            <a href="../../chart.html" class="dropdown-item"><i class="fa fa-keyboard me-2"></i>chart</a>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+
+        
+        <!-- Sidebar End -->
+
+
+
+       <!-- Content Start -->
+       <div class="content">
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-border navbar-expand bg-primary navbar-dark sticky-top px-4 py-0">
+            <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                
+            </a>
+            <a href="#" class="sidebar-toggler flex-shrink-0">
+                <i class="fa fa-bars"></i>
+            </a>
+            <form class="d-none d-md-flex ms-4">
+                <input class="form-control bg-dark border-0" type="search" placeholder="Search">
+            </form>
+            <div class="navbar-nav align-items-center ms-auto">
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fa fa-envelope me-lg-2"></i>
+                        <span class="d-none d-lg-inline-flex">Mensajes</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        <a href="#" class="dropdown-item">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle" src="../img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                <div class="ms-2">
+                                    <h6 class="fw-normal mb-0">te llego una caja</h6>
+                                    <small>15 minutes ago</small>
+                                </div>
+                            </div>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle" src="../img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                <div class="ms-2">
+                                    <h6 class="fw-normal mb-0">te llego una caja</h6>
+                                    <small>15 minutes ago</small>
+                                </div>
+                            </div>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle" src="../img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                <div class="ms-2">
+                                    <h6 class="fw-normal mb-0">te llego una caja</h6>
+                                    <small>15 minutes ago</small>
+                                </div>
+                            </div>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item text-center">Ver mas</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fa fa-bell me-lg-2"></i>
+                        <span class="d-none d-lg-inline-flex">Notificación</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        <a href="#" class="dropdown-item">
+                            <h6 class="fw-normal mb-0">Se acabaron los tornillos</h6>
+                            <small>15 minutes ago</small>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item">
+                            <h6 class="fw-normal mb-0">Hoy llega la merca</h6>
+                            <small>15 minutes ago</small>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item">
+                            <h6 class="fw-normal mb-0">Mas cemento</h6>
+                            <small>15 minutes ago</small>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item text-center">See all notifications</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <img class="rounded-circle me-lg-2" src="../img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <span class="d-none d-lg-inline-flex">Yocser</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        <a href="#" class="dropdown-item">Mi perfil</a>
+                        <a href="#" class="dropdown-item">Configuracion</a>
+                        <a href="../signin.html" class="dropdown-item">Cerrar sesion</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Navbar End -->
+                
+                
+
+                
+            <!-- Table Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">    
+                    <div class="col-12">
+                        <div class="  rounded h-100 p-4"><!--bg-secondary-->
+                            <h6 class="mb-4">ARTICULOS</h6>
+                            <div class="table-responsive">
+                                <table id="articuloTable" class="table">
+                                    <thead>
+                                        <tr>
+                                        
+                                            
+                                            <th scope="col">EAN</th>
+                                            <th scope="col">Nombre Artículo</th>
+                                            <th scope="col">Descripción</th>
+                                            <th scope="col">Valor Unitario</th>
+                                            <th scope="col">Porcentaje</th>
+                                            <th scope="col">Iva</th>
+                                            <th scope="col">Stock</th>
+                                            <th scope="col">Mín Stock</th>
+                                            <th scope="col">Máx Stock</th>
+                                            <th scope="col">Val Reorden</th>
+                                            <th scope="col">Fecha Vence</th>
+                                            <th scope="col">Estado</th>
+                                            
+                                            
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="articulos-tbody">
+                                        <tr>
+                                            
+                                        </tr>
+                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" id="agregarArticulos" class="btn btn-success">Agregar Artículo</button>
+
+
+                                <button type="button" id="consultarButton" class="btn btn-warning">Mostrar Artículo</button>
+                                <button type="button" class="btn btn-danger">Borrar Artículo</button>
+                            </div>
+                           
+                            
+
+                                <div id="data"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">FerreSys</a>, Todos los derechos reservados.
+                        </div>
+
+        <!-- Content End -->
+  
+ <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+       
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../lib/chart/chart.min.js"></script>
+    <script src="../../lib/easing/easing.min.js"></script>
+    <script src="../../lib/waypoints/waypoints.min.js"></script>
+    <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../../lib/tempusdominus/js/moment.min.js"></script>
+    <script src="../../lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    
+    <!-- Template Javascript -->
+    <script src="../../js/main.js"></script>
+
+    <!-- JavaScript Consult-->
+      <script src="../../js/consult/articulo.js"></script>
+      
+
+    <!-- JavaScript Button Agregar-->
+     <script src="../../js/button/articulo.js"></script>
+
+   
+     
+    
+
+</body>
+
+</html>
