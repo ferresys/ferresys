@@ -1854,11 +1854,12 @@ progress {
     cursor: pointer;
 }
 .form-control:focus {
-    color: #6c7293;
+    color:var(--bs-dark);
     background-color: #fff;
-    border-color: var(--bs-dark);
+    border-color: var(--marca);
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(3, 3, 3, 0.25);
+    box-shadow: 0 0 0 0.25rem var(--marca);
+
 }
 .form-control::-webkit-date-and-time-value {
     height: 1.5em;
@@ -2064,6 +2065,7 @@ textarea.form-control-lg {
     display: inline-block;
     width: 40px;  /* Ancho total del interruptor */
     height: 24px;
+    margin-right: 5px;
   }
   
   .switch-input {
@@ -2603,9 +2605,10 @@ fieldset:disabled .btn {
     border-color: var(--marca);
 }
 .btn-primary:hover {
-    color: #fff;
-    background-color: #000;
-    border-color: var(--marca);
+    color: var(--marca);
+    border: 1px solid var(--marca);
+    background-color: #022232;
+    box-shadow: 0 0 10px rgba(241,203,73,.4);
 }
 .btn-check:focus + .btn-primary,
 .btn-primary:focus {
@@ -6918,6 +6921,19 @@ fieldset:disabled .btn {
 }
 .pe-auto {
     pointer-events: auto !important;
+}
+
+.box-info {
+    border-left: 5px solid var(--bs-teal);
+}
+.box-info-2 {
+    border-left: 5px solid var(--bs-cyan);
+}
+.box-info-3 {
+    border-left: 5px solid var(--bs-indigo);
+}
+.box-info-4 {
+    border-left: 5px solid var(--bs-red);
 }
 .rounded {
     border-radius: 5px !important;
