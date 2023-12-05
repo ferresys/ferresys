@@ -5,6 +5,7 @@ import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
 import { validateEmail } from '../../middleware/email';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
@@ -16,13 +17,14 @@ export const login = async (req, res) => {
   const user = await pool.query('SELECT * FROM tabUsuario WHERE usuario = $1', [usuario]);
 
   if (user.rows.length > 0) {
-    // Comparar la contraseña con la contraseña encriptada almacenada
     const match = await bcrypt.compare(password, user.rows[0].password);
 
     if (match) {
-      res.json({ message: 'Ingreso exitoso' });
+      const token = jwt.sign({ id: user.rows[0].idUsuario }, process.env.SECRET, { expiresIn: '10m' });
+
+      res.json({ message: 'Ingreso exitoso', token });
     } else {
-      res.status(400).json({ message: 'Contraseña incorrecta' });
+      res.status(401).json({ message: 'Contraseña incorrecta' });
     }
   } else {
     res.status(400).json({ message: 'Usuario no existe' });
