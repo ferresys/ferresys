@@ -9,7 +9,8 @@ import { getCategoriasError, getCategoriaByIdError, insertCategoria, updateCateg
 import { getArticulosError, getArticuloByIdError, insertArticulo, updateArticulo, deleteArticulo} from '../controllers/articulos';
 import { getReciboMercanciasError, getReciboMercanciaByIdError, insertReciboMercancia} from '../controllers/recibo-mercancias';
 import { getKardexError, getKardexByIdError} from '../controllers/kardex';
-import { getUsuariosError, getUsuarioByIdError, insertUsuario, updateUsuario, deleteUsuario, login} from '../controllers/usuarios';
+import { getUsuariosError, getUsuarioByIdError, insertUsuario, updateUsuario, deleteUsuario} from '../controllers/usuarios';
+import { login } from '../controllers/usuario-login';
 import { getPermisosError, getPermisoByIdError, insertPermiso, updatePermiso, deletePermiso} from '../controllers/permisos';
 import { getUsuarioPermisosError, getUsuarioPermisoByIdError, insertUsuarioPermiso, updateUsuarioPermiso, deleteUsuarioPermiso  }from '../controllers/usuario-permisos';
 import { insertEncabezadoVenta} from '../controllers/encabezado-venta';
