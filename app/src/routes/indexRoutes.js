@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { validateToken } from '../../middleware/validate-token';
 const router = Router(); //Creamos la instancia router.
 
-import { getClientesError, getClienteByIdError, insertCliente, updateCliente, deleteCliente} from '../controllers/clientes';
+import { getClientesError, getClienteByIdError, insertCliente, updateCliente, deleteCliente} from '../controllers/Clientes';
 import { getProveedoresError, getProveedorByIdError, insertProveedor, updateProveedor, deleteProveedor} from '../controllers/proveedores';
 import { getMarcasError, getMarcaByIdError, insertMarca, updateMarca, deleteMarca }from '../controllers/marcas';
 import { getCategoriasError, getCategoriaByIdError, insertCategoria, updateCategoria, deleteCategoria} from '../controllers/categorias';

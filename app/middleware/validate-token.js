@@ -5,12 +5,12 @@ export const validateToken = (req, res, next) => {
     const token = authHeader && authHeader.split(' ')[1];
 
     if (token == null) {
-        return res.sendStatus(401).json({ message : 'Access Deniend' });
+        return res.status(401).json({ message : 'Access Denied' });
     }
 
     jwt.verify(token, process.env.SECRET, (err, user) => {
         if (err) {
-            return res.sendStatus(403).json({ message : 'Accesso denegado'});
+            return res.status(403).json({ message : 'Access Denied' });
         }
 
         req.user = user;

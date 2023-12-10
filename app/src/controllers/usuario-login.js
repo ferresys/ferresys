@@ -12,8 +12,10 @@ export const login = async (req, res) => {
   
       if (match) {
         const token = jwt.sign({ id: user.rows[0].idUsuario }, process.env.SECRET, { expiresIn: '10m' });
+
+        res.cookie('token', token, { httpOnly: true, sameSite: 'none' });
   
-        res.json({ message: 'Ingreso exitoso', token });
+        res.status(200).json({ auth: true, message: 'Ingreso exitoso', token });
       } else {
         res.status(401).json({ message: 'Contraseña incorrecta' });
       }

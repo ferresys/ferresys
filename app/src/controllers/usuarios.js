@@ -5,7 +5,6 @@ import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
 import { validateEmail } from '../../middleware/email';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
