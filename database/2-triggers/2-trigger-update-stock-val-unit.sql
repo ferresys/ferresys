@@ -1,6 +1,6 @@
 /*esta función trigger es importante para:
 cuando el usuario ingrese datos de recibo de mercancia o venta de mercancia,
-debemos llamar esta función para que me actualice los datos 
+debemos llamar esta función para que  actualice los datos 
 valStock y valUnit en la tabArticulo*/
 
 CREATE OR REPLACE FUNCTION actualizarStockValUnitEntradas()
@@ -20,7 +20,7 @@ select Porcentaje into zPorcentaje from tabArticulo where eanArt = NEW.eanArt;
  
 zValStock := (SELECT COALESCE(valStock, 0) + NEW.cantArt FROM tabArticulo WHERE eanArt = NEW.eanArt);
 zValUnit :=zValPromedio* zPorcentaje ;
-  	
+    
 
 UPDATE tabArticulo SET valStock = zValStock, valUnit = zValUnit WHERE eanArt = NEW.eanArt;
 
@@ -44,18 +44,12 @@ $$
 DECLARE
   zValStock tabArticulo.valStock%type;
   zValUnit tabArticulo.valUnit%type;
-  --zPorcentaje tabArticulo.porcentaje%type;
-
+  
 BEGIN
---select Porcentaje into zPorcentaje from tabArticulo where eanArt = NEW.eanArt;
- -- IF NEW.tipoMov = TRUE THEN
-    	--zValStock := (SELECT COALESCE(valStock, 0) + NEW.cantArt FROM tabArticulo WHERE eanArt = NEW.eanArt);
-    	--zValUnit := NEW.valProm * zPorcentaje ; --(el porcentaje debe ser ingresado como 1.20, 1.30, 1.10..etc)
-	--zValUnit :=(select valProm from tabKardex where consecKardex= consecKardex)* zPorcentaje ;
-  	-- ELSIF NEW.tipoMov = FALSE THEN
-    	zValStock := (SELECT COALESCE(valStock, 0) - NEW.cantArt FROM tabArticulo WHERE eanArt = NEW.eanArt);
-    	zValUnit := (SELECT valUnit FROM tabArticulo WHERE eanArt = NEW.eanArt);
-  --END IF;*/
+
+      zValStock := (SELECT COALESCE(valStock, 0) - NEW.cantArt FROM tabArticulo WHERE eanArt = NEW.eanArt);
+      zValUnit := (SELECT valUnit FROM tabArticulo WHERE eanArt = NEW.eanArt);
+  
 
   UPDATE tabArticulo SET valStock = zValStock, valUnit = zValUnit WHERE eanArt = NEW.eanArt;
 
