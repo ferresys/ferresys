@@ -1,16 +1,8 @@
--- Función para insertar datos en la tabla "tabArticulo"
 
---SELECT insertArticulo('00000001','Pulidora','1','1','Taladro amarillo',1.20, 1.19, 10, 500, 50, NULL);
---SELECT insertArticulo('00000002','Alambre # 14','2','2','alambre para instalaciones eléctricas #14 azul',1.20, 1.19, 10, 500, 50, NULL);
+--SELECT insertArticulo('00001','Pulidora','1','1','Pulidora amarilla',1.20, 1.19, 10, 500, 50, NULL);
 
---select * from tabArticulo;
---delete from tabArticulo;
-/* utilizamos join para consultar datos de varias tablas:
-SELECT  a.nomArt, m.nomMarca, c.nomCateg
-FROM tabArticulo a
-JOIN tabMarca m ON m.consecMarca = a.consecMarca 
-JOIN tabCategoria c ON c.consecCateg = a.consecCateg
-*/
+
+-- Función para insertar un nuevo Artículo
 
 CREATE OR REPLACE FUNCTION insertArticulo(
     zEanArt tabArticulo.eanArt%type,

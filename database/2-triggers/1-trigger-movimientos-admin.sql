@@ -1,6 +1,6 @@
 /*cada movimiento que el usuario realice en la base de datos 
 se vera reflejado en cada una de las tablas dependiendo de la 
-tabla donde se realizó la inserción, actualización o borrado*/
+tabla donde se realizó la inserción, actualización o eliminación*/
 
 CREATE OR REPLACE FUNCTION movimientosUsuario()
 RETURNS TRIGGER AS 

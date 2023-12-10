@@ -1,9 +1,7 @@
--- Función para insertar datos en la tabla "tabCategoria"
 
 --SELECT insertCategoria('Herramientas');
---SELECT insertCategoria('Eléctricos');
 
---select * from tabCategoria;
+-- Función para insertar una nueva Categoria
 
 CREATE OR REPLACE FUNCTION insertCategoria(
     zNomCateg tabCategoria.nomCateg%type

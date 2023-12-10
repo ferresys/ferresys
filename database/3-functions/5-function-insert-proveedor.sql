@@ -1,9 +1,8 @@
 
--- Función para insertar datos en la tabla "tabProveedor"
+--select insertProveedor('1234569825-4','MAKITA','3225468794','makita@gmail.com','calle 45# 12-51');
 
---select insertProveedor('1234569825-4','DEWALT','holsa','dewalt@gmail.com','calle 22 # 1-14');
---select insertProveedor('103658977-1','MAKITA','3225468794','makita@gmail.com','calle 45 ');
---select * from tabProveedor;
+
+-- Función para insertar datos en la tabla "tabProveedor"
 
 CREATE OR REPLACE FUNCTION insertProveedor(
     zIdProv tabProveedor.idProv%type,

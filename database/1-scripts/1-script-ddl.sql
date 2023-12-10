@@ -76,6 +76,7 @@ CREATE TABLE tabProveedor(
 CREATE TABLE tabCategoria(
   consecCateg SMALLINT NOT NULL,
   nomCateg VARCHAR NOT NULL,
+  estado BOOLEAN NOT NULL DEFAULT TRUE,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
@@ -86,6 +87,7 @@ CREATE TABLE tabCategoria(
 CREATE TABLE tabMarca(
   consecMarca SMALLINT NOT NULL,
   nomMarca VARCHAR NOT NULL,
+  estado BOOLEAN NOT NULL DEFAULT TRUE,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
@@ -114,9 +116,9 @@ CREATE TABLE tabArticulo(
   userUpdate VARCHAR,
   PRIMARY KEY (eanArt),
   CONSTRAINT fkMarca
-  FOREIGN KEY (consecMarca) REFERENCES tabMarca(consecMarca),
+  FOREIGN KEY (consecMarca) REFERENCES tabMarca(consecMarca) ON DELETE CASCADE,
   CONSTRAINT fkCategoria
-  FOREIGN KEY (consecCateg) REFERENCES tabCategoria(consecCateg)
+  FOREIGN KEY (consecCateg) REFERENCES tabCategoria(consecCateg) ON DELETE CASCADE
   
 );
 
@@ -127,19 +129,16 @@ CREATE TABLE tabReciboMercancia(
   valCompra NUMERIC(10),
   valTotal NUMERIC(10),
   idProv VARCHAR NOT NULL,
-  consecMarca SMALLINT NOT NULL,
   observacion TEXT,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONE,
   userUpdate VARCHAR,
   PRIMARY KEY (consecReciboMcia),
-   CONSTRAINT fkArticulo
-  FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt),
+  CONSTRAINT fkArticulo
+  FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt) ON DELETE CASCADE,
   CONSTRAINT fkProveedor
-  FOREIGN KEY (idProv) REFERENCES tabProveedor(idProv),
-  CONSTRAINT fkMarca
-  FOREIGN KEY (consecMarca) REFERENCES tabMarca(consecMarca)
+  FOREIGN KEY (idProv) REFERENCES tabProveedor(idProv) ON DELETE CASCADE
 );
 
 CREATE TABLE tabEncabezadoVenta(
@@ -154,9 +153,7 @@ CREATE TABLE tabEncabezadoVenta(
   userInsert VARCHAR,
   fecUpdate TIMESTAMP WITHOUT TIME ZONe,
   userUpdate VARCHAR,
-  PRIMARY KEY (idEncVenta),
-  CONSTRAINT fkCliente
-  FOREIGN KEY (idCli) REFERENCES tabCliente(idCli)
+  PRIMARY KEY (idEncVenta)
 );
 
 CREATE TABLE tabDetalleVenta(
@@ -177,13 +174,13 @@ CREATE TABLE tabDetalleVenta(
   userUpdate VARCHAR,
   PRIMARY KEY (consecDetVenta),
   CONSTRAINT fkidEncVenta
-  FOREIGN KEY (idEncVenta) REFERENCES tabEncabezadoVenta(idEncVenta),
+  FOREIGN KEY (idEncVenta) REFERENCES tabEncabezadoVenta(idEncVenta) ON DELETE CASCADE,
   CONSTRAINT fkConsecFactura
-  FOREIGN KEY (consecFactura) REFERENCES tabEncabezadoVenta(consecFactura),
+  FOREIGN KEY (consecFactura) REFERENCES tabEncabezadoVenta(consecFactura) ON DELETE CASCADE,
   CONSTRAINT fkArticulo
-  FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt),
+  FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt) ON DELETE CASCADE,
   CONSTRAINT fkconsecCotizacion
-  FOREIGN KEY (consecCotizacion) REFERENCES tabEncabezadoVenta(consecCotizacion)
+  FOREIGN KEY (consecCotizacion) REFERENCES tabEncabezadoVenta(consecCotizacion) ON DELETE CASCADE
 );
 
 CREATE TABLE tabKardex(
@@ -200,11 +197,11 @@ CREATE TABLE tabKardex(
   userUpdate VARCHAR,
   PRIMARY KEY (consecKardex),
   CONSTRAINT fkArticulo
-  FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt),
+  FOREIGN KEY (eanArt) REFERENCES tabArticulo(eanArt) ON DELETE CASCADE,
   CONSTRAINT fkReciboMercancia
-  FOREIGN KEY (consecReciboMcia) REFERENCES tabReciboMercancia(consecReciboMcia),
+  FOREIGN KEY (consecReciboMcia) REFERENCES tabReciboMercancia(consecReciboMcia) ON DELETE CASCADE,
   CONSTRAINT fkDetalleVenta
-  FOREIGN KEY (consecDetVenta) REFERENCES tabDetalleVenta(consecDetVenta)
+  FOREIGN KEY (consecDetVenta) REFERENCES tabDetalleVenta(consecDetVenta) ON DELETE CASCADE
 );
 
 CREATE TABLE tabRegBorrados(
