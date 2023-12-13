@@ -1,17 +1,21 @@
 document.getElementById('consultarCategorias').addEventListener('click', () => {
-    fetch('http://localhost:4000/categorias')
+    const token = localStorage.getItem('token');
+
+    fetch('http://localhost:4000/categorias', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }
+    })
         .then(response => response.json())
         .then(data => {
             const tablaMarca = document.querySelector('#tablaCategoria tbody');
             tablaMarca.innerHTML = ''; // Limpiar la tabla antes de agregar nuevos datos
-
             data.forEach(categoria => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${categoria.conseccateg}</td>
-                    <td>${categoria.nomcateg}</td>
-                   
-                   
+                    <td>${categoria.nomcateg}</td> 
                 `;
                 tablaMarca.appendChild(row);
             });
@@ -20,23 +24,3 @@ document.getElementById('consultarCategorias').addEventListener('click', () => {
             console.error('Error al realizar la consulta:', error);
         });
 });
-
-/* codigo para la barra de busqueda
-    
-        document.addEventListener("DOMContentLoaded", function() {
-            const searchInput = document.getElementById("searchInput");
-            const proveedorTable = document.getElementById("proveedorTable").querySelector("tbody").children;
-
-            searchInput.addEventListener("input", function() {
-                const searchTerm = searchInput.value.toLowerCase();
-
-                for (const row of proveedorTable) {
-                    const text = row.innerText.toLowerCase();
-                    if (text.includes(searchTerm)) {
-                        row.style.display = "table-row";
-                    } else {
-                        row.style.display = "none";
-                    }
-                }
-            });
-        });*/

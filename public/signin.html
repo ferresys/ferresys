@@ -298,31 +298,31 @@
         <span></span>
 
         <div class="signin">
-            <div class="content">
-                <a href="index.html" class="">
-                    <img src="img/logo-pri.png" alt="" width="100">
-                </a>
-                <h2>Inicio de Sesión</h2>
-                <div class="form">
-                    <div class="inputBox">
-                        <input type="text" required>
-                        <i>Usuario</i>
-                    </div>
-                    <div class="inputBox">
-                        <input type="password" required>
-                        <i>Contraseña</i>
-                    </div>
-                    <div class="links">
-                        <a href="#">¿Olvidaste la Contraseña?</a>
-                        <a href="#">Nuevo</a>
-                    </div>
-                    <div class="inputBox">
-                        <form action="index.html">
-                            <input type="submit" value="ENTRAR">
-                        </form>
+            <form id="loginForm">
+                <div class="content">
+                    <a href="index.html" class="">
+                        <img src="img/logo-pri.png" alt="" width="100">
+                    </a>
+                    <h2>Inicio de Sesión</h2>
+                    <div class="form">
+                        <div class="inputBox">
+                            <input type="text" id="floatingInput" required>
+                            <label for="floatingInput">Usuario</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="password" id="floatingPassword" required>
+                            <label for="floatingPassword">Contraseña</label>
+                        </div>
+                        <div class="links">
+                            <a href="#">¿Olvidaste la Contraseña?</a>
+                            <a href="#">Nuevo</a>
+                        </div>
+                        <div class="inputBox">
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4" onclick="validateForm(event)"> Inicio Sesión</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 
@@ -341,6 +341,7 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="../public/js/auth-user.js"></script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

@@ -1,7 +1,8 @@
 import { Router } from 'express';
+import { validateToken } from '../../middleware/validate-token';
 const router = Router(); //Creamos la instancia router.
 
-import { getClientesError, getClienteByIdError, insertCliente, updateCliente, deleteCliente} from '../controllers/clientes';
+import { getClientesError, getClienteByIdError, insertCliente, updateCliente, deleteCliente} from '../controllers/Clientes';
 import { getProveedoresError, getProveedorByIdError, insertProveedor, updateProveedor, deleteProveedor} from '../controllers/proveedores';
 import { getMarcasError, getMarcaByIdError, insertMarca, updateMarca, deleteMarca }from '../controllers/marcas';
 import { getCategoriasError, getCategoriaByIdError, insertCategoria, updateCategoria, deleteCategoria} from '../controllers/categorias';
@@ -9,6 +10,7 @@ import { getArticulosError, getArticuloByIdError, insertArticulo, updateArticulo
 import { getReciboMercanciasError, getReciboMercanciaByIdError, insertReciboMercancia} from '../controllers/recibo-mercancias';
 import { getKardexError, getKardexByIdError} from '../controllers/kardex';
 import { getUsuariosError, getUsuarioByIdError, insertUsuario, updateUsuario, deleteUsuario} from '../controllers/usuarios';
+import { login } from '../controllers/usuario-login';
 import { getPermisosError, getPermisoByIdError, insertPermiso, updatePermiso, deletePermiso} from '../controllers/permisos';
 import { getUsuarioPermisosError, getUsuarioPermisoByIdError, insertUsuarioPermiso, updateUsuarioPermiso, deleteUsuarioPermiso  }from '../controllers/usuario-permisos';
 import { insertEncabezadoVenta} from '../controllers/encabezado-venta';
@@ -16,16 +18,16 @@ import { insertDetalleVenta}from '../controllers/detalle-venta';
 
 // ESTABLECEMOS LA RUTA Y EL CONTROLADOR
 
-router.get('/clientes', getClientesError);
-router.get('/proveedores', getProveedoresError);
-router.get('/marcas', getMarcasError);
-router.get('/categorias', getCategoriasError);
-router.get('/articulos', getArticulosError);
-router.get('/reciboMercancias', getReciboMercanciasError);
-router.get('/kardex', getKardexError);
-router.get('/usuarios', getUsuariosError);
-router.get('/permisos', getPermisosError);
-router.get('/usuarioPermisos', getUsuarioPermisosError);
+router.get('/clientes', validateToken, getClientesError);
+router.get('/proveedores', validateToken, getProveedoresError);
+router.get('/marcas', validateToken, getMarcasError);
+router.get('/categorias', validateToken, getCategoriasError);
+router.get('/articulos', validateToken, getArticulosError);
+router.get('/reciboMercancias', validateToken, getReciboMercanciasError);
+router.get('/kardex', validateToken, getKardexError);
+router.get('/usuarios', validateToken, getUsuariosError);
+router.get('/permisos', validateToken, getPermisosError);
+router.get('/usuarioPermisos', validateToken, getUsuarioPermisosError);
 
 //consultas por id .
 
@@ -40,12 +42,9 @@ router.get('/Usuarios/:id', getUsuarioByIdError);
 router.get('/permisos/:id', getPermisoByIdError);
 router.get('/usuarioPermisos/:id', getUsuarioPermisoByIdError);
 
-app.get('/protected', verifyToken, (req, res) => {
-    res.send('This is a protected route');
-  });
-
 // insertar datos
 
+router.post('/login', login);
 router.post('/clientes', insertCliente);
 router.post('/proveedores', insertProveedor);
 router.post('/marcas', insertMarca);
