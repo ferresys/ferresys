@@ -2600,8 +2600,8 @@ fieldset:disabled .btn {
     opacity: 0.65;
 }
 .btn-primary {
-    color: #000;
-    background-color: #fff;
+    color: var(--marca);
+    background-color: #022232;
     border-color: var(--marca);
 }
 .btn-primary:hover {

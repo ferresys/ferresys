@@ -303,15 +303,19 @@
                     <a href="index.html" class="">
                         <img src="img/logo-pri.png" alt="" width="100">
                     </a>
-                    <h2>Inicio de Sesión</h2>
+                    <h2>LA REFORMA S.A.S</h2>
                     <div class="form">
                         <div class="inputBox">
                             <input type="text" id="floatingInput" required>
                             <label for="floatingInput">Usuario</label>
                         </div>
                         <div class="inputBox">
-                            <input type="password" id="floatingPassword" required>
+                            <input type="password" name="password" id="floatingPassword" class="input__field" required>
                             <label for="floatingPassword">Contraseña</label>
+                            <img 
+                                alt="Eye Icon" title="Eye Icon" 
+                                src="img/eye.svg" class="input__icon"
+                            >
                         </div>
                         <div class="links">
                             <a href="#">¿Olvidaste la Contraseña?</a>
@@ -345,6 +349,59 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        const input = document.querySelector(".input__field");
+        const inputIcon = document.querySelector(".input__icon");
+
+inputIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    inputIcon.setAttribute(
+        'src', 
+        input.getAttribute('type') === 'password' ?
+        'img/eye-off.svg'
+          :
+        'img/eye.svg'
+    );
+
+    input.setAttribute(
+        'type', 
+        input.getAttribute('type') === 'password' ? 
+        'text'
+          :
+        'password'
+    );
+});
+
+//esto es para el ojito del *
+
+document.addEventListener('DOMContentLoaded', function() {
+    var floatingInput = document.getElementById('floatingInput');
+    var label = floatingInput.previousElementSibling; // Selecciona el elemento label
+
+    // Verifica el estado inicial del input y aplica la clase adecuada
+    if (floatingInput.value.trim() !== '') {
+        label.classList.add('label-active');
+    }
+
+    // Agrega eventos para detectar cambios en el input
+    floatingInput.addEventListener('input', function() {
+        if (floatingInput.value.trim() === '') {
+            label.classList.remove('label-active');
+        } else {
+            label.classList.add('label-active');
+        }
+    });
+
+    floatingInput.addEventListener('blur', function() {
+        if (floatingInput.value.trim() === '') {
+            label.classList.remove('label-active');
+        }
+    });
+});
+    </script>
+    
 </body>
 
 </html>
