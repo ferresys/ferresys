@@ -29,6 +29,7 @@
    DB_PASS=user_password
    DB_NAME=database_name
    DB_PORT=port
+   SECRET=secret
    ```
 
 5. Star the server

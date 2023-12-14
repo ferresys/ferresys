@@ -42,25 +42,28 @@ CREATE TABLE tabUsuarioPermiso(
 
 CREATE TABLE tabCliente(
   codCli UUID NOT NULL,
-  idCli VARCHAR  NOT NULL UNIQUE,
-  tipoCli BOOLEAN NOT NULL DEFAULT TRUE, --TRUE="CLIENTE NATURAL" / FALSE="CLIENTE JURIDICO"
-  nomCli VARCHAR,
-  apeCli VARCHAR,
-  nomRepLegal VARCHAR,
-  nomEmpresa VARCHAR,
+  idCli VARCHAR NOT NULL UNIQUE,
+  divCli VARCHAR ,
+  tipoCli BOOLEAN NOT NULL,
+  nomCli VARCHAR ,
+  apeCli VARCHAR ,
+  nomRepLegal VARCHAR ,
+  nomEmpresa VARCHAR ,
   telCli VARCHAR (10) NOT NULL,
-  emailCli VARCHAR NOT NULL,
-  dirCli VARCHAR NOT NULL,
+  emailCli VARCHAR ,
+  dirCli VARCHAR ,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
-  fecUpdate TIMESTAMP WITHOUT TIME ZONe,
+  fecUpdate TIMESTAMP WITHOUT TIME ZONE,
   userUpdate VARCHAR,
   PRIMARY KEY (codCli)
 );
 
+
 CREATE TABLE tabProveedor(
   codProv UUID NOT NULL,
   idProv VARCHAR NOT NULL UNIQUE,
+  divProv VARCHAR,
   nomProv VARCHAR NOT NULL,
   telProv VARCHAR NOT NULL,
   emailProv VARCHAR NOT NULL,

@@ -1,0 +1,5 @@
+*.identifier
+
+node_modules/
+
+.env

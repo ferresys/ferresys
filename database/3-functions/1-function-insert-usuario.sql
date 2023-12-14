@@ -1,7 +1,7 @@
 
 --funcion para insertar usuarios y validar si ya existen.
 
--- SELECT insertUsuario('ghgh12', 'nora', 'lopez', 'juan@gmail.com', 'juan', 'abcd1234');
+-- SELECT insertUsuario('123456', 'nora', 'lopez', 'juan@gmail.com', 'juan', 'abcd1234');
 -- SELECT insertUsuario ('1095821825', 'Jacob', 'Chavez', 'jacob@gmail.com', 'juan', 'abcd1234');
 
 --select * from tabUsuario;

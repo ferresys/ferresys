@@ -10,25 +10,6 @@ import bcrypt from 'bcrypt';
 
 //CONSULTAS GENERALES
 
-export const login = async (req, res) => {
-  const { usuario, password } = req.body;
-
-  const user = await pool.query('SELECT * FROM tabUsuario WHERE usuario = $1', [usuario]);
-
-  if (user.rows.length > 0) {
-    // Comparar la contraseña con la contraseña encriptada almacenada
-    const match = await bcrypt.compare(password, user.rows[0].password);
-
-    if (match) {
-      res.json({ message: 'Ingreso exitoso' });
-    } else {
-      res.status(400).json({ message: 'Contraseña incorrecta' });
-    }
-  } else {
-    res.status(400).json({ message: 'Usuario no existe' });
-  }
-};
-
 const getUsuarios = async (req, res) => {
   const response = await pool.query('SELECT * FROM tabUsuario LIMIT 100');
   if (!response.rows.length) {

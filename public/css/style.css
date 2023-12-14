@@ -143,6 +143,9 @@
  color: black;
 }
 
+.icon-tool {
+    color: orange;
+}
 .sidebar .navbar .navbar-nav .nav-link:hover {
     color: var(--secondary);
     background: var(--primary);
@@ -153,7 +156,7 @@
 
 .sidebar .navbar .navbar-nav .nav-link.active {
     color: var(--dark);
-    background: var(--primary);
+    background: var(--marca);
     border-color: var(--marca);
     
 
@@ -248,7 +251,7 @@
 
 .content .navbar .dropdown-item:hover,
 .content .navbar .dropdown-item.active {
-    background: var(--dark);
+    background: var(--marca);
     
 }
 /*desplegable submenu*/
