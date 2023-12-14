@@ -1,5 +1,5 @@
 
---SELECT insertDetalleVenta ('00001', 10, 0);
+--SELECT insertDetalleVenta ('1', 10, 0);
 
 --Función para insertar Detalle de Venta
 
