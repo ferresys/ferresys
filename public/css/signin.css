@@ -82,6 +82,9 @@ section .signin {
     border-radius: 4px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
 }
+.sombra-log {
+    filter: drop-shadow(8px 5px 5px #000);
+}
 
 section .signin .content {
     position: relative;

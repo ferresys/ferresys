@@ -17,8 +17,7 @@ document.getElementById('consultarMarcas').addEventListener('click', () => {
                 row.innerHTML = `
                     <td>${marca.consecmarca}</td>
                     <td>${marca.nommarca}</td>
-                   
-                   
+                
                 `;
                 tablaMarca.appendChild(row);
             });
