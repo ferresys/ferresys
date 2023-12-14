@@ -1,6 +1,6 @@
 
 
---SELECT insertReciboMercancia('00001', 20, 5000, '1234569825-4', 'pulidora en buen estado');
+--SELECT insertReciboMercancia('1', 20, 5000, '1234569825', 'pulidora en buen estado');
 
 
 --Función para insertar Recibo de Mercancia

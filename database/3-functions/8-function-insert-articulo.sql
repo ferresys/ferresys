@@ -1,6 +1,6 @@
 
---SELECT insertArticulo('00001','Pulidora','1','1','Pulidora amarilla',1.20, 1.19, 10, 500, 50, NULL);
-
+--SELECT insertArticulo('2','Pulidora','1','1','Pulidora amarilla',1.20, 1.19, 10, 500, 50, NULL);
+select * from tabArticulo
 
 -- Función para insertar un nuevo Artículo
 
