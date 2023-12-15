@@ -69,6 +69,15 @@ export const updateCliente = async (req, res) => {
   const { idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli } = req.body;
 
   try {
+    if (!validateEmail(emailCli)) {
+      throw new Error('Invalid email format');
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    return;
+  }
+
+  try {
     const response = await pool.query(
       'UPDATE tabCliente SET idCli = $1, tipoCli = $2, nomCli = $3, apeCli = $4, nomRepLegal = $5, nomEmpresa = $6, telCli = $7, emailCli = $8, dirCli = $9 WHERE idCli = $10',
       [idCli, tipoCli, nomCli, apeCli, nomRepLegal, nomEmpresa, telCli, emailCli, dirCli, id]
