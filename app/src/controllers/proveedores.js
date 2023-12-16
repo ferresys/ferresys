@@ -76,6 +76,15 @@ export const updateProveedor = async (req, res) => {
   const { idProv, nomProv, telProv, emailProv, dirProv } = req.body;
 
   try {
+    if (!validateEmail(emailProv)) {
+      throw new Error('Invalid email format');
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    return;
+  }
+
+  try {
     const response = await pool.query(
       'UPDATE tabProveedor SET idProv = $1, nomProv = $2, telProv = $3, emailProv = $4, dirProv = $5 WHERE idProv = $6',
       [idProv, nomProv, telProv, emailProv, dirProv, id]

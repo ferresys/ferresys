@@ -77,15 +77,21 @@ export const updateUsuario = async (req, res) => {
   const { idUsuario, nomUsuario, apeUsuario, emailUsuario, usuario, password } = req.body;
 
   try {
+    if (!validateEmail(emailUsuario)) {
+      throw new Error('Invalid email format');
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    return;
+  }
+
+  try {
     const user = await pool.query('SELECT * FROM tabUsuario WHERE idUsuario = $1', [id]);
 
-    const match = await bcrypt.compare(password, user.rows[0].password);
-
-    if (match) {
-      return res.status(400).send('No puedes usar la misma contraseña');
+    let hashedpassword = user.rows[0].password;
+    if (password) {
+      hashedpassword = await bcrypt.hash(password, 10);
     }
-
-    const hashedpassword = await bcrypt.hash(password, 10);
 
     const response = await pool.query(
       'UPDATE tabUsuario SET idUsuario = $1, nomUsuario = $2, apeUsuario = $3, emailUsuario = $4, usuario = $5, password = $6 WHERE idUsuario = $7',
