@@ -22,7 +22,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// ...
+// confirmacion via correo 
 
 router.get('/confirm/:confirmationCode', async (req, res) => {
   try {
@@ -39,11 +39,10 @@ router.get('/confirm/:confirmationCode', async (req, res) => {
   }
 });
 
-// ...
 
 
 
-// ...
+// ruta para autenticarse
 
 router.post('/login', async (req, res) => {
   const { correo, contrasena } = req.body;

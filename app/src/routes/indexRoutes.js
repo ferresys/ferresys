@@ -78,5 +78,6 @@ router.delete('/usuarios/:id', deleteUsuario);
 router.delete('/permisos/:id', deletePermiso);
 router.delete('/usuarioPermisos/:id', deleteUsuarioPermiso);
 
+
 export default router;
 

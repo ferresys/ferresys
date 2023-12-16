@@ -3,6 +3,8 @@ import cors from 'cors';
 import path from 'path';
 import session from 'express-session';
 const app = express();
+const protectedRoutes = require('../middleware/protectedRoutes');
+
 
 // Middlewares
 app.use(express.json());
@@ -16,6 +18,10 @@ app.use(session({
   saveUninitialized: false,
   cookie: { secure: false }
 }));
+
+// Middleware de autenticación
+app.use('/', protectedRoutes);
+
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'public', 'signin.html'), function (err) {
@@ -37,6 +43,9 @@ app.get('/home', (req, res) => {
   }
 });
 
+
+
+
 // Ruta para servir archivos de la carpeta 'lib'
 app.use('/lib', express.static(path.join(__dirname, '..', '..', 'public', 'lib')));
 
@@ -48,6 +57,11 @@ app.use('/css', express.static(path.join(__dirname, '..', '..', 'public', 'css')
 
 // Ruta para servir archivos JavaScript
 app.use('/js', express.static(path.join(__dirname, '..', '..', 'public', 'js')));
+app.use('/consult', express.static(path.join(__dirname, '..', '..', 'public', 'consult')));
+app.use('/html', express.static(path.join(__dirname, '..', '..', 'public', 'html')));
+
+
+
 // Rutas
 import router from '../src/routes/indexRoutes';
 app.use(router);
@@ -57,12 +71,13 @@ app.use(router);
 import authRouter from '../auth/roueterauth';
 app.use('/api/auth', authRouter);
 
-// Ruta de captura
+
 // Ruta de captura
 app.use('*', (req, res) => {
   console.log(`Solicitud no manejada: ${req.method} ${req.originalUrl}`);
   res.status(404).send('La ruta solicitada no existe.');
 });
+
 
 
 const port = process.env.PORT || 4000;

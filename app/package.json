@@ -10,6 +10,7 @@
   "author": "Yocser Chavez, David Adarme, Diego Largo",
   "license": "ISC",
   "dependencies": {
+    "@sweetalert2/theme-dark": "^5.0.15",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",

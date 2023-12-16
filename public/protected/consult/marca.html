@@ -71,14 +71,14 @@
 
                 <div class="navbar-nav w-100 ">
 
-                    <a href="../index.html" class="nav-item nav-link"><i class="fas fa-home me-2"></i>Inicio</a>
+                    <a href="/home" class="nav-item nav-link"><i class="fas fa-home me-2"></i>Inicio</a>
                     <a href="" class="nav-item nav-link"><i class="fas fa-dollar-sign me-2"></i>Ventas</a>
                     <a href="" class="nav-item nav-link"><i class="fas fa-shopping-cart me-2"></i>Compras</a>
-                    <a href="../consult/articulo.html" class="nav-item nav-link"><i class="fas fa-tools me-2"></i>Articulos</a>
-                    <a href="" class="nav-item nav-link active"><i class="fas fa-tags me-2"></i>Marcas</a>
-                    <a href="../consult/categoria.html" class="nav-item nav-link"><i class="fas fa-sitemap me-2"></i>Categorias</a>
-                    <a href="../consult/cliente.html" class="nav-item nav-link"><i class="fas fa-user me-2"></i>Clientes</a>
-                    <a href="../consult/proveedor.html" class="nav-item nav-link"><i class="fas fa-truck me-2"></i>Proveedores</a>
+                    <a href="/articulo" class="nav-item nav-link"><i class="fas fa-tools me-2"></i>Articulos</a>
+                    <a href="/marca" class="nav-item nav-link active"><i class="fas fa-tags me-2"></i>Marcas</a>
+                    <a href="/categoria" class="nav-item nav-link"><i class="fas fa-sitemap me-2"></i>Categorias</a>
+                    <a href="/cliente" class="nav-item nav-link"><i class="fas fa-user me-2"></i>Clientes</a>
+                    <a href="/proveedor" class="nav-item nav-link"><i class="fas fa-truck me-2"></i>Proveedores</a>
                     <a href="" class="nav-item nav-link"><i class="fas fa-boxes me-2"></i>Inventario</a>
                     <a href="" class="nav-item nav-link"><i class="fas fa-users me-2"></i>Usuarios</a>
 
@@ -202,7 +202,7 @@
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">Mi perfil</a>
                             <a href="#" class="dropdown-item">Configuracion</a>
-                            <a href="../signin.html" class="dropdown-item">Cerrar sesion</a>
+                            <a href="#" id="logoutButton" class="dropdown-item" onclick="handleLogout()">Cerrar sesion</a>
                         </div>
                     </div>
                 </div>
@@ -283,6 +283,7 @@
                     <script src="../js/marca.js"></script>
                     <!-- Template Javascript -->
                     <script src="../js/main.js"></script>
+                    <script src="js/auth-user.js"></script>
 
                     <!-- JavaScript Consult-->
                     <script src="../js/consult/articulo.js"></script>

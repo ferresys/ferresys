@@ -32,11 +32,11 @@ function loginUser(event) {
                             'error'
                         );
                     } else if (data.error === 'Email not confirmed') {
-                        Swal.fire(
-                            'Error al iniciar sesión',
-                            'Aún no has sido autorizado. Por favor, revisa tu correo electrónico para autorizar tu cuenta.',
-                            'error'
-                        );
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Aún no has sido autorizado',
+                            text: 'Por favor, espera que el administrador te de acceso.'
+                        });
                     }
                     // Devuelve una promesa rechazada con el error para pasar al bloque catch
                     return Promise.reject(data.error || 'El inicio de sesión falló');
