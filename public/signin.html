@@ -297,21 +297,22 @@
         <span></span>
         <span></span>
 
-        <div class="signin">
-            <form id="loginForm">
+        <!-- Formulario de Inicio de Sesión -->
+        <div class="signin" id="loginSection">
+            <form id="loginForm" method="post" onsubmit="loginUser(event)">
                 <div class="content">
-                    <a href="index.html" class="">
+                    
                         <img src="img/logo-pri.png" alt="" class="sombra-log" width="100">
-                    </a>
+                    
                     <h2>LA REFORMA S.A.S</h2>
                     <div class="form">
                         <div class="inputBox">
-                            <input type="text" id="floatingInput" required>
-                            <label for="floatingInput">Usuario</label>
+                            <input type="email" id="loginEmail" required>
+                            <label class="floatingInput" for="loginEmail">Correo Electrónico</label>
                         </div>
                         <div class="inputBox">
                             <input type="password" name="password" id="floatingPassword" class="input__field" required>
-                            <label for="floatingPassword">Contraseña</label>
+                            <label class="floatingInput" for="floatingPassword">Contraseña</label>
                             <img 
                                 alt="Eye Icon" title="Eye Icon" 
                                 src="img/eye.svg" class="input__icon"
@@ -319,10 +320,47 @@
                         </div>
                         <div class="links">
                             <a href="#">¿Olvidaste la Contraseña?</a>
-                            <a href="#">Nuevo</a>
+                            <a href="#" onclick="toggleForms()">Nuevo</a>
                         </div>
                         <div class="inputBox">
-                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4" onclick="validateForm(event)"> Inicio Sesión</button>
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Inicio Sesión</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Formulario de Registro -->
+        <div class="signin" id="signupSection">
+            <form id="signupForm">
+                <div class="content">
+                    <a href="index.html" class="">
+                        <img src="img/logo-pri.png" alt="" class="sombra-log" width="100">
+                    </a>
+                    <h2 style="color: #0f0;">Nuevo Registro</h2>
+                    <div class="form">
+                        <div class="inputBox">
+                            <input type="text" id="name" name="name" class="inputField" required>
+                            <label class="floatingInput" for="name">Nombre</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="email" id="signupEmail" required>
+                            <label class="floatingInput" for="signupEmail">Correo Electrónico</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="password" id="password" name="password" class="inputField" required>
+                            <label class="floatingInput" for="password">Contraseña</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="inputField" required>
+                            <label class="floatingInput" for="confirmPassword">Confirmar Contraseña</label>
+                        </div>
+                        <p id="message"></p>
+                        <div class="links">
+                            <a href="#" onclick="toggleForms()">¿Ya tienes una cuenta? Inicia Sesión</a>
+                        </div>
+                        <div class="inputBox">
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4 registerButton">Registrarse</button>
                         </div>
                     </div>
                 </div>
@@ -345,9 +383,10 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="../public/js/auth-user.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Template Javascript -->
+    <script src="js/auth-user.js"></script>  
     <script src="js/main.js"></script>
 
     <script>
@@ -377,31 +416,140 @@ inputIcon.addEventListener("click", (e) => {
 //esto es para el ojito del *
 
 document.addEventListener('DOMContentLoaded', function() {
-    var floatingInput = document.getElementById('floatingInput');
-    var label = floatingInput.previousElementSibling; // Selecciona el elemento label
+    let floatingInputs = document.querySelectorAll('.inputField');
 
-    // Verifica el estado inicial del input y aplica la clase adecuada
-    if (floatingInput.value.trim() !== '') {
-        label.classList.add('label-active');
-    }
+    floatingInputs.forEach(function(input) {
+        let label = input.nextElementSibling;
 
-    // Agrega eventos para detectar cambios en el input
-    floatingInput.addEventListener('input', function() {
-        if (floatingInput.value.trim() === '') {
-            label.classList.remove('label-active');
-        } else {
+        // Verifica el estado inicial del input y aplica la clase adecuada
+        if (input.value.trim() !== '') {
             label.classList.add('label-active');
         }
-    });
 
-    floatingInput.addEventListener('blur', function() {
-        if (floatingInput.value.trim() === '') {
-            label.classList.remove('label-active');
-        }
+        // Agrega eventos para detectar cambios en el input
+        input.addEventListener('input', function() {
+            if (input.value.trim() === '') {
+                label.classList.remove('label-active');
+            } else {
+                label.classList.add('label-active');
+            }
+        });
+
+        input.addEventListener('blur', function() {
+            if (input.value.trim() === '') {
+                label.classList.remove('label-active');
+            }
+        });
     });
 });
+
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const emailInputs = document.querySelectorAll('input[type="email"]');
+        
+        emailInputs.forEach(function(emailInput) {
+            const emailLabel = document.querySelector(`label[for="${emailInput.id}"]`);
     
+            emailInput.addEventListener('focus', function() {
+                emailLabel.classList.add('active');
+            });
+    
+            emailInput.addEventListener('input', function() {
+                if (this.value === '') {
+                    emailLabel.classList.remove('active');
+                } else {
+                    emailLabel.classList.add('active');
+                }
+            });
+    
+            // Verifica el estado inicial del input y aplica la clase adecuada
+            if (emailInput.value.trim() !== '') {
+                emailLabel.classList.add('active');
+            }
+        });
+    });
+</script>
+    
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Función para validar las contraseñas
+        function validatePasswords() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const messageElement = document.getElementById('message');
+    
+            if (password === '' || confirmPassword === '') {
+                messageElement.style.display = 'none';
+            } else if (password !== confirmPassword) {
+                messageElement.textContent = 'Las contraseñas no coinciden';
+                messageElement.style.color = 'red';
+                messageElement.style.display = 'block';
+            } else {
+                messageElement.textContent = '';
+                messageElement.style.display = 'none';
+            }
+        }
+    
+        //  campo de confirmación de contraseña
+        const confirmPasswordElement = document.getElementById('confirmPassword');
+        if (confirmPasswordElement) {
+            confirmPasswordElement.addEventListener('input', validatePasswords);
+        }
+    
+        // controlador de eventos al campo de contraseña
+        const passwordElement = document.getElementById('password');
+        if (passwordElement) {
+            passwordElement.addEventListener('input', validatePasswords);
+        }
+    });
+</script>
+
+    <script>
+    //formulario de inicio de sesión esté visible por defecto
+    showLoginForm();
+
+    function showLoginForm() {
+        let loginSection = document.getElementById('loginSection');
+        let signupSection = document.getElementById('signupSection');
+
+
+        loginSection.classList.add('login');
+        loginSection.classList.remove('signup', 'flipped');
+
+        
+        signupSection.classList.add('signup', 'flipped');
+        signupSection.classList.remove('login');
+
+        loginSection.style.display = 'flex';
+        signupSection.style.display = 'none';
+    }
+
+   //hace que gire y muestre el sigup
+    function toggleForms() {
+        const signinElement = document.querySelector('.signin');
+        const loginSection = document.getElementById('loginSection');
+        const signupSection = document.getElementById('signupSection');
+    
+        if (signinElement.classList.contains('login')) {
+            signinElement.classList.remove('login');
+            signinElement.classList.add('signup');
+            signupSection.style.transform = "rotateY(0deg)";
+            signupSection.style.display = "block";
+            loginSection.style.display = "none";
+        } else {
+            signinElement.classList.remove('signup');
+            signinElement.classList.add('login');
+            signupSection.style.transform = "rotateY(180deg)";
+            signupSection.style.display = "none";
+            loginSection.style.display = "block";
+        }
+    }
+</script>
+
+    
+    
+ 
 </body>
 
 </html>

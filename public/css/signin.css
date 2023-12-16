@@ -70,6 +70,51 @@ section span:hover {
     transition: 0s;
 }
 
+
+
+#loginSection, #signupSection {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: transform 1s;
+}
+.signin {
+    position: relative;
+    width: 400px;
+    background: #022232;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    perspective: 1000px;
+}
+.signin h2 {
+    font-size: 2em;
+    color: #ffcc29;
+    text-transform: uppercase;
+}
+
+.signin form {
+    transform-style: preserve-3d;
+
+}
+
+.signin.login {
+    transform: rotateY(0deg);
+}
+
+.signin.signup {
+    transform: rotateY(180deg);
+    
+}
+
+.signin.flipped {
+    transform: rotateY(180deg);
+}
+
 section .signin {
     position: absolute;
     width: 400px;
@@ -127,6 +172,7 @@ section .signin .content .form .inputBox input {
     font-size: 1em;
 }
 
+
 section .signin .content .form .inputBox input:focus {
     color: #fff;
     border-color: var(--marca);
@@ -143,7 +189,20 @@ section .signin .content .form .inputBox i {
     pointer-events: none;
 }
 
+.floatingInput {
+    position: absolute;
+    transition: all 0.3s ease;
+}
 
+.floatingInput.active {
+    top: 0;
+    left: 15px;
+    font-size: 16px;
+    padding: 0 2px;
+    background: #022232;
+    opacity: 1;
+    
+}
 
 /* .signin .content .form .inputBox input:focus ~ i,
 .signin .content .form .inputBox input:valid ~ i {

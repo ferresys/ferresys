@@ -45,6 +45,9 @@ export const manejoErroresInsert = async (res, errorNumero = null) => {
   }
 };
 
+
+
+
  /********************************************************************************************
  *(=>)Las funciones de flecha son una forma más concisa de escribir funciones en comparación * 
  *con las funciones tradicionales(function) de JavaScript.                                             *
