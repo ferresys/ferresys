@@ -43,6 +43,14 @@ app.get('/home', (req, res) => {
   }
 });
 
+app.get('/public/resetpass.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', '..', 'public', 'resetpass.html'), function (err) {
+    if (err) {
+      console.log(err);
+      res.status(err.status).end();
+    }
+  });
+});
 
 
 

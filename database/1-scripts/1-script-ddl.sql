@@ -20,7 +20,8 @@ CREATE TABLE usuarios(
     correo VARCHAR(100) NOT NULL UNIQUE,
     contrasena VARCHAR(255) NOT NULL,
     confirmationcode VARCHAR(255),
-    confirmed BOOLEAN
+    confirmed BOOLEAN,
+    resetPasswordToken VARCHAR(255)
 );
 
 

@@ -29,7 +29,9 @@
    DB_PASS=user_password
    DB_NAME=database_name
    DB_PORT=port
-   SECRET=secret
+   JWT_SECRET=
+   MAILTRAP_USER=
+   MAILTRAP_PASS=
    ```
 
 5. Star the server

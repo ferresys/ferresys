@@ -301,9 +301,9 @@
         <div class="signin" id="loginSection">
             <form id="loginForm" method="post" onsubmit="loginUser(event)">
                 <div class="content">
-                    
-                        <img src="img/logo-pri.png" alt="" class="sombra-log" width="100">
-                    
+
+                    <img src="img/logo-pri.png" alt="" class="sombra-log" width="100">
+
                     <h2>LA REFORMA S.A.S</h2>
                     <div class="form">
                         <div class="inputBox">
@@ -313,13 +313,10 @@
                         <div class="inputBox">
                             <input type="password" name="password" id="floatingPassword" class="input__field" required>
                             <label class="floatingInput" for="floatingPassword">Contraseña</label>
-                            <img 
-                                alt="Eye Icon" title="Eye Icon" 
-                                src="img/eye.svg" class="input__icon"
-                            >
+                            <img alt="Eye Icon" title="Eye Icon" src="img/eye.svg" class="input__icon">
                         </div>
                         <div class="links">
-                            <a href="#">¿Olvidaste la Contraseña?</a>
+                            <a href="#" onclick="forgotPassword()">¿Olvidaste la Contraseña?</a>
                             <a href="#" onclick="toggleForms()">Nuevo</a>
                         </div>
                         <div class="inputBox">
@@ -334,9 +331,7 @@
         <div class="signin" id="signupSection">
             <form id="signupForm">
                 <div class="content">
-                    <a href="index.html" class="">
-                        <img src="img/logo-pri.png" alt="" class="sombra-log" width="100">
-                    </a>
+                    <img src="img/logo-pri.png" alt="" class="sombra-log" width="100">
                     <h2 style="color: #0f0;">Nuevo Registro</h2>
                     <div class="form">
                         <div class="inputBox">
@@ -352,7 +347,8 @@
                             <label class="floatingInput" for="password">Contraseña</label>
                         </div>
                         <div class="inputBox">
-                            <input type="password" id="confirmPassword" name="confirmPassword" class="inputField" required>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="inputField"
+                                required>
                             <label class="floatingInput" for="confirmPassword">Confirmar Contraseña</label>
                         </div>
                         <p id="message"></p>
@@ -360,7 +356,8 @@
                             <a href="#" onclick="toggleForms()">¿Ya tienes una cuenta? Inicia Sesión</a>
                         </div>
                         <div class="inputBox">
-                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4 registerButton">Registrarse</button>
+                            <button type="submit"
+                                class="btn btn-primary py-3 w-100 mb-4 registerButton">Registrarse</button>
                         </div>
                     </div>
                 </div>
@@ -386,170 +383,170 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Template Javascript -->
-    <script src="js/auth-user.js"></script>  
+    <script src="js/auth-user.js"></script>
     <script src="js/main.js"></script>
 
     <script>
         const input = document.querySelector(".input__field");
         const inputIcon = document.querySelector(".input__icon");
 
-inputIcon.addEventListener("click", (e) => {
-    e.preventDefault();
+        inputIcon.addEventListener("click", (e) => {
+            e.preventDefault();
 
-    inputIcon.setAttribute(
-        'src', 
-        input.getAttribute('type') === 'password' ?
-        'img/eye-off.svg'
-          :
-        'img/eye.svg'
-    );
+            inputIcon.setAttribute(
+                'src',
+                input.getAttribute('type') === 'password' ?
+                    'img/eye-off.svg'
+                    :
+                    'img/eye.svg'
+            );
 
-    input.setAttribute(
-        'type', 
-        input.getAttribute('type') === 'password' ? 
-        'text'
-          :
-        'password'
-    );
-});
-
-//esto es para el ojito del *
-
-document.addEventListener('DOMContentLoaded', function() {
-    let floatingInputs = document.querySelectorAll('.inputField');
-
-    floatingInputs.forEach(function(input) {
-        let label = input.nextElementSibling;
-
-        // Verifica el estado inicial del input y aplica la clase adecuada
-        if (input.value.trim() !== '') {
-            label.classList.add('label-active');
-        }
-
-        // Agrega eventos para detectar cambios en el input
-        input.addEventListener('input', function() {
-            if (input.value.trim() === '') {
-                label.classList.remove('label-active');
-            } else {
-                label.classList.add('label-active');
-            }
+            input.setAttribute(
+                'type',
+                input.getAttribute('type') === 'password' ?
+                    'text'
+                    :
+                    'password'
+            );
         });
 
-        input.addEventListener('blur', function() {
-            if (input.value.trim() === '') {
-                label.classList.remove('label-active');
-            }
+        //esto es para el ojito del *
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let floatingInputs = document.querySelectorAll('.inputField');
+
+            floatingInputs.forEach(function (input) {
+                let label = input.nextElementSibling;
+
+                // Verifica el estado inicial del input y aplica la clase adecuada
+                if (input.value.trim() !== '') {
+                    label.classList.add('label-active');
+                }
+
+                // Agrega eventos para detectar cambios en el input
+                input.addEventListener('input', function () {
+                    if (input.value.trim() === '') {
+                        label.classList.remove('label-active');
+                    } else {
+                        label.classList.add('label-active');
+                    }
+                });
+
+                input.addEventListener('blur', function () {
+                    if (input.value.trim() === '') {
+                        label.classList.remove('label-active');
+                    }
+                });
+            });
         });
-    });
-});
 
     </script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const emailInputs = document.querySelectorAll('input[type="email"]');
-        
-        emailInputs.forEach(function(emailInput) {
-            const emailLabel = document.querySelector(`label[for="${emailInput.id}"]`);
-    
-            emailInput.addEventListener('focus', function() {
-                emailLabel.classList.add('active');
-            });
-    
-            emailInput.addEventListener('input', function() {
-                if (this.value === '') {
-                    emailLabel.classList.remove('active');
-                } else {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const emailInputs = document.querySelectorAll('input[type="email"]');
+
+            emailInputs.forEach(function (emailInput) {
+                const emailLabel = document.querySelector(`label[for="${emailInput.id}"]`);
+
+                emailInput.addEventListener('focus', function () {
+                    emailLabel.classList.add('active');
+                });
+
+                emailInput.addEventListener('input', function () {
+                    if (this.value === '') {
+                        emailLabel.classList.remove('active');
+                    } else {
+                        emailLabel.classList.add('active');
+                    }
+                });
+
+                // Verifica el estado inicial del input y aplica la clase adecuada
+                if (emailInput.value.trim() !== '') {
                     emailLabel.classList.add('active');
                 }
             });
-    
-            // Verifica el estado inicial del input y aplica la clase adecuada
-            if (emailInput.value.trim() !== '') {
-                emailLabel.classList.add('active');
-            }
         });
-    });
-</script>
-    
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Función para validar las contraseñas
-        function validatePasswords() {
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const messageElement = document.getElementById('message');
-    
-            if (password === '' || confirmPassword === '') {
-                messageElement.style.display = 'none';
-            } else if (password !== confirmPassword) {
-                messageElement.textContent = 'Las contraseñas no coinciden';
-                messageElement.style.color = 'red';
-                messageElement.style.display = 'block';
-            } else {
-                messageElement.textContent = '';
-                messageElement.style.display = 'none';
-            }
-        }
-    
-        //  campo de confirmación de contraseña
-        const confirmPasswordElement = document.getElementById('confirmPassword');
-        if (confirmPasswordElement) {
-            confirmPasswordElement.addEventListener('input', validatePasswords);
-        }
-    
-        // controlador de eventos al campo de contraseña
-        const passwordElement = document.getElementById('password');
-        if (passwordElement) {
-            passwordElement.addEventListener('input', validatePasswords);
-        }
-    });
-</script>
+    </script>
 
     <script>
-    //formulario de inicio de sesión esté visible por defecto
-    showLoginForm();
+        document.addEventListener('DOMContentLoaded', function () {
+            // Función para validar las contraseñas
+            function validatePasswords() {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const messageElement = document.getElementById('message');
 
-    function showLoginForm() {
-        let loginSection = document.getElementById('loginSection');
-        let signupSection = document.getElementById('signupSection');
+                if (password === '' || confirmPassword === '') {
+                    messageElement.style.display = 'none';
+                } else if (password !== confirmPassword) {
+                    messageElement.textContent = 'Las contraseñas no coinciden';
+                    messageElement.style.color = 'red';
+                    messageElement.style.display = 'block';
+                } else {
+                    messageElement.textContent = '';
+                    messageElement.style.display = 'none';
+                }
+            }
+
+            //  campo de confirmación de contraseña
+            const confirmPasswordElement = document.getElementById('confirmPassword');
+            if (confirmPasswordElement) {
+                confirmPasswordElement.addEventListener('input', validatePasswords);
+            }
+
+            // controlador de eventos al campo de contraseña
+            const passwordElement = document.getElementById('password');
+            if (passwordElement) {
+                passwordElement.addEventListener('input', validatePasswords);
+            }
+        });
+    </script>
+
+    <script>
+        //formulario de inicio de sesión esté visible por defecto
+        showLoginForm();
+
+        function showLoginForm() {
+            let loginSection = document.getElementById('loginSection');
+            let signupSection = document.getElementById('signupSection');
 
 
-        loginSection.classList.add('login');
-        loginSection.classList.remove('signup', 'flipped');
+            loginSection.classList.add('login');
+            loginSection.classList.remove('signup', 'flipped');
 
-        
-        signupSection.classList.add('signup', 'flipped');
-        signupSection.classList.remove('login');
 
-        loginSection.style.display = 'flex';
-        signupSection.style.display = 'none';
-    }
+            signupSection.classList.add('signup', 'flipped');
+            signupSection.classList.remove('login');
 
-   //hace que gire y muestre el sigup
-    function toggleForms() {
-        const signinElement = document.querySelector('.signin');
-        const loginSection = document.getElementById('loginSection');
-        const signupSection = document.getElementById('signupSection');
-    
-        if (signinElement.classList.contains('login')) {
-            signinElement.classList.remove('login');
-            signinElement.classList.add('signup');
-            signupSection.style.transform = "rotateY(0deg)";
-            signupSection.style.display = "block";
-            loginSection.style.display = "none";
-        } else {
-            signinElement.classList.remove('signup');
-            signinElement.classList.add('login');
-            signupSection.style.transform = "rotateY(180deg)";
-            signupSection.style.display = "none";
-            loginSection.style.display = "block";
+            loginSection.style.display = 'flex';
+            signupSection.style.display = 'none';
         }
-    }
-</script>
 
-    
-    
- 
+        //hace que gire y muestre el sigup
+        function toggleForms() {
+            const signinElement = document.querySelector('.signin');
+            const loginSection = document.getElementById('loginSection');
+            const signupSection = document.getElementById('signupSection');
+
+            if (signinElement.classList.contains('login')) {
+                signinElement.classList.remove('login');
+                signinElement.classList.add('signup');
+                signupSection.style.transform = "rotateY(0deg)";
+                signupSection.style.display = "block";
+                loginSection.style.display = "none";
+            } else {
+                signinElement.classList.remove('signup');
+                signinElement.classList.add('login');
+                signupSection.style.transform = "rotateY(180deg)";
+                signupSection.style.display = "none";
+                loginSection.style.display = "block";
+            }
+        }
+    </script>
+
+
+
+
 </body>
 
 </html>

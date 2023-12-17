@@ -5,6 +5,9 @@ import { sendConfirmationEmail } from './mailerauth.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { confirmUser } from '../auth/controller.js';
+import { v4 as uuidv4 } from 'uuid';
+import { forgotPassword, resetPassword } from './controller.js';
+import { sendResetPasswordEmail } from './mailerauth.js';
 
 const router = express.Router();
 
@@ -13,6 +16,14 @@ router.use(express.json()); // Para poder parsear el cuerpo de las solicitudes P
 router.post('/register', async (req, res) => {
   try {
     const user = req.body;
+
+    // Verificar si el correo ya está registrado
+    const existingUser = await pool.query('SELECT * FROM usuarios WHERE correo = $1', [user.correo]);
+    if (existingUser.rows.length > 0) {
+      // Si el usuario ya existe, devolver un error
+      return res.status(400).json({ error: 'El correo ya está registrado.' });
+    }
+
     const confirmationCode = await addUser(user);
     await sendConfirmationEmail(user, confirmationCode);
     res.json({ success: true });
@@ -84,5 +95,49 @@ router.get('/logout', (req, res) => {
   });
 });
 
+// Ruta para solicitar el cambio de contraseña
+router.post('/forgot-password', async (req, res) => {
+  const { correo } = req.body;
+
+  try {
+    const result = await pool.query('SELECT * FROM usuarios WHERE correo = $1', [correo]);
+    const user = result.rows[0];
+
+    if (!user) {
+      return res.status(400).json({ error: 'No user with that email' });
+    }
+
+    const token = uuidv4();
+    await pool.query('UPDATE usuarios SET resetPasswordToken = $1 WHERE id = $2', [token, user.id]);
+
+    sendResetPasswordEmail(user, token);
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false });
+  }
+});
+// Ruta para cambiar la contraseña
+router.post('/reset/:token', async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+
+  try {
+    const result = await pool.query('SELECT * FROM usuarios WHERE resetPasswordToken = $1', [token]);
+    const user = result.rows[0];
+
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid or expired password reset token' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await pool.query('UPDATE usuarios SET contrasena = $1, resetPasswordToken = NULL WHERE id = $2', [hashedPassword, user.id]);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false });
+  }
+});
 
 export default router;

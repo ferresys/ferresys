@@ -1,3 +1,5 @@
+
+
 document.getElementById('signupForm').addEventListener('submit', registerUser);
 console.log(loginForm);
 
@@ -97,26 +99,75 @@ function registerUser(e) {
     };
 
     fetch('http://localhost:4000/api/auth/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            return Swal.fire(
-                'Registro exitoso!',
-                'Por favor, espera a que te verifiquen.',
-                'success'
-            );
-        })
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+})
+.then(response => response.json())
+.then(data => {
+    if (data.error) {
+        // Si el servidor devuelve un error, muestra una alerta de error
+        Swal.fire(
+            'Error de registro',
+            'El correo ya está registrado.',
+            'error'
+        );
+    } else {
+        // Si no hay error, muestra una alerta de éxito
+        Swal.fire(
+            'Registro exitoso!',
+            'Por favor, espera a que te verifiquen.',
+            'success'
+        )
         .then(() => {
             // Refrescar la página después de que el usuario haga clic en OK
             location.reload();
+        });
+    }
+})
+.catch(error => console.error('Error:', error));
+}
+
+//recuperar contrasena
+
+function forgotPassword() {
+    Swal.fire({
+        title: '¿Olvidaste tu contraseña?',
+        text: 'Ingresa tu correo electrónico:',
+        input: 'email',
+        confirmButtonText: 'Enviar',
+        allowOutsideClick: false
+    })
+        .then(result => {
+            // Aquí usamos result.value para obtener el valor del input
+            const correo = result.value;
+
+            if (!correo) throw null;
+
+            return fetch('http://localhost:4000/api/auth/forgot-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    correo: correo
+                })
+            });
         })
-        .catch(error => console.error('Error:', error));
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            Swal.fire("¡Éxito!", "Se ha enviado un correo de restablecimiento de contraseña a tu correo electrónico.", "success");
+        })
+        .catch(error => {
+            Swal.fire("¡Error!", "No se pudo enviar el correo de restablecimiento de contraseña.", "error");
+        });
 }
 
 
