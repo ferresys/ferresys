@@ -94,6 +94,22 @@ router.get('/logout', (req, res) => {
     }
   });
 });
+// cambia el no nombre en la aplicacion
+router.get('/me', async (req, res) => {
+  
+  if (!req.session.userId) {
+    return res.status(401).json({ error: 'No estás autenticado.' });
+  }
+
+  // Busca al usuario en la base de datos
+  const user = await pool.query('SELECT nombre FROM usuarios WHERE id = $1', [req.session.userId]);
+  if (user.rows.length > 0) {
+    // Devuelve los detalles del usuario
+    res.json(user.rows[0]);
+  } else {
+    res.status(404).json({ error: 'Usuario no encontrado.' });
+  }
+});
 
 // Ruta para solicitar el cambio de contraseña
 router.post('/forgot-password', async (req, res) => {

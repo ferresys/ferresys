@@ -170,5 +170,7 @@ export async function resetPassword(req, res) {
   }
 }
 
+
+
 export { addUser, generateToken };
 export default passport;
