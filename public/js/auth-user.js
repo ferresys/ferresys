@@ -1,8 +1,4 @@
 
-
-
-
-
 // Captura los datos del formulario de registro
 
 
@@ -185,16 +181,21 @@ function registerUser(e) {
 }
 
 //recuperar contrasena
-
 function forgotPassword() {
     Swal.fire({
         title: '¿Olvidaste tu contraseña?',
         text: 'Ingresa tu correo electrónico:',
         input: 'email',
         confirmButtonText: 'Enviar',
-        allowOutsideClick: false
+        allowOutsideClick: false,
+        showCloseButton: true
     })
         .then(result => {
+            // Si el modal fue cerrado, no hagas nada
+            if (result.dismiss === Swal.DismissReason.close || result.dismiss === Swal.DismissReason.esc || result.dismiss === Swal.DismissReason.backdrop) {
+                throw null;
+            }
+
             // Aquí usamos result.value para obtener el valor del input
             const correo = result.value;
 
@@ -220,7 +221,10 @@ function forgotPassword() {
             Swal.fire("¡Éxito!", "Se ha enviado un correo de restablecimiento de contraseña a tu correo electrónico.", "success");
         })
         .catch(error => {
-            Swal.fire("¡Error!", "No se pudo enviar el correo de restablecimiento de contraseña.", "error");
+            // Si el error es null, significa que el modal fue cerrado, así que no muestres ninguna alerta
+            if (error !== null) {
+                Swal.fire("¡Error!", "No se pudo enviar el correo de restablecimiento de contraseña.", "error");
+            }
         });
 }
 
