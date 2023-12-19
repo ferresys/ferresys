@@ -13,7 +13,6 @@ $$
 DECLARE
     zValUnit tabArticulo.valUnit%type;
     zSubTotal tabDetalleVenta.subTotal%type;
-    zIva tabArticulo.iva%type;
     zTotalPagar tabDetalleVenta.totalPagar%type;
     zIdEncVenta BIGINT;
     zConsecFactura BIGINT;
@@ -22,11 +21,11 @@ DECLARE
 BEGIN
     -- Obtener el valor unitario (valUnit) del artículo desde la tabla "tabArticulo"
     SELECT valUnit INTO zValUnit FROM tabArticulo WHERE eanArt = zEanArt;
-    SELECT iva INTO zIva FROM tabArticulo WHERE eanArt = zEanArt;
+    
     
     -- Calcular el subtotal y el total a pagar
     zSubtotal := zCantArt * zValUnit;
-    zTotalPagar := (zSubtotal * zIva)-zdescuento;
+    zTotalPagar := zSubtotal-zDescuento;
     
     --obtener el idEncVenta desde la tabEncabezadoVenta
     SELECT idEncVenta into zIdEncVenta from tabEncabezadoVenta ORDER BY idEncVenta DESC LIMIT 1;
@@ -36,8 +35,8 @@ BEGIN
     SELECT consecCotizacion INTO zConsecCotizacion FROM tabEncabezadoVenta  ORDER BY  idEncVenta  DESC LIMIT 1 ;
     
     -- Insertar los datos en la tabla "tabDetalleVenta"
-    INSERT INTO tabDetalleVenta (eanArt, cantArt, valUnit, subTotal, iva, descuento, totalPagar, consecFactura, consecCotizacion,idEncVenta )
-    VALUES (zEanArt, zCantArt, zValUnit, zSubTotal, zIva, zDescuento, zTotalPagar, zConsecFactura, zConsecCotizacion,zIdEncVenta);
+    INSERT INTO tabDetalleVenta (eanArt, cantArt, valUnit, subTotal, descuento, totalPagar, consecFactura, consecCotizacion,idEncVenta )
+    VALUES (zEanArt, zCantArt, zValUnit, zSubTotal, zDescuento, zTotalPagar, zConsecFactura, zConsecCotizacion,zIdEncVenta);
    
     RETURN zIdEncVenta;
     
