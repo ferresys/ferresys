@@ -1,28 +1,23 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-const fs = require('fs');
-const path = require('path');
-
-const imagePath = path.join(__dirname, '..', '..', 'public', 'img', 'logo_ferreSys1.png');
-const imageBase64 = fs.readFileSync(imagePath).toString('base64');
 
 dotenv.config();
 
 export async function sendConfirmationEmail(user) {
-  const smtpTransport = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
-    port: 2525,
-    auth: {
-      user: process.env.MAILTRAP_USER,
-      pass: process.env.MAILTRAP_PASS,
-    },
-  });
+    const smtpTransport = nodemailer.createTransport({
+        host: 'smtp.mailtrap.io',
+        port: 2525,
+        auth: {
+            user: process.env.MAILTRAP_USER,
+            pass: process.env.MAILTRAP_PASS,
+        },
+    });
 
-  const mailOptions = {
-    from: process.env.EMAIL,
-    to: user.correo,
-    subject: 'Confirma tu cuenta',
-    html: `
+    const mailOptions = {
+        from: process.env.EMAIL,
+        to: user.correo,
+        subject: 'Confirma tu cuenta',
+        html: `
         <!DOCTYPE html PUBLIC>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -107,7 +102,7 @@ export async function sendConfirmationEmail(user) {
                             <tr>
                                 <td align="center" valign="top" style="padding: 0;">
                                     <a href="" target="_blank" style="Margin: 0; color: #9DD6EA; font-family: Arial,sans-serif; font-weight: normal; line-height: 1.3; margin: 0 !important; padding:
-0; text-decoration: underline;"><img src="data:image/png;base64,${imageBase64}" width="200" height="200" border="0" alt="Heaven Sent" style="border: none; display: block; height: 100px !important; margin: 0; padding: 0; width: 100px !important;"></a>
+0; text-decoration: underline;"><img src="https://drive.google.com/uc?id=1bSDI-0PONIf4_600TP4cbArpJjotXSUm" width="200" height="200" border="0" alt="Heaven Sent" style="border: none; display: block; height: 100px !important; margin: 0; padding: 0; width: 100px !important;"></a>
                                 </td>
                             </tr>
                         </table>
@@ -225,36 +220,36 @@ END -->
 
 </html>
     `
-};
+    };
 
-  smtpTransport.sendMail(mailOptions, (error, response) => {
-    error ? console.log(error) : console.log(response);
-    smtpTransport.close();
-  });
+    smtpTransport.sendMail(mailOptions, (error, response) => {
+        error ? console.log(error) : console.log(response);
+        smtpTransport.close();
+    });
 }
 
 
 export async function sendResetPasswordEmail(user, token) {
-  const smtpTransport = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
-    port: 2525,
-    auth: {
-      user: process.env.MAILTRAP_USER,
-      pass: process.env.MAILTRAP_PASS,
-    },
-  });
+    const smtpTransport = nodemailer.createTransport({
+        host: 'smtp.mailtrap.io',
+        port: 2525,
+        auth: {
+            user: process.env.MAILTRAP_USER,
+            pass: process.env.MAILTRAP_PASS,
+        },
+    });
 
-  if (!user.correo) {
-    console.log('No email provided for user', user);
-    return;
-  }
+    if (!user.correo) {
+        console.log('No email provided for user', user);
+        return;
+    }
 
-  const mailOptions = {
-    from: process.env.EMAIL,
-    to: user.correo,
-    subject: 'Restablece tu contraseña',
-    html: `
-      <!DOCTYPE html PUBLIC>
+    const mailOptions = {
+        from: process.env.EMAIL,
+        to: user.correo,
+        subject: 'Restablece tu contraseña',
+        html: `
+        <!DOCTYPE html PUBLIC>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -338,7 +333,7 @@ export async function sendResetPasswordEmail(user, token) {
                             <tr>
                                 <td align="center" valign="top" style="padding: 0;">
                                     <a href="" target="_blank" style="Margin: 0; color: #9DD6EA; font-family: Arial,sans-serif; font-weight: normal; line-height: 1.3; margin: 0 !important; padding:
-0; text-decoration: underline;"><img src="data:image/png;base64,${imageBase64}" width="200" height="200" border="0" alt="Heaven Sent" style="border: none; display: block; height: 100px !important; margin: 0; padding: 0; width: 100px !important;"></a>
+0; text-decoration: underline;"><img src="https://drive.google.com/uc?id=1bSDI-0PONIf4_600TP4cbArpJjotXSUm" width="200" height="200" border="0" alt="Heaven Sent" style="border: none; display: block; height: 100px !important; margin: 0; padding: 0; width: 100px !important;"></a>
                                 </td>
                             </tr>
                         </table>
@@ -456,18 +451,18 @@ END -->
 
 </html>
     `
-  };
+    };
 
-  console.log('About to send reset password email');
+    console.log('About to send reset password email');
 
-  smtpTransport.sendMail(mailOptions, (error, response) => {
-    if (error) {
-      console.log('Error sending reset password email', error);
-    } else {
-      console.log('Reset password email sent', response);
-    }
-    smtpTransport.close();
-  });
+    smtpTransport.sendMail(mailOptions, (error, response) => {
+        if (error) {
+            console.log('Error sending reset password email', error);
+        } else {
+            console.log('Reset password email sent', response);
+        }
+        smtpTransport.close();
+    });
 
-  console.log('Done with sendResetPasswordEmail');
+    console.log('Done with sendResetPasswordEmail');
 }

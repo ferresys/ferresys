@@ -42,7 +42,7 @@ router.get('/confirm/:confirmationCode', async (req, res) => {
       await pool.query('UPDATE usuarios SET confirmed = TRUE WHERE id = $1', [user.rows[0].id]);
       res.send(`
       <!DOCTYPE html PUBLIC>
-      <html xmlns="http://www.w3.org/1999/xhtml">
+      <html>
       
       <head>
           <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

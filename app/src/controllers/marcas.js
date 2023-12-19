@@ -3,8 +3,7 @@ import pool from '../../config/config-database';
 import { manejoErrores } from '../../middleware/error';
 import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
-import PDFDocument from 'pdfkit';
-import blobStream from 'blob-stream';
+
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 

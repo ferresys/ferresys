@@ -47,12 +47,12 @@ document.getElementById('agregarMarcas').addEventListener('click', () => {
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire('¡Agregado!', 'La marca ha sido agregada.', 'success')
-            .then(() => {
-                // Refrescar la lista de marcas después de crear una nueva marca
-                consultarMarcas();
-            });
+                .then(() => {
+                    // Refrescar la lista de marcas después de crear una nueva marca
+                    consultarMarcas();
+                });
         }
-        
+
     }).catch(error => {
         console.error('Error:', error);
     });
@@ -84,13 +84,13 @@ function consultarMarcas(marcas = null) {
             const estado = marca.estado ? 'Activo' : 'Inactivo';
             const estadoClass = marca.estado ? 'my-success' : 'my-danger';
             const row = document.createElement('tr');
-                        row.innerHTML = `
+            row.innerHTML = `
             <td>${marca.consecmarca}</td>
             <td>${marca.nommarca}</td>
             <td class="text-center"><span class="${estadoClass}">${estado}</span></td>
             <td class="actions-cell">
-                <button class="btn btn-primary btn-sm edit-button hidden"><i class="bi bi-pencil-fill"></i></button>
-                <button class="btn btn-danger btn-sm delete-button hidden"><i class="bi bi-trash-fill"></i></button>
+            <button class="btn btn-primary btn-sm edit-button hidden btn-full-height"><i class="bi bi-pencil-fill"></i></button>
+            <button class="btn btn-danger btn-sm delete-button hidden btn-full-height"><i class="bi bi-trash-fill"></i></button>
             </td>
         `;
             tablaMarca.appendChild(row);
@@ -108,6 +108,9 @@ function consultarMarcas(marcas = null) {
                         </select>
                     `,
                     focusConfirm: false,
+                    showCancelButton: true, // Agrega esta línea
+                    confirmButtonText: 'Guardar',
+                    cancelButtonText: 'Cancelar',
                     preConfirm: async () => {
                         const nommarca = document.getElementById('swal-input1').value;
                         const estado = document.getElementById('swal-input2').value === 'Activo';
@@ -137,20 +140,22 @@ function consultarMarcas(marcas = null) {
                         row.children[2].children[0].textContent = marca.estado ? 'Activo' : 'Inactivo';
                         row.children[2].children[0].className = marca.estado ? 'my-success' : 'my-danger';
                     }
-                }).then(() => {
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'success',
-                        title: 'La marca ha sido editada.',
-                        showConfirmButton: false,
-                        timer: 2500,
-                        toast: true,
-                        timerProgressBar: true,
-                        onOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            position: 'top',
+                            icon: 'success',
+                            title: 'La marca ha sido editada.',
+                            showConfirmButton: false,
+                            timer: 2500,
+                            toast: true,
+                            timerProgressBar: true,
+                            onOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+                    }
                 }).catch(error => {
                     console.error('Error:', error);
                 });
@@ -200,12 +205,12 @@ function consultarMarcas(marcas = null) {
             });
         });
     })
-    .catch(error => {
-        console.error('Error al realizar la consulta:', error);
-    });
+        .catch(error => {
+            console.error('Error al realizar la consulta:', error);
+        });
 }
 
-            
+
 
 
 document.getElementById('filtro').addEventListener('click', () => {
@@ -236,33 +241,33 @@ function filtrarMarcas(estado) {
             'Authorization': `Bearer ${token}`,
         }
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        let marcasFiltradas;
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            let marcasFiltradas;
 
-        if (estado === '') {
-            // Si el usuario seleccionó "Todos", no filtrar las marcas
-            marcasFiltradas = data;
-        } else {
-            // Si el usuario seleccionó "Activos" o "Inactivos", filtrar las marcas por estado
-            const estadoBool = estado === 'true';
-            marcasFiltradas = data.filter(marca => marca.estado === estadoBool);
-        }
+            if (estado === '') {
+                // Si el usuario seleccionó "Todos", no filtrar las marcas
+                marcasFiltradas = data;
+            } else {
+                // Si el usuario seleccionó "Activos" o "Inactivos", filtrar las marcas por estado
+                const estadoBool = estado === 'true';
+                marcasFiltradas = data.filter(marca => marca.estado === estadoBool);
+            }
 
-        // Actualizar la lista de marcas con las marcas filtradas
-        consultarMarcas(marcasFiltradas);
-    })
-    .catch(error => {
-        console.error('Error al realizar la consulta:', error);
-    });
+            // Actualizar la lista de marcas con las marcas filtradas
+            consultarMarcas(marcasFiltradas);
+        })
+        .catch(error => {
+            console.error('Error al realizar la consulta:', error);
+        });
 }
 document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('exportar').addEventListener('click', function() {
+    document.getElementById('exportar').addEventListener('click', function () {
         // Captura los datos de la tabla
         const table = document.getElementById('tablaMarca');
         const rows = Array.from(table.rows);
@@ -283,16 +288,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 text: JSON.stringify(formattedData),
             }),
         })
-        .then(response => response.blob())
-        .then(blob => {
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.download = 'tabla.pdf';
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-        });
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'tabla.pdf';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            });
     });
 });
