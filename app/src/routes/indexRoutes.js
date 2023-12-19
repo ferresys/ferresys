@@ -1,9 +1,8 @@
 import { Router } from 'express';
 const router = Router(); //Creamos la instancia router.
-
 import { login } from '../controllers/usuario-login';
-import { validateToken } from '../../middleware/validate-token';
-import { getClientesError, getClienteByIdError, insertCliente, updateCliente, deleteCliente} from '../controllers/clientes';
+// import { validateToken } from '../../middleware/validate-token';
+import { getClientesError, getClienteByIdError, insertCliente, updateCliente, deleteCliente} from '../controllers/Clientes';
 import { getProveedoresError, getProveedorByIdError, insertProveedor, updateProveedor, deleteProveedor} from '../controllers/proveedores';
 import { getMarcasError, getMarcaByIdError, insertMarca, updateMarca, deleteMarca }from '../controllers/marcas';
 import { getCategoriasError, getCategoriaByIdError, insertCategoria, updateCategoria, deleteCategoria} from '../controllers/categorias';
@@ -18,16 +17,16 @@ import { insertDetalleVenta}from '../controllers/detalle-venta';
 
 // ESTABLECEMOS LA RUTA Y EL CONTROLADOR
 
-router.get('/clientes', validateToken, getClientesError);
-router.get('/proveedores', validateToken, getProveedoresError);
-router.get('/marcas', validateToken, getMarcasError);
-router.get('/categorias', validateToken, getCategoriasError);
-router.get('/articulos', validateToken, getArticulosError);
-router.get('/reciboMercancias', validateToken, getReciboMercanciasError);
-router.get('/kardex', validateToken, getKardexError);
-router.get('/usuarios', validateToken, getUsuariosError);
-router.get('/permisos', validateToken, getPermisosError);
-router.get('/usuarioPermisos', validateToken, getUsuarioPermisosError);
+router.get('/clientes',  getClientesError);
+router.get('/proveedores',  getProveedoresError);
+router.get('/marcas',  getMarcasError);
+router.get('/categorias',  getCategoriasError);
+router.get('/articulos',  getArticulosError);
+router.get('/reciboMercancias',  getReciboMercanciasError);
+router.get('/kardex',  getKardexError);
+router.get('/usuarios',  getUsuariosError);
+router.get('/permisos',  getPermisosError);
+router.get('/usuarioPermisos',  getUsuarioPermisosError);
 
 //consultas por id .
 
@@ -79,4 +78,6 @@ router.delete('/usuarios/:id', deleteUsuario);
 router.delete('/permisos/:id', deletePermiso);
 router.delete('/usuarioPermisos/:id', deleteUsuarioPermiso);
 
+
 export default router;
+

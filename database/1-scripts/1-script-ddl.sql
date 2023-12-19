@@ -14,6 +14,17 @@ CREATE TABLE tabUsuario(
   PRIMARY KEY (codUsuario)
 );
 
+CREATE TABLE usuarios(
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL UNIQUE,
+    contrasena VARCHAR(255) NOT NULL,
+    confirmationcode VARCHAR(255),
+    confirmed BOOLEAN,
+    resetPasswordToken VARCHAR(255)
+);
+
+
 CREATE TABLE tabPermiso(
   consecPermiso SMALLINT NOT NULL,
   nomPermiso VARCHAR NOT NULL,
@@ -214,3 +225,4 @@ CREATE TABLE tabRegBorrados(
   nomTabla VARCHAR NOT NULL,
   PRIMARY KEY (consecRegBor)
 );
+
