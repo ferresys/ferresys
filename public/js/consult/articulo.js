@@ -1,5 +1,5 @@
 document.getElementById('consultarButton').addEventListener('click', () => {
-    fetch('http://localhost:4000/articulos')
+    fetch('https://ferresysrender.onrender.com/articulos')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.querySelector('#articuloTable tbody');

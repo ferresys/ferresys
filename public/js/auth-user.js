@@ -9,7 +9,7 @@ function loginUser(event) {
     let correo = document.getElementById('loginEmail').value;
     let contrasena = document.getElementById('floatingPassword').value;
 
-    fetch('http://localhost:4000/api/auth/login', {
+    fetch('https://ferresysrender.onrender.com/api/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ async function getUserData() {
             throw new Error('No token found');
         }
 
-        const response = await fetch('http://localhost:4000/api/auth/me', {
+        const response = await fetch('https://ferresysrender.onrender.com/api/auth/me', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ function registerUser(e) {
         contrasena: document.getElementById('password').value
     };
 
-    fetch('http://localhost:4000/api/auth/register', {
+    fetch('https://ferresysrender.onrender.com/api/auth/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -201,7 +201,7 @@ function forgotPassword() {
 
             if (!correo) throw null;
 
-            return fetch('http://localhost:4000/api/auth/forgot-password', {
+            return fetch('https://ferresysrender.onrender.com/api/auth/forgot-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

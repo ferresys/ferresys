@@ -1,7 +1,7 @@
 document.getElementById('consultarButton').addEventListener('click', () => {
     const token = localStorage.getItem('token');
 
-    fetch('http://localhost:4000/proveedores', {
+    fetch('https://ferresysrender.onrender.com/proveedores', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,

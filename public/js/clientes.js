@@ -1,5 +1,5 @@
 // Asume que la URL es la ruta en tu servidor que maneja la consulta de clientes
-const url = 'http://localhost:4000/clientes';
+const url = 'https://ferresysrender.onrender.com/clientes';
 
 fetch(url)
     .then(response => {

@@ -1,5 +1,5 @@
 document.getElementById('consultarCategorias').addEventListener('click', () => {
-    fetch('http://localhost:4000/categorias')
+    fetch('https://ferresysrender.onrender.com/categorias')
         .then(response => response.json())
         .then(data => {
             const tablaMarca = document.querySelector('#tablaCategoria tbody');

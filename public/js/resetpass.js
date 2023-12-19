@@ -24,7 +24,7 @@ export function resetPassword() {
             return;
         }
 
-        fetch(`http://localhost:4000/api/auth/reset/${token}`, {
+        fetch(`https://ferresysrender.onrender.com/api/auth/reset/${token}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ export function resetPassword() {
             .then(data => {
                 Swal.fire("¡Éxito!", "Tu contraseña ha sido restablecida.", "success")
                     .then(() => {
-                        window.location.href = 'http://localhost:4000';
+                        window.location.href = 'https://ferresysrender.onrender.com';
                     });
             })
             .catch(error => {

@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
       data[key] = value;
     });
 
-    fetch("http://localhost:4000/articulos", {
+    fetch("https://ferresysrender.onrender.com/articulos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

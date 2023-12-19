@@ -1,7 +1,7 @@
 document.getElementById('consultarMarcas').addEventListener('click', () => {
     const token = localStorage.getItem('token');
 
-    fetch('http://localhost:4000/marcas', {
+    fetch('https://ferresysrender.onrender.com/marcas', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,

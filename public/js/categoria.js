@@ -1,7 +1,7 @@
 document.getElementById('consultarCategorias').addEventListener('click', () => {
     const token = localStorage.getItem('token');
 
-    fetch('http://localhost:4000/categorias', {
+    fetch('https://ferresysrender.onrender.com/categorias', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
