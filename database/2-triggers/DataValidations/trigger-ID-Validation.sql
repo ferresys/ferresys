@@ -13,8 +13,8 @@ BEGIN
                 zIdValue := NEW.idCli;
             WHEN TG_RELID = 'tabproveedor'::regclass THEN
                 zIdValue := NEW.idProv;
-            WHEN TG_RELID = 'tabusuario'::regclass THEN
-                zIdValue := NEW.idUsuario;
+            WHEN TG_RELID = 'usuarios'::regclass THEN
+                zIdValue := NEW.id;
             ELSE
                 RAISE EXCEPTION 'Error trigger';
         END CASE;
@@ -37,5 +37,5 @@ BEFORE INSERT ON tabProveedor
 FOR EACH ROW EXECUTE FUNCTION validacionId();
 
 CREATE TRIGGER nitUsuario
-BEFORE INSERT ON tabUsuario
+BEFORE INSERT ON usuarios
 FOR EACH ROW EXECUTE FUNCTION validacionId();

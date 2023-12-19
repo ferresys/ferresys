@@ -1,19 +1,4 @@
 
-CREATE TABLE tabUsuario(
-  codUsuario UUID NOT NULL,
-  idUsuario VARCHAR NOT NULL UNIQUE,
-  nomUsuario VARCHAR NOT NULL,
-  apeUsuario VARCHAR NOT NULL,
-  emailUsuario VARCHAR NOT NULL,
-  usuario VARCHAR NOT NULL,
-  password VARCHAR NOT NULL,
-  fecInsert TIMESTAMP WITHOUT TIME ZONE,
-  userInsert VARCHAR,
-  fecUpdate TIMESTAMP WITHOUT TIME ZONE,
-  userUpdate VARCHAR,
-  PRIMARY KEY (codUsuario)
-);
-
 CREATE TABLE usuarios(
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -38,7 +23,7 @@ CREATE TABLE tabPermiso(
 
 CREATE TABLE tabUsuarioPermiso(
   consecUsuarioPermiso SMALLINT NOT NULL,
-  idUsuario VARCHAR NOT NULL,
+  id SERIAL NOT NULL,
   consecPermiso SMALLINT NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
@@ -46,7 +31,7 @@ CREATE TABLE tabUsuarioPermiso(
   userUpdate VARCHAR,
   PRIMARY KEY (consecUsuarioPermiso),
   CONSTRAINT fkUsuario
-  FOREIGN KEY (idUsuario) REFERENCES tabUsuario(idUsuario),
+  FOREIGN KEY (id) REFERENCES usuarios(id),
   CONSTRAINT fkPermiso
   FOREIGN KEY (consecPermiso) REFERENCES tabPermiso(consecPermiso)
 );
@@ -55,7 +40,7 @@ CREATE TABLE tabCliente(
   codCli UUID NOT NULL,
   idCli VARCHAR NOT NULL UNIQUE,
   divCli VARCHAR ,
-  tipoCli BOOLEAN NOT NULL,
+  tipoCli BOOLEAN NOT NULL DEFAULT TRUE,
   nomCli VARCHAR ,
   apeCli VARCHAR ,
   nomRepLegal VARCHAR ,
@@ -77,8 +62,8 @@ CREATE TABLE tabProveedor(
   divProv VARCHAR,
   nomProv VARCHAR NOT NULL,
   telProv VARCHAR NOT NULL,
-  emailProv VARCHAR NOT NULL,
-  dirProv VARCHAR NOT NULL,
+  emailProv VARCHAR NULL,
+  dirProv VARCHAR NULL,
   estado BOOLEAN NOT NULL DEFAULT TRUE, --TRUE="ACTIVO" - FALSE="INACTIVO"
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
@@ -116,13 +101,12 @@ CREATE TABLE tabArticulo(
   consecCateg SMALLINT NOT NULL,
   descArt TEXT,
   valUnit NUMERIC(10),
-  porcentaje NUMERIC(10,2), /*porcentaje de ganancia por articulo que pone el administrador*/
-  iva NUMERIC (10,2) NOT NULL,
+  porcentaje NUMERIC(10,2), /*1.20 porcentaje de ganancia por articulo que pone el administrador*/
   valStock INTEGER,
-  stockMin INTEGER NOT NULL,
-  stockMax INTEGER NOT NULL,
-  valReorden INTEGER NOT NULL,
-  fecVence DATE,
+  stockMin INTEGER NOT NULL DEFAULT 10,
+  stockMax INTEGER NOT NULL DEFAULT 500,
+  valReorden INTEGER NOT NULL DEFAULT 50,
+  fecVence DATE DEFAULT NULL,
   estado BOOLEAN NOT NULL DEFAULT TRUE,--TRUE="ACTIVO" - FALSE="INACTIVO"
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
   userInsert VARCHAR,
@@ -179,7 +163,7 @@ CREATE TABLE tabDetalleVenta(
   cantArt INTEGER NOT NULL,
   valUnit NUMERIC(10) NOT NULL,
   subTotal NUMERIC(10) NOT NULL,
-  iva NUMERIC (10,2) NOT NULL DEFAULT 0.19, -- DEFAULT 0
+  iva NUMERIC (10,2) NOT NULL DEFAULT 0, -- DEFAULT 0- en caso tal que se requiera IVA=1.19 o segun como este la tasa.
   descuento NUMERIC (10) NOT NULL DEFAULT 0,
   totalPagar NUMERIC(10) NOT NULL,
   fecInsert TIMESTAMP WITHOUT TIME ZONE,
