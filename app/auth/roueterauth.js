@@ -187,7 +187,7 @@ router.get('/confirm/:confirmationCode', async (req, res) => {
                                               <tr>
                                                 <!-- LINK DE 
       END -->
-                                                  <td align="center" valign="middle" height="48" style="color: #ffcc29 !important; padding: 0;"> <a class="content__button-link" href="http://localhost:4000/" target="_blank" style="Margin: 0; color: #ffcc29 !important; display: inline-block; font-family: 'Gotham',Helvetica,Arial,sans-serif; font-size: 20px; font-weight: 600; line-height: 48px; margin: 0 !important; padding: 0; text-decoration: none;">REGRESAR AL INICIO</a> </td>
+                                                  <td align="center" valign="middle" height="48" style="color: #ffcc29 !important; padding: 0;"> <a class="content__button-link" href="https://ferresysrender.onrender.com/" target="_blank" style="Margin: 0; color: #ffcc29 !important; display: inline-block; font-family: 'Gotham',Helvetica,Arial,sans-serif; font-size: 20px; font-weight: 600; line-height: 48px; margin: 0 !important; padding: 0; text-decoration: none;">REGRESAR AL INICIO</a> </td>
                                                   <!-- FIN LINK DE BACKEND -->
                                               </tr>
                                           </table>

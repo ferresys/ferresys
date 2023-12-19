@@ -165,7 +165,7 @@ line-height: 10px; padding: 0;">&nbsp;</td>
                                         <tr>
                                           <!-- LINK DE 
 END -->
-                                            <td align="center" valign="middle" height="48" style="color: #ffffff !important; padding: 0;"> <a class="content__button-link" href="http://localhost:4000/api/auth/confirm/${user.confirmationCode}" target="_blank" style="Margin: 0; color: #ffffff !important; display: inline-block; font-family: 'Gotham',Helvetica,Arial,sans-serif; font-size: 20px; font-weight: 600; line-height: 48px; margin: 0 !important; padding: 0; text-decoration: none;">Confirmar Cuenta</a>                                                </td>
+                                            <td align="center" valign="middle" height="48" style="color: #ffffff !important; padding: 0;"> <a class="content__button-link" href="https://ferresysrender.onrender.com/api/auth/confirm/${user.confirmationCode}" target="_blank" style="Margin: 0; color: #ffffff !important; display: inline-block; font-family: 'Gotham',Helvetica,Arial,sans-serif; font-size: 20px; font-weight: 600; line-height: 48px; margin: 0 !important; padding: 0; text-decoration: none;">Confirmar Cuenta</a>                                                </td>
                                             <!-- FIN LINK DE BACKEND -->
                                         </tr>
                                     </table>
@@ -396,7 +396,7 @@ line-height: 10px; padding: 0;">&nbsp;</td>
                                         <tr>
                                           <!-- LINK DE 
 END -->
-                                            <td align="center" valign="middle" height="48" style="color: #ffffff !important; padding: 0;"> <a class="content__button-link" href="http://localhost:4000/public/resetpass.html?token=${token}" target="_blank" style="Margin: 0; color: #ffffff !important; display: inline-block; font-family: 'Gotham',Helvetica,Arial,sans-serif; font-size: 20px; font-weight: 600; line-height: 48px; margin: 0 !important; padding: 0; text-decoration: none;">Restablecer Contraseña</a>                                                </td>
+                                            <td align="center" valign="middle" height="48" style="color: #ffffff !important; padding: 0;"> <a class="content__button-link" href="https://ferresysrender.onrender.com/public/resetpass.html?token=${token}" target="_blank" style="Margin: 0; color: #ffffff !important; display: inline-block; font-family: 'Gotham',Helvetica,Arial,sans-serif; font-size: 20px; font-weight: 600; line-height: 48px; margin: 0 !important; padding: 0; text-decoration: none;">Restablecer Contraseña</a>                                                </td>
                                             <!-- FIN LINK DE BACKEND -->
                                         </tr>
                                     </table>

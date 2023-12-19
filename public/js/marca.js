@@ -15,7 +15,7 @@ document.getElementById('agregarMarcas').addEventListener('click', () => {
             }
 
             // Verificar si la marca ya existe
-            const responseCheck = await fetch('http://localhost:4000/marcas');
+            const responseCheck = await fetch('https://ferresysrender.onrender.com/marcas');
             const data = await responseCheck.json();
             const existeMarca = data.some(marca => marca.nommarca === nommarca);
 
@@ -25,7 +25,7 @@ document.getElementById('agregarMarcas').addEventListener('click', () => {
                 return;
             }
 
-            const url = `http://localhost:4000/marcas`; // URL del servidor para agregar marcas
+            const url = `https://ferresysrender.onrender.com/marcas`; // URL del servidor para agregar marcas
 
             const response = await fetch(url, {
                 method: 'POST',
@@ -64,7 +64,7 @@ function consultarMarcas(marcas = null) {
 
     const fetchMarcas = marcas
         ? Promise.resolve(marcas)
-        : fetch('http://localhost:4000/marcas', {
+        : fetch('https://ferresysrender.onrender.com/marcas', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -116,7 +116,7 @@ function consultarMarcas(marcas = null) {
                         const estado = document.getElementById('swal-input2').value === 'Activo';
 
                         const id = marca.consecmarca; // Obtén el ID de la marca
-                        const url = `http://localhost:4000/marcas/${id}`; // Incluye el ID en la URL
+                        const url = `https://ferresysrender.onrender.com/marcas/${id}`; // Incluye el ID en la URL
 
                         const response = await fetch(url, {
                             method: 'PUT',
@@ -174,7 +174,7 @@ function consultarMarcas(marcas = null) {
                 }).then(async (result) => {
                     if (result.isConfirmed) {
                         const id = marca.consecmarca; // Obtén el ID de la marca
-                        const url = `http://localhost:4000/marcas/${id}`; // Incluye el ID en la URL
+                        const url = `https://ferresysrender.onrender.com/marcas/${id}`; // Incluye el ID en la URL
 
                         const response = await fetch(url, {
                             method: 'DELETE',
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
 
         // Envía los datos al servidor
-        fetch('http://localhost:4000/generate-pdf', {
+        fetch('https://ferresysrender.onrender.com/generate-pdf', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

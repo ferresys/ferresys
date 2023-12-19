@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Añade un listener al botón "Mostrar Clientes" (asume que tiene un id="mostrar-clientes")
   document.getElementById('mostrar-clientes').addEventListener('click', function() {
     // Realiza una petición fetch al endpoint que proporciona los datos de los clientes
-    fetch('http://localhost:3000/clientes')
+    fetch('https://ferresysrender.onrender.com/clientes')
     
       .then(response => response.json())
       .then(data => {
