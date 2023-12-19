@@ -25,16 +25,22 @@ function loginUser(event) {
                 return response.json().then(data => {
                     // Si el estado de la respuesta es 401, muestra una alerta de "contraseña incorrecta"
                     if (response.status === 401) {
-                        Swal.fire(
-                            'Error al iniciar sesión',
-                            'La contraseña que ingresaste es incorrecta. Por favor, inténtalo de nuevo.',
-                            'error'
-                        );
+                        Swal.fire({
+                            title: 'Error al iniciar sesión',
+                            text: 'La contraseña que ingresaste es incorrecta. Por favor, inténtalo de nuevo.',
+                            icon: 'error',
+                            customClass: {
+                                confirmButton: 'my-confirm-button-class'
+                            }
+                        });
                     } else if (data.error === 'Email not confirmed') {
                         Swal.fire({
                             icon: 'info',
                             title: 'Aún no has sido autorizado',
-                            text: 'Por favor, espera que el administrador te de acceso.'
+                            text: 'Por favor, espera que el administrador te de acceso.',
+                            customClass: {
+                                confirmButton: 'my-confirm-button-class'
+                            }
                         });
                     }
                     // Devuelve una promesa rechazada con el error para pasar al bloque catch
@@ -159,18 +165,24 @@ function registerUser(e) {
         .then(data => {
             if (data.error) {
                 // Si el servidor devuelve un error, muestra una alerta de error
-                Swal.fire(
-                    'Error de registro',
-                    'El correo ya está registrado.',
-                    'error'
-                );
+                Swal.fire({
+                    title: 'Error de registro',
+                    text: 'El correo ya está registrado.',
+                    icon: 'error',
+                    customClass: {
+                        confirmButton: 'my-confirm-button-class'
+                    }
+                });
             } else {
                 // Si no hay error, muestra una alerta de éxito
-                Swal.fire(
-                    'Registro exitoso!',
-                    'Por favor, espera a que te verifiquen.',
-                    'success'
-                )
+                Swal.fire({
+                    title: 'Registro exitoso!',
+                    text: 'Por favor, espera a que te verifiquen.',
+                    icon: 'success',
+                    customClass: {
+                        confirmButton: 'my-confirm-button-class'
+                    }
+                })
                     .then(() => {
                         // Refrescar la página después de que el usuario haga clic en OK
                         location.reload();
@@ -188,7 +200,10 @@ function forgotPassword() {
         input: 'email',
         confirmButtonText: 'Enviar',
         allowOutsideClick: false,
-        showCloseButton: true
+        showCloseButton: true,
+        customClass: {
+            confirmButton: 'my-confirm-button-class'
+        }
     })
         .then(result => {
             // Si el modal fue cerrado, no hagas nada
@@ -218,12 +233,27 @@ function forgotPassword() {
             return response.json();
         })
         .then(data => {
-            Swal.fire("¡Éxito!", "Se ha enviado un correo de restablecimiento de contraseña a tu correo electrónico.", "success");
+            Swal.fire({
+                title: '¡Perfecto!',
+                text: 'Se ha enviado un correo de restablecimiento de contraseña a tu correo electrónico.',
+                icon: 'success',
+                customClass: {
+                    confirmButton: 'my-confirm-button-class'
+                }
+            });
         })
         .catch(error => {
             // Si el error es null, significa que el modal fue cerrado, así que no muestres ninguna alerta
             if (error !== null) {
-                Swal.fire("¡Error!", "No se pudo enviar el correo de restablecimiento de contraseña.", "error");
+                Swal.fire({
+                    title: '¡Error!',
+                    text: 'No se pudo enviar el correo de restablecimiento de contraseña.',
+                    icon: 'error',
+                    customClass: {
+                        confirmButton: 'my-confirm-button-class'
+                    }
+                });
+
             }
         });
 }

@@ -1662,6 +1662,35 @@ progress {
 .table-bordered > :not(caption) > * {
     border-width: 1px 0;
 }
+
+span.my-success {
+    background-color: var(--bs-teal);
+    color: #ffffff; 
+    padding: 5px;
+    border-radius: 20px;
+}
+
+span.my-danger {
+    background-color: var(--bs-danger);
+    color: #ffffff; 
+    padding: 5px;
+    border-radius: 20px;
+}
+
+/* Oculta los botones por defecto */
+.hidden {
+    display: none !important; 
+}
+
+/* Muestra los botones cuando se pasa el cursor sobre la fila de la tabla */
+tr:hover .hidden {
+    display: inline-block !important;
+}
+
+.actions-cell {
+    width: 100px !important; /* Ajusta este valor según el ancho que desees para los botones */
+}
+
 .table-bordered > :not(caption) > * > * {
     border-width: 0 1px;
 }
@@ -2719,13 +2748,13 @@ fieldset:disabled .btn {
 }
 .btn-info {
     color: #000;
-    background-color: #0dcaf0;
-    border-color: #0dcaf0;
+    background-color: #f6f6f6;
+    
 }
 .btn-info:hover {
-    color: #000;
-    background-color: #31d2f2;
-    border-color: #25cff2;
+    color: #000000;
+    background-color: #5353531d;
+    border-color: #000000;
 }
 .btn-check:focus + .btn-info,
 .btn-info:focus {
@@ -6457,6 +6486,14 @@ fieldset:disabled .btn {
 .mb-4 {
     margin-bottom: 1.5rem !important;
 }
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .mb-5 {
     margin-bottom: 3rem !important;
 }

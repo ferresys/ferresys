@@ -17,6 +17,27 @@
     z-index: 99;
 }
 
+/* Estilo suave para los bordes de la tabla */
+#tablaMarca {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#tablaMarca th, #tablaMarca td {
+    border-left: 1px solid #ccc;
+}
+
+#tablaMarca th:first-child, #tablaMarca td:first-child {
+    border-left: none;
+}
+
+/* Cambiar el color de los encabezados de la tabla */
+#tablaMarca .thead-dark th {
+    background-color: #022232e8; /* Cambia este valor al color que prefieras */
+    color: white; /* Cambia este valor al color que prefieras para el texto */
+}
 
 /*** Spinner ***/
 #spinner {

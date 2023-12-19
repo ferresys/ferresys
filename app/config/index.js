@@ -4,7 +4,7 @@ import path from 'path';
 import session from 'express-session';
 const app = express();
 const protectedRoutes = require('../middleware/protectedRoutes');
-
+import pdfRouter from '../../app/src/routes/pdfrouter';
 
 // Middlewares
 app.use(express.json());
@@ -21,7 +21,7 @@ app.use(session({
 
 // Middleware de autenticación
 app.use('/', protectedRoutes);
-
+app.use(pdfRouter);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'public', 'signin.html'), function (err) {
