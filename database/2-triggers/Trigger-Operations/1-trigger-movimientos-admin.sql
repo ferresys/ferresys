@@ -30,15 +30,7 @@ END;
 $$ 
 LANGUAGE plpgsql;
 
-CREATE TRIGGER triggertabUsuario -- Crear el trigger en la tabla tabUsuario
-BEFORE INSERT OR UPDATE ON tabUsuario
-FOR EACH ROW
-EXECUTE FUNCTION movimientosUsuario();
-
-CREATE TRIGGER triggertabRegBorrados
-AFTER DELETE ON tabUsuario FOR EACH ROW EXECUTE PROCEDURE movimientosUsuario();
---------------------------------------------------------------------------------------------------
-
+-------------------------------------------------------------------------------------
 CREATE TRIGGER triggertabPermiso -- Crear el trigger en la tabla tabPermiso
 BEFORE INSERT OR UPDATE ON tabPermiso
 FOR EACH ROW
