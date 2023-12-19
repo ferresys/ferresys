@@ -3,6 +3,8 @@ import pool from '../../config/config-database';
 import { manejoErrores } from '../../middleware/error';
 import { ErrorDeBaseDeDatos } from '../../middleware/class-error';
 import { manejoErroresInsert } from '../../middleware/error';
+import PDFDocument from 'pdfkit';
+import blobStream from 'blob-stream';
 
 //CONFIGURAMOS LOS CONTROLADORES A TRAVES DE FUNCIONES PARA MANEJAR LAS SOLICITUDES HTTP.
 
@@ -24,7 +26,7 @@ export const getMarcasError = manejoErrores(getMarcas);
 
 const getMarcaById = async (req, res) => {
   const id = req.params.id;
-  const response = await pool.query('SELECT * FROM tabMarca WHERE consecMarca = $1', [id]);
+  const response = await pool.query('SELECT consecMarca, nomMarca, estado FROM tabMarca WHERE consecMarca = $1', [id]);
   if (!response.rows.length) {
     console.log('No se encontraron registros en la base de datos');
     throw new ErrorDeBaseDeDatos('Los datos no se encontraron en la base de datos');//Throw se usa para generar un error intencional en el codigo js.
@@ -60,15 +62,14 @@ export const insertMarca = async (req, res) => {
 
 export const updateMarca = async (req, res) => {
   const id = req.params.id;
-  const { nomMarca } = req.body;
+  const { nomMarca, estado } = req.body;
 
   try {
-    const response = await pool.query(
-      'UPDATE tabMarca SET nomMarca = $1 WHERE consecMarca = $2',
-      [nomMarca, id]
+    await pool.query(
+      'UPDATE tabMarca SET nomMarca = $1, estado = $2 WHERE consecMarca = $3',
+      [nomMarca, estado, id]
     );
 
-    console.log(response);
     res.send('Marca Actualizada con éxito');
   } catch (error) {
     console.error('Error al actualizar marca:', error);
@@ -90,3 +91,4 @@ export const deleteMarca = async (req, res) => {
     res.status(500).send('Error al eliminar Marca');
   }
 };
+

@@ -72,11 +72,13 @@ section span:hover {
 
 
 
-#loginSection, #signupSection {
+#loginSection,
+#signupSection {
     transform-style: preserve-3d;
     backface-visibility: hidden;
     transition: transform 1s;
 }
+
 .signin {
     position: relative;
     width: 400px;
@@ -91,6 +93,7 @@ section span:hover {
     transition: transform 1s;
     perspective: 1000px;
 }
+
 .signin h2 {
     font-size: 2em;
     color: #ffcc29;
@@ -108,7 +111,7 @@ section span:hover {
 
 .signin.signup {
     transform: rotateY(180deg);
-    
+
 }
 
 .signin.flipped {
@@ -127,6 +130,7 @@ section .signin {
     border-radius: 4px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
 }
+
 .sombra-log {
     filter: drop-shadow(8px 5px 5px #000);
 }
@@ -160,7 +164,7 @@ section .signin .content .form .inputBox {
 }
 
 section .signin .content .form .inputBox input {
-    
+
     width: 100%;
     background: transparent;
     border: 1px solid #fff;
@@ -172,7 +176,17 @@ section .signin .content .form .inputBox input {
     font-size: 1em;
 }
 
+.my-confirm-button-class {
+    background-color: #022232 !important;
+    
+    color: white !important;
+}
 
+.my-confirm-button-class:hover{
+    background-color: var(--marca) !important;
+    
+    color: black !important;
+}
 section .signin .content .form .inputBox input:focus {
     color: #fff;
     border-color: var(--marca);
@@ -201,7 +215,7 @@ section .signin .content .form .inputBox i {
     padding: 0 2px;
     background: #022232;
     opacity: 1;
-    
+
 }
 
 /* .signin .content .form .inputBox input:focus ~ i,
@@ -226,6 +240,7 @@ section .signin .content .form .inputBox i {
     transition: .3s;
     opacity: .7;
 }
+
 .input__icon {
     position: absolute;
     right: -7px;
@@ -237,8 +252,8 @@ section .signin .content .form .inputBox i {
     cursor: pointer;
 }
 
-.inputBox input:focus ~ label,
-.inputBox input:valid ~ label {
+.inputBox input:focus~label,
+.inputBox input:valid~label {
     top: 0;
     left: 15px;
     font-size: 16px;

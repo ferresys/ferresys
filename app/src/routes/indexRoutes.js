@@ -41,6 +41,7 @@ router.get('/Usuarios/:id', getUsuarioByIdError);
 router.get('/permisos/:id', getPermisoByIdError);
 router.get('/usuarioPermisos/:id', getUsuarioPermisoByIdError);
 
+
 // insertar datos
 
 router.post('/login', login);

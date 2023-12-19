@@ -96,8 +96,7 @@
                             <a href="../button.html" class="dropdown-item">button</a>
                             <a href="../typography.html" class="dropdown-item">typography</a>
                             <a href="../element.html" class="dropdown-item">element</a>
-                            <a href="../chart.html" class="dropdown-item"><i
-                                    class="fa fa-keyboard me-2"></i>chart</a>
+                            <a href="../chart.html" class="dropdown-item"><i class="fa fa-keyboard me-2"></i>chart</a>
                         </div>
                     </div>
 
@@ -199,7 +198,8 @@
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">Mi perfil</a>
                             <a href="#" class="dropdown-item">Configuracion</a>
-                            <a href="#" id="logoutButton" class="dropdown-item" onclick="handleLogout()">Cerrar sesion</a>
+                            <a href="#" id="logoutButton" class="dropdown-item" onclick="handleLogout()">Cerrar
+                                sesion</a>
                         </div>
                     </div>
                 </div>
@@ -215,30 +215,39 @@
                 <div class="row g-4">
                     <div class="col-12">
                         <div class="rounded h-100 p-4"><!--bg-secondary-->
-                            <h6 class="mb-4">MARCAS</h6>
-                            <div class="table-responsive">
-                                <table id="tablaMarca" class="table">
-                                    <thead>
-                                        <tr>
-
-                                            <th scope="col">ID Marca</th>
-                                            <th scope="col">Nombre Marca</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="marcas-tbody">
-                                        <tr>
-
-                                        </tr>
-
-                                    </tbody>
-                                </table>
+                            <div class="header-container">
+                                <h6 class="mb-4">MARCAS</h6>
+                                <div class="btn-group">
+                                    <button type="button" id="agregarMarcas" class="btn btn-success">
+                                        <i class="bi bi-plus"></i> Agregar Marca
+                                    </button>
+                                    <button type="button" id="filtro" class="btn btn-info">
+                                        <i class="bi bi-funnel"></i>
+                                    </button>
+                                    <button type="button" id="exportar" class="btn btn-info">
+                                        <i class="bi bi-download"></i> Exportar
+                                    </button>
+                                </div>
                             </div>
-                            <div class="btn-group" role="group">
-                                <button type="button" id="agregarMarcas" class="btn btn-success">Agregar Marca</button>
-                                <button type="button" id="consultarMarcas" class="btn btn-warning">Consultar
-                                    Marcas</button>
-                                <button type="button" class="btn btn-danger">Borrar Marca</button>
+                            <div class="container">
+                                <div class="table-responsive">
+                                    <table id="tablaMarca" class="table table-hover table-bordered table-striped">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">ID Marca</th>
+                                                <th scope="col">Nombre Marca</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="marcas-tbody">
+                                            <tr>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+
 
 
                             <!--<div id="data"></div>-->
@@ -276,8 +285,12 @@
                     <script src="../lib/tempusdominus/js/moment.min.js"></script>
                     <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
                     <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-                     
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
                     <script src="../js/marca.js"></script>
+                    <script src="../../js/export.js"></script>
                     <!-- Template Javascript -->
                     <script src="../js/main.js"></script>
                     <script src="js/auth-user.js"></script>
