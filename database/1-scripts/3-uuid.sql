@@ -7,17 +7,6 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 --creamos la función para generar un UUID por registro
 
-CREATE OR REPLACE FUNCTION uuidtabUsuario()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.codUsuario := uuid_generate_v4();
-    RETURN NEW;
-END;
-$$ 
-LANGUAGE PLpgSQL;
-
------------------------------------------------------------------------
-
 CREATE OR REPLACE FUNCTION uuidtabCliente()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -41,11 +30,6 @@ LANGUAGE PLpgSQL;
 
 
 -- Crea el trigger para las tablas 
-
-CREATE TRIGGER uuidUsuario
-BEFORE INSERT ON tabUsuario
-FOR EACH ROW
-EXECUTE FUNCTION uuidtabUsuario();
 
 CREATE TRIGGER uuidCliente
 BEFORE INSERT ON tabCliente

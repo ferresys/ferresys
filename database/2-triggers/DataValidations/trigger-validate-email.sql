@@ -7,8 +7,8 @@ DECLARE
 BEGIN
     IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
         CASE
-            WHEN TG_RELID = 'tabusuario'::regclass THEN
-                emailValue := NEW.emailUsuario;
+            WHEN TG_RELID = 'usuarios'::regclass THEN
+                emailValue := NEW.correo;
             WHEN TG_RELID = 'tabcliente'::regclass THEN
                 emailValue := NEW.emailCli;
             WHEN TG_RELID = 'tabproveedor'::regclass THEN
@@ -27,7 +27,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER validarEmailUsuario
-BEFORE INSERT ON tabUsuario
+BEFORE INSERT ON usuarios
 FOR EACH ROW EXECUTE FUNCTION validarEmailGenerico();
 
 CREATE TRIGGER validarEmailCliente
