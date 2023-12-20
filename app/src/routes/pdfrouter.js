@@ -2,35 +2,51 @@ import express from 'express';
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 
-
 const router = express.Router();
-router.post('/generate-pdf', async (req, res) => {
-    const tableData = JSON.parse(req.body.text);
 
-    const headers = [
-        { label: "ID", property: 'id', width: 200 },
-        { label: "Marca", property: 'marca', width: 200 },
-        { label: "Estado", property: 'estado', width: 200 }
-    ];
+router.post('/generate-pdf/:table', async (req, res) => {
+    const tableData = JSON.parse(req.body.text);
+    const tableName = req.params.table; // Obtiene el nombre de la tabla del parámetro de la ruta
+
+    let headers, title;
+
+    // Configura los encabezados y el título en función del nombre de la tabla
+    if (tableName === 'marcas') {
+        headers = [
+            { label: "ID", property: 'id', width: 200 },
+            { label: "Marca", property: 'marca', width: 200 },
+            { label: "Estado", property: 'estado', width: 200 }
+        ];
+        title = "Marcas";
+    } else if (tableName === 'categorias') {
+        headers = [
+            { label: "ID", property: 'id', width: 200 },
+            { label: "Categoria", property: 'marca', width: 200 },
+            { label: "Estado", property: 'estado', width: 200 }
+        ];
+        title = "Categorías";
+    } else {
+        // Maneja el caso en que el nombre de la tabla no sea válido
+        res.status(400).send('Nombre de tabla no válido');
+        return;
+    }
 
     const datas = tableData.map(row => {
-        return {
-            id: row.id,
-            marca: row.marca,
-            estado: row.estado
-        };
+        return headers.reduce((obj, header) => {
+            obj[header.property] = row[header.property];
+            return obj;
+        }, {});
     });
 
     const date = new Date();
     const formattedDate = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`;
 
     const table = {
-        title: "Marcas",
+        title: title,
         subtitle: formattedDate,
         headers: headers,
         datas: datas
     };
-
     
 
     const html = `

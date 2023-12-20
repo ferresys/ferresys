@@ -24,7 +24,7 @@ export const getCategoriasError = manejoErrores(getCategorias);
 
 const getCategoriaById = async (req, res) => {
   const id = req.params.id;
-  const response = await pool.query('SELECT * FROM tabCategoria WHERE consecCategoria = $1', [id]);
+  const response = await pool.query('SELECT consecCateg, nomCateg, estado FROM tabCategoria WHERE consecCateg = $1', [id]);
   if (!response.rows.length) {
     console.log('No se encontraron registros en la base de datos');
     throw new ErrorDeBaseDeDatos('Los datos no se encontraron en la base de datos');//Throw se usa para generar un error intencional en el codigo js.
@@ -60,13 +60,12 @@ export const insertCategoria = async (req, res) => {
 
 export const updateCategoria = async (req, res) => {
   const id = req.params.id;
-  const { nomCateg } = req.body;
+  const { nomCateg, estado } = req.body; // Asegúrate de que 'estado' se incluye en el cuerpo de la solicitud
 
   try {
-   
     const response = await pool.query(
-      'UPDATE tabCategoria SET nomCateg = $1 WHERE consecCateg = $2',
-      [nomCateg, id]
+      'UPDATE tabCategoria SET nomCateg = $1, estado = $2 WHERE consecCateg = $3', // Agrega 'estado' a la consulta SQL
+      [nomCateg, estado, id] // Agrega 'estado' a los valores
     );
 
     console.log(response);
@@ -91,3 +90,4 @@ export const deleteCategoria = async (req, res) => {
     res.status(500).send('Error al eliminar Categoría');
   }
 };
+
