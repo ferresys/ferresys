@@ -54,7 +54,7 @@ function loginUser(event) {
         .then(async data => {
             // Guarda el token de autenticación en el almacenamiento local
             localStorage.setItem('token', data.token);
-            console.log('Token guardado:', localStorage.getItem('token')); // Debería imprimir el token guardado
+            console.log('Token guardado:', localStorage.getItem('token')); 
 
             // Redirige al usuario a la página '/home'
             window.location.href = '/home';
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.getElementById('loginForm').addEventListener('submit', loginUser);
 
-// ... (código existente) ...
+
 
 async function getUserData() {
     try {
@@ -107,7 +107,6 @@ async function getUserData() {
     }
 }
 
-// ... (código existente) ...
 
 
 
@@ -228,7 +227,12 @@ function forgotPassword() {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Error: ' + response.statusText);
+                //el servidor devuelve un código de estado 403 cuando el usuario no está autorizado
+                if (response.status === 403) {
+                    throw new Error('Usuario no autorizado');
+                } else {
+                    throw new Error('Error: ' + response.statusText);
+                }
             }
             return response.json();
         })
@@ -243,17 +247,20 @@ function forgotPassword() {
             });
         })
         .catch(error => {
-            // Si el error es null, significa que el modal fue cerrado, así que no muestres ninguna alerta
             if (error !== null) {
+                let errorMessage = 'No se pudo enviar el correo de restablecimiento de contraseña.';
+                if (error.message === 'Usuario no autorizado') {
+                    errorMessage = 'No puedes restablecer la contraseña si no estás autorizado.';
+                }
+        
                 Swal.fire({
                     title: '¡Error!',
-                    text: 'No se pudo enviar el correo de restablecimiento de contraseña.',
+                    text: errorMessage,
                     icon: 'error',
                     customClass: {
                         confirmButton: 'my-confirm-button-class'
                     }
                 });
-
             }
         });
 }

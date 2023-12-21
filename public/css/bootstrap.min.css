@@ -1637,7 +1637,14 @@ progress {
     color: #6c7293;
     vertical-align: top;
     border-color: #000;
+    border: 1px solid #ccc;
 }
+
+.table .thead-dark th {
+    background-color: #022232e8; /* Cambia este valor al color que prefieras */
+    color: white; /* Cambia este valor al color que prefieras para el texto */
+}
+
 .table > :not(caption) > * > * {
     padding: 0.5rem 0.5rem;
     background-color: var(--bs-table-bg);

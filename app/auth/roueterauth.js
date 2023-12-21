@@ -297,7 +297,7 @@ router.get('/logout', (req, res) => {
     }
   });
 });
-// cambia el no nombre en la aplicacion
+// cambia el nombre en la aplicacion
 router.get('/me', async (req, res) => {
   
   if (!req.session.userId) {
@@ -324,6 +324,10 @@ router.post('/forgot-password', async (req, res) => {
 
     if (!user) {
       return res.status(400).json({ error: 'No user with that email' });
+    }
+
+    if (!user.confirmed) {
+      return res.status(403).json({ error: 'User not authorized' });
     }
 
     const token = uuidv4();

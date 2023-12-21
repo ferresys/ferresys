@@ -1,6 +1,31 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     consultarMarcas();
 });
+
+
+document.getElementById('searchInput-marca').addEventListener('keyup', function() {
+    let input, filter, table, tr, td, i, j, txtValue;
+    input = document.getElementById('searchInput-marca');
+    filter = input.value.toUpperCase();
+    table = document.getElementById('tablaMarca');
+    tr = table.getElementsByTagName('tr');
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName('td');
+        for (j = 0; j < td.length; j++) {
+            if (td[j]) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = '';
+                    break;
+                } else {
+                    tr[i].style.display = 'none';
+                }
+            }       
+        }
+    }
+});
+
 document.getElementById('agregarMarcas').addEventListener('click', () => {
     Swal.fire({
         title: 'Agregar Marca',
@@ -279,7 +304,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
 
         // Envía los datos al servidor
-        fetch('http://localhost:4000/generate-pdf', {
+        fetch('http://localhost:4000/generate-pdf/marcas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -301,3 +326,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
     });
 });
+

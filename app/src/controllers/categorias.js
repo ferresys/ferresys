@@ -60,12 +60,12 @@ export const insertCategoria = async (req, res) => {
 
 export const updateCategoria = async (req, res) => {
   const id = req.params.id;
-  const { nomCateg, estado } = req.body; // Asegúrate de que 'estado' se incluye en el cuerpo de la solicitud
+  const { nomCateg, estado } = req.body; 
 
   try {
     const response = await pool.query(
       'UPDATE tabCategoria SET nomCateg = $1, estado = $2 WHERE consecCateg = $3', // Agrega 'estado' a la consulta SQL
-      [nomCateg, estado, id] // Agrega 'estado' a los valores
+      [nomCateg, estado, id] 
     );
 
     console.log(response);

@@ -29,7 +29,7 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -112,14 +112,14 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-border navbar-expand bg-primary navbar-dark sticky-top px-4 py-0">
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                <a href="" class="navbar-brand d-flex d-lg-none me-4">
 
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
                 <form class="d-none d-md-flex ms-4">
-                    <input class="form-control bg-dark border-0" type="search" placeholder="Search">
+                    <input id="searchInput-categ"" class="form-control bg-dark border-0" type="search" placeholder="Search">
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
@@ -212,42 +212,43 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-12">
-                        <div class="rounded h-100 p-4"><!--bg-secondary -->
-                            <h6 class="mb-4">CATEGORIAS</h6>
-                            <div class="table-responsive">
-                                <table id="tablaCategoria" class="table">
-                                    <thead>
-                                        <tr>
-
-                                            <th scope="col">ID Categoria</th>
-                                            <th scope="col">Nombre Categoria</th>
-
-
-
-
-
-
-                                        </tr>
-                                    </thead>
-                                    <tbody id="categorias-tbody">
-                                        <tr>
-
-                                        </tr>
-
-                                    </tbody>
-                                </table>
+                        <div class="rounded h-100 p-4"><!--bg-secondary-->
+                            <div class="header-container mx-sm-0 mx-md-1 mx-lg-2 mx-xl-3">
+                                <h4 class="mb-4">Categorias</h4>
+                                <div class="btn-group">
+                                    <button type="button" id="agregarCategorias" class="btn btn-success">
+                                        <i class="bi bi-plus"></i> Agregar
+                                    </button>
+                                    <button type="button" id="filtroCateg" class="btn btn-info">
+                                        <i class="bi bi-funnel"></i>
+                                    </button>
+                                    <button type="button" id="exportarCateg" class="btn btn-info">
+                                        <i class="bi bi-download"></i> Exportar
+                                    </button>
+                                </div>
                             </div>
-                            <div class="btn-group" role="group">
-                                <button type="button" id="agregarCategoria" class="btn btn-success">Agregar
-                                    Categoria</button>
-                                <button type="button" id="consultarCategorias" class="btn btn-warning">Consultar
-                                    Categorias</button>
-                                <button type="button" class="btn btn-danger">Borrar Categoria</button>
+                            <div class="container">
+                                <div class="table-responsive">
+                                    <table id="tablaCategor" class="table table-hover table-bordered table-striped">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Categoria</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="marcas-tbody">
+                                            <tr>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
 
 
-                            <div id="data"></div>
+                            <!--<div id="data"></div>-->
 
                         </div>
                     </div>
@@ -284,6 +285,7 @@
                     <script src="../lib/tempusdominus/js/moment.min.js"></script>
                     <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
                     <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
                     <!-- Template Javascript -->
                     <script src="../js/main.js"></script>

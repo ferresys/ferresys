@@ -106,6 +106,16 @@ DB_PASS=contraseña_del_usuario
 DB_NAME=nombre_de_la_base_de_datos 
 DB_PORT=puerto especificado
 
+JWT_SECRET=
+
+
+ADMIN_EMAIL=ferre.syspro@gmail.com
+
+EMAIL=ferre.syspro@gmail.com
+CLIENT_ID=
+CLIENT_SECRET=
+REFRESH_TOKEN=
+ACCESS_TOKEN=
 **ejemplo:**
 ```bash
 DB_HOST=localhost
